@@ -7,6 +7,8 @@
 
 import SwiftUI
 import UIKit
+import Lottie
+
 
 class ViewController: UITabBarController {
     
@@ -18,25 +20,10 @@ class ViewController: UITabBarController {
         
         self.navigationItem.prompt = "UITabBarController"
         
-//        view.backgroundColor = .systemBackground
-//
-//        // [Label]
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        label.numberOfLines = 0
-//        label.font = UIFont.preferredFont(forTextStyle: .title1)
-//        label.textAlignment = .center
-//        label.text = "Welcome to \n ViewController"
-//
-//        view.addSubview(label)
-//
-//        NSLayoutConstraint.activate([
-//            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            label.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-//        ])
         
     }
     
-    init(){ 
+    init(){
         super.init(nibName: nil, bundle: nil)
         
         let firstTab: UIViewController = FirstTabBar()
@@ -56,7 +43,7 @@ class ViewController: UITabBarController {
 
 }
 
-struct ViewControllerRepresentable: UIViewControllerRepresentable {
+struct Main: UIViewControllerRepresentable {
     typealias UIViewControllerType = ViewController
 
     func makeUIViewController(context: Context) -> ViewController {
@@ -70,6 +57,6 @@ struct ViewControllerRepresentable: UIViewControllerRepresentable {
 @available(iOS 13.0.0, *)
 struct ViewPreview: PreviewProvider {
     static var previews: some View {
-        ViewControllerRepresentable()
+        Main()
     }
 }

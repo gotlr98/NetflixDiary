@@ -16,6 +16,8 @@
 		8A3FD6312A4D393A005D94B9 /* SecondTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3FD6302A4D393A005D94B9 /* SecondTabBar.swift */; };
 		8A3FD6332A4D42D3005D94B9 /* ThirdTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3FD6322A4D42D3005D94B9 /* ThirdTabBar.swift */; };
 		8A3FD6362A4D440E005D94B9 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 8A3FD6352A4D440E005D94B9 /* Lottie */; };
+		8A3FD6382A4D5771005D94B9 /* netflix.json in Resources */ = {isa = PBXBuildFile; fileRef = 8A3FD6372A4D5771005D94B9 /* netflix.json */; };
+		8A3FD63A2A4D57C0005D94B9 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3FD6392A4D57C0005D94B9 /* StartView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,8 @@
 		8A3FD62E2A4D3935005D94B9 /* FirstTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTabBar.swift; sourceTree = "<group>"; };
 		8A3FD6302A4D393A005D94B9 /* SecondTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondTabBar.swift; sourceTree = "<group>"; };
 		8A3FD6322A4D42D3005D94B9 /* ThirdTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdTabBar.swift; sourceTree = "<group>"; };
+		8A3FD6372A4D5771005D94B9 /* netflix.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = netflix.json; sourceTree = "<group>"; };
+		8A3FD6392A4D57C0005D94B9 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +75,8 @@
 				8A3FD62E2A4D3935005D94B9 /* FirstTabBar.swift */,
 				8A3FD6302A4D393A005D94B9 /* SecondTabBar.swift */,
 				8A3FD6322A4D42D3005D94B9 /* ThirdTabBar.swift */,
+				8A3FD6372A4D5771005D94B9 /* netflix.json */,
+				8A3FD6392A4D57C0005D94B9 /* StartView.swift */,
 			);
 			path = NetflixDiaryApp;
 			sourceTree = "<group>";
@@ -141,6 +147,7 @@
 			files = (
 				8A3FD6212A4C1062005D94B9 /* LaunchScreen.storyboard in Resources */,
 				8A3FD61E2A4C1062005D94B9 /* Assets.xcassets in Resources */,
+				8A3FD6382A4D5771005D94B9 /* netflix.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,6 +164,7 @@
 				8A3FD6152A4C1061005D94B9 /* AppDelegate.swift in Sources */,
 				8A3FD6172A4C1061005D94B9 /* SceneDelegate.swift in Sources */,
 				8A3FD6332A4D42D3005D94B9 /* ThirdTabBar.swift in Sources */,
+				8A3FD63A2A4D57C0005D94B9 /* StartView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
