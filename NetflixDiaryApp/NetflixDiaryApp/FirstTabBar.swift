@@ -12,10 +12,28 @@ import UIKit
 
 class FirstTabBar: UIViewController{
     
-    var button = UIButton()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        makeButton()
+    }
+    
+    init(){
+        super.init(nibName: nil, bundle: nil)
+        
+        self.view.backgroundColor = .white
+        
+        self.tabBarItem = UITabBarItem(title: "home", image: UIImage(systemName: "house.fill"), tag: 1)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    func makeButton(){
+        
+        var button = UIButton()
         self.view.addSubview(button)
         
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -30,18 +48,6 @@ class FirstTabBar: UIViewController{
         button.setTitleColor(.white, for: .normal)
         
         button.backgroundColor = .black
-    }
-    
-    init(){
-        super.init(nibName: nil, bundle: nil)
-        
-        self.view.backgroundColor = .white
-        
-        self.tabBarItem = UITabBarItem(title: "home", image: UIImage(systemName: "house.fill"), tag: 1)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
     }
     
     
