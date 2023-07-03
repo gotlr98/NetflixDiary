@@ -31,6 +31,14 @@ class FirstTabBar: UIViewController{
         super.init(coder: aDecoder)
     }
     
+    func toolbar(){
+        
+        self.navigationController?.isToolbarHidden = false
+        
+        var shareButton: UIBarButtonItem!
+        var trashButton: UIBarButtonItem!
+    }
+    
     func makeButton(){
         
         var button = UIButton()
