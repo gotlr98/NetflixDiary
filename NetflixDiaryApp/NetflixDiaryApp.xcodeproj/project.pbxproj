@@ -21,6 +21,8 @@
 		8ACC66442A541B4600C9B66A /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 8ACC66432A541B4600C9B66A /* Realm */; };
 		8ACC66462A541B4600C9B66A /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8ACC66452A541B4600C9B66A /* RealmSwift */; };
 		8ACC66492A541CB800C9B66A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACC66482A541CB800C9B66A /* User.swift */; };
+		8ACC664B2A542F4D00C9B66A /* Netflix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACC664A2A542F4D00C9B66A /* Netflix.swift */; };
+		8ACC664E2A543B3C00C9B66A /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 8ACC664D2A543B3C00C9B66A /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +39,7 @@
 		8A3FD6372A4D5771005D94B9 /* netflix.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = netflix.json; sourceTree = "<group>"; };
 		8A3FD6392A4D57C0005D94B9 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		8ACC66482A541CB800C9B66A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		8ACC664A2A542F4D00C9B66A /* Netflix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Netflix.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8ACC664E2A543B3C00C9B66A /* Kingfisher in Frameworks */,
 				8ACC66462A541B4600C9B66A /* RealmSwift in Frameworks */,
 				8ACC66442A541B4600C9B66A /* Realm in Frameworks */,
 				8A3FD6362A4D440E005D94B9 /* Lottie in Frameworks */,
@@ -92,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				8ACC66482A541CB800C9B66A /* User.swift */,
+				8ACC664A2A542F4D00C9B66A /* Netflix.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -116,6 +121,7 @@
 				8A3FD6352A4D440E005D94B9 /* Lottie */,
 				8ACC66432A541B4600C9B66A /* Realm */,
 				8ACC66452A541B4600C9B66A /* RealmSwift */,
+				8ACC664D2A543B3C00C9B66A /* Kingfisher */,
 			);
 			productName = NetflixDiaryApp;
 			productReference = 8A3FD6112A4C1061005D94B9 /* NetflixDiaryApp.app */;
@@ -148,6 +154,7 @@
 			packageReferences = (
 				8A3FD6342A4D440E005D94B9 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				8ACC66422A541B4600C9B66A /* XCRemoteSwiftPackageReference "realm-swift" */,
+				8ACC664C2A543B3C00C9B66A /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 8A3FD6122A4C1061005D94B9 /* Products */;
 			projectDirPath = "";
@@ -180,6 +187,7 @@
 				8A3FD62F2A4D3935005D94B9 /* FirstTabBar.swift in Sources */,
 				8A3FD6192A4C1061005D94B9 /* ViewController.swift in Sources */,
 				8A3FD6152A4C1061005D94B9 /* AppDelegate.swift in Sources */,
+				8ACC664B2A542F4D00C9B66A /* Netflix.swift in Sources */,
 				8ACC66492A541CB800C9B66A /* User.swift in Sources */,
 				8A3FD6172A4C1061005D94B9 /* SceneDelegate.swift in Sources */,
 				8A3FD6332A4D42D3005D94B9 /* ThirdTabBar.swift in Sources */,
@@ -409,6 +417,14 @@
 				kind = branch;
 			};
 		};
+		8ACC664C2A543B3C00C9B66A /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -426,6 +442,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8ACC66422A541B4600C9B66A /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		8ACC664D2A543B3C00C9B66A /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8ACC664C2A543B3C00C9B66A /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
