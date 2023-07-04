@@ -27,10 +27,12 @@ class StartView: UIViewController{
             animationView.removeFromSuperview()
             
             
-            let main = ViewController()
+//            let main = ViewController()
+//
+//            main.modalPresentationStyle = .fullScreen
+//            self.present(main, animated: false)
             
-            main.modalPresentationStyle = .fullScreen
-            self.present(main, animated: false)
+            self.navigationController?.pushViewController(ViewController(), animated: false)
 
         }
 

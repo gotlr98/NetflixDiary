@@ -20,6 +20,15 @@ class ViewController: UITabBarController {
         
         self.navigationItem.prompt = "UITabBarController"
         
+        self.navigationItem.setHidesBackButton(true, animated: true)
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "추가하기", image: UIImage(systemName: "swift"), target: nil, action: Selector("hi"))
+        navigationItem.rightBarButtonItem!.menu = UIMenu(children: [
+            UIAction(title: "remove", attributes: .destructive, handler: { _ in
+                print("remove clicked")
+            })
+        ])
+        
         
     }
     

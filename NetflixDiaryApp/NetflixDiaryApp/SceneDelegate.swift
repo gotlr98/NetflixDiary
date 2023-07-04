@@ -17,23 +17,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
-            window = UIWindow(windowScene: windowScene)
+        window = UIWindow(windowScene: windowScene)
 
-                // ViewController 초기화
-                let mainViewController = StartView()
+            // ViewController 초기화
+        let mainViewController = StartView()
+        let navVC = UINavigationController(rootViewController: mainViewController)
+        
 
-                // MARK: Window 구성
-            window?.rootViewController = mainViewController
-                // 화면에 띄울 Root 뷰 컨트롤러 지정
+            // MARK: Window 구성
+        window?.rootViewController = navVC
+            // 화면에 띄울 Root 뷰 컨트롤러 지정
 
-            window?.backgroundColor = .systemBackground
-                // Window의 Background Color설정.
-                // window 또는 ViewController의 backgroundColor중 하나는 설정되어야합니다.
-                // 둘중 하나 미설정시 검은화면만 보입니다.
+        window?.backgroundColor = .systemBackground
+            // Window의 Background Color설정.
+            // window 또는 ViewController의 backgroundColor중 하나는 설정되어야합니다.
+            // 둘중 하나 미설정시 검은화면만 보입니다.
 
-            window?.makeKeyAndVisible()
-                // 구성된 창 띄우기
-                // 이것도 미설정시 검은화면 
+        window?.makeKeyAndVisible()
+            // 구성된 창 띄우기
+            // 이것도 미설정시 검은화면
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
