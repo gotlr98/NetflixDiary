@@ -10,6 +10,19 @@ import UIKit
 import RealmSwift
 
 class User: Object{
-    @objc dynamic var name: String = ""
-//    @objc dynamic var 
+    
+    @objc dynamic var id: UUID = UUID()
+    let user_net = List<Netflix>()
+    
+    func set_user(id: UUID){
+        
+        let user = User()
+        user.id = id
+        
+        let realm = try! Realm()
+        
+        try! realm.write{
+            realm.add(user)
+        }
+    }
 }
