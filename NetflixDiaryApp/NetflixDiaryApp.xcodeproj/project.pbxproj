@@ -23,6 +23,7 @@
 		8ACC66492A541CB800C9B66A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACC66482A541CB800C9B66A /* User.swift */; };
 		8ACC664B2A542F4D00C9B66A /* Netflix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACC664A2A542F4D00C9B66A /* Netflix.swift */; };
 		8ACC664E2A543B3C00C9B66A /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 8ACC664D2A543B3C00C9B66A /* Kingfisher */; };
+		8ACC66502A554B9E00C9B66A /* writeReviewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACC664F2A554B9E00C9B66A /* writeReviewModal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		8A3FD6392A4D57C0005D94B9 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		8ACC66482A541CB800C9B66A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8ACC664A2A542F4D00C9B66A /* Netflix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Netflix.swift; sourceTree = "<group>"; };
+		8ACC664F2A554B9E00C9B66A /* writeReviewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = writeReviewModal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 				8A3FD6322A4D42D3005D94B9 /* ThirdTabBar.swift */,
 				8A3FD6372A4D5771005D94B9 /* netflix.json */,
 				8A3FD6392A4D57C0005D94B9 /* StartView.swift */,
+				8ACC664F2A554B9E00C9B66A /* writeReviewModal.swift */,
 			);
 			path = NetflixDiaryApp;
 			sourceTree = "<group>";
@@ -184,6 +187,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A3FD6312A4D393A005D94B9 /* SecondTabBar.swift in Sources */,
+				8ACC66502A554B9E00C9B66A /* writeReviewModal.swift in Sources */,
 				8A3FD62F2A4D3935005D94B9 /* FirstTabBar.swift in Sources */,
 				8A3FD6192A4C1061005D94B9 /* ViewController.swift in Sources */,
 				8A3FD6152A4C1061005D94B9 /* AppDelegate.swift in Sources */,

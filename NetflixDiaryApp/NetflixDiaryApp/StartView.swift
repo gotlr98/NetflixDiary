@@ -51,7 +51,7 @@ class StartView: UIViewController{
             
             animationView.removeFromSuperview()
 
-            self.requestNet()
+//            self.requestNet()
             
             self.navigationController?.pushViewController(ViewController(), animated: false)
 

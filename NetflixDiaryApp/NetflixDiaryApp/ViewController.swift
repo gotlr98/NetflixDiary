@@ -22,10 +22,12 @@ class ViewController: UITabBarController {
         
         self.navigationItem.setHidesBackButton(true, animated: true)
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "추가하기", image: UIImage(systemName: "swift"), target: nil, action: Selector("hi"))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "추가하기", image: UIImage(systemName: "plus"), target: nil, action: nil)
         navigationItem.rightBarButtonItem!.menu = UIMenu(children: [
-            UIAction(title: "remove", attributes: .destructive, handler: { _ in
-                print("remove clicked")
+            UIAction(title: "리뷰쓰기", attributes: .destructive, handler: { _ in
+                let modal = writeReviewModal()
+                modal.modalPresentationStyle = .pageSheet
+                self.present(modal, animated: true)
             })
         ])
         

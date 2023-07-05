@@ -17,8 +17,6 @@ class FirstTabBar: UIViewController{
         super.viewDidLoad()
         
         
-        
-        
         let scrollView: UIScrollView! = UIScrollView()
         let contentView: UIView! = UIView()
         
@@ -69,22 +67,22 @@ class FirstTabBar: UIViewController{
         
         
 //        self.navigationController!.title = "NavigationTitle"
-        contentView.addSubview(btn)
-        
-        btn.showsMenuAsPrimaryAction = true
-        btn.menu = UIMenu(children: [
-            UIAction(title: "remove", attributes: .destructive, handler: { _ in
-                print("remove clicked")
-            })
-        ])
-                
-        btn.translatesAutoresizingMaskIntoConstraints = false
-        
-        btn.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 100).isActive = true
-        btn.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 50).isActive = true
-        
-        btn.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        btn.heightAnchor.constraint(equalToConstant: 20).isActive = true
+//        contentView.addSubview(btn)
+//        
+//        btn.showsMenuAsPrimaryAction = true
+//        btn.menu = UIMenu(children: [
+//            UIAction(title: "remove", attributes: .destructive, handler: { _ in
+//                print("remove clicked")
+//            })
+//        ])
+//                
+//        btn.translatesAutoresizingMaskIntoConstraints = false
+//        
+//        btn.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 100).isActive = true
+//        btn.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 50).isActive = true
+//        
+//        btn.widthAnchor.constraint(equalToConstant: 200).isActive = true
+//        btn.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
         
         
