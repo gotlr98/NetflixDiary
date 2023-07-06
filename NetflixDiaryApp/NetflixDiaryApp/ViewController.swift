@@ -26,7 +26,7 @@ class ViewController: UITabBarController {
         navigationItem.rightBarButtonItem!.menu = UIMenu(children: [
             UIAction(title: "리뷰쓰기", attributes: .destructive, handler: { _ in
                 let modal = writeReviewModal()
-                modal.modalPresentationStyle = .pageSheet
+                modal.modalPresentationStyle = .fullScreen
                 self.present(modal, animated: true)
             })
         ])
