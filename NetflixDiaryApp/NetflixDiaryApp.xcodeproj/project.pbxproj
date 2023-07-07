@@ -25,7 +25,6 @@
 		8ACC664E2A543B3C00C9B66A /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 8ACC664D2A543B3C00C9B66A /* Kingfisher */; };
 		8ACC66502A554B9E00C9B66A /* writeReviewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACC664F2A554B9E00C9B66A /* writeReviewModal.swift */; };
 		8ACC66522A56954C00C9B66A /* searchMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACC66512A56954C00C9B66A /* searchMovie.swift */; };
-		8ACC66542A57CBFF00C9B66A /* emptyTextFieldAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACC66532A57CBFF00C9B66A /* emptyTextFieldAlert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,7 +44,6 @@
 		8ACC664A2A542F4D00C9B66A /* Netflix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Netflix.swift; sourceTree = "<group>"; };
 		8ACC664F2A554B9E00C9B66A /* writeReviewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = writeReviewModal.swift; sourceTree = "<group>"; };
 		8ACC66512A56954C00C9B66A /* searchMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = searchMovie.swift; sourceTree = "<group>"; };
-		8ACC66532A57CBFF00C9B66A /* emptyTextFieldAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emptyTextFieldAlert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,7 +94,6 @@
 				8A3FD6392A4D57C0005D94B9 /* StartView.swift */,
 				8ACC664F2A554B9E00C9B66A /* writeReviewModal.swift */,
 				8ACC66512A56954C00C9B66A /* searchMovie.swift */,
-				8ACC66532A57CBFF00C9B66A /* emptyTextFieldAlert.swift */,
 			);
 			path = NetflixDiaryApp;
 			sourceTree = "<group>";
@@ -192,7 +189,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8ACC66542A57CBFF00C9B66A /* emptyTextFieldAlert.swift in Sources */,
 				8A3FD6312A4D393A005D94B9 /* SecondTabBar.swift in Sources */,
 				8ACC66502A554B9E00C9B66A /* writeReviewModal.swift in Sources */,
 				8A3FD62F2A4D3935005D94B9 /* FirstTabBar.swift in Sources */,
