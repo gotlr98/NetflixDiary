@@ -13,4 +13,8 @@ class searchMovie: UIViewController{
     override func viewDidLoad() {
         
     }
+    
+    func recieveData(response: String) {
+        
+    }
 }

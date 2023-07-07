@@ -9,17 +9,20 @@ import Foundation
 import UIKit
 import SwiftUI
 
+protocol SendDataDelegate {
+    func recieveData(img_url : [String]) -> Void
+}
+
 
 class writeReviewModal: UIViewController{
     
     var searchTextField: UITextField!
+    var delegate: SendDataDelegate?
+    var img_url: [String] = []
+    var searchButton: UIButton = .init(frame: .init())
+    
     
     override func viewDidLoad() {
-        if let sheetPresentationController = sheetPresentationController{
-            sheetPresentationController.detents = [.medium(), .large()]
-            
-        }
-        
         self.view.backgroundColor = .gray
         
         let cancelBtn: UIButton = .init(frame: .init())
@@ -69,7 +72,9 @@ class writeReviewModal: UIViewController{
         searchTextField.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
         searchTextField.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         
-        let searchButton: UIButton = .init(frame: .init())
+//        let searchButton: UIButton = .init(frame: .init())
+        
+//        let searchButton: UIButton = .init(frame: .init())
         
         searchButton.backgroundColor = .orange
         
@@ -83,8 +88,20 @@ class writeReviewModal: UIViewController{
         searchButton.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
         searchButton.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         searchButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        super.viewDidAppear(animated)
+        
+        if let sheetPresentationController = sheetPresentationController{
+            sheetPresentationController.detents = [.medium(), .large()]
+            
+        }
         
         searchButton.addTarget(self, action: #selector(search), for: .touchUpInside)
+        
     }
     
     @objc func cancel(){
@@ -92,10 +109,23 @@ class writeReviewModal: UIViewController{
     }
     
     @objc func search(){
-        guard let text = searchTextField.text else{
+        
+        let alert = UIAlertController(title: "Error", message: "검색어를 입력해 주세요", preferredStyle: UIAlertController.Style.alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        
+        alert.addAction(defaultAction)
+        
+        if let text = searchTextField.text, text.isEmpty{
+            
+            self.present(alert, animated: false)
             return
         }
-        requestNet(name: text)
+        else{
+            requestNet(name: searchTextField.text!)
+            
+            self.navigationController?.pushViewController(searchMovie(), animated: false)
+        }
+        
     }
     
     func requestNet(name: String){
@@ -156,7 +186,19 @@ class writeReviewModal: UIViewController{
 
         dataTask.resume()
     }
+    
+    func getTopMostViewController() -> UIViewController? {
+        var topMostViewController = UIApplication.shared.windows[0].rootViewController
+
+        while let presentedViewController = topMostViewController?.presentedViewController {
+            topMostViewController = presentedViewController
+        }
+
+        return topMostViewController
+    }
 }
+
+
 //
 //#if DEBUG
 //import SwiftUI

@@ -23,15 +23,20 @@ class ViewController: UITabBarController {
         self.navigationItem.setHidesBackButton(true, animated: true)
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "추가하기", image: UIImage(systemName: "plus"), target: nil, action: nil)
+
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         navigationItem.rightBarButtonItem!.menu = UIMenu(children: [
             UIAction(title: "리뷰쓰기", attributes: .destructive, handler: { _ in
-                let modal = writeReviewModal()
-                modal.modalPresentationStyle = .fullScreen
-                self.present(modal, animated: true)
+//                let modal = writeReviewModal()
+//                modal.modalPresentationStyle = .fullScreen
+//                self.present(modal, animated: true)
+                
+                self.navigationController?.pushViewController(writeReviewModal(), animated: true)
             })
         ])
-        
-        
     }
     
     init(){

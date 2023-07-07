@@ -39,13 +39,16 @@ class StartView: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
         let animationView: LottieAnimationView = .init(name: "netflix")
         self.view.addSubview(animationView)
         
         animationView.frame = self.view.bounds
         animationView.center = self.view.center
         animationView.contentMode = .scaleAspectFit
-        
         animationView.play{ (finish) in
             print("animation finished")
             
@@ -56,7 +59,6 @@ class StartView: UIViewController{
             self.navigationController?.pushViewController(ViewController(), animated: false)
 
         }
-
     }
     
     
