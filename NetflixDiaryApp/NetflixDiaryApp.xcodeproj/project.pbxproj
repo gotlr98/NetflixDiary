@@ -18,11 +18,12 @@
 		8A3FD6362A4D440E005D94B9 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 8A3FD6352A4D440E005D94B9 /* Lottie */; };
 		8A3FD6382A4D5771005D94B9 /* netflix.json in Resources */ = {isa = PBXBuildFile; fileRef = 8A3FD6372A4D5771005D94B9 /* netflix.json */; };
 		8A3FD63A2A4D57C0005D94B9 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3FD6392A4D57C0005D94B9 /* StartView.swift */; };
+		8A6831C92A5ADFCD00CC81F4 /* ImageSlideshow in Frameworks */ = {isa = PBXBuildFile; productRef = 8A6831C82A5ADFCD00CC81F4 /* ImageSlideshow */; };
+		8A6831CB2A5ADFCD00CC81F4 /* ImageSlideshow/Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 8A6831CA2A5ADFCD00CC81F4 /* ImageSlideshow/Kingfisher */; };
 		8ACC66442A541B4600C9B66A /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 8ACC66432A541B4600C9B66A /* Realm */; };
 		8ACC66462A541B4600C9B66A /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8ACC66452A541B4600C9B66A /* RealmSwift */; };
 		8ACC66492A541CB800C9B66A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACC66482A541CB800C9B66A /* User.swift */; };
 		8ACC664B2A542F4D00C9B66A /* Netflix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACC664A2A542F4D00C9B66A /* Netflix.swift */; };
-		8ACC664E2A543B3C00C9B66A /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 8ACC664D2A543B3C00C9B66A /* Kingfisher */; };
 		8ACC66502A554B9E00C9B66A /* writeReviewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACC664F2A554B9E00C9B66A /* writeReviewModal.swift */; };
 		8ACC66522A56954C00C9B66A /* searchMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACC66512A56954C00C9B66A /* searchMovie.swift */; };
 /* End PBXBuildFile section */
@@ -51,10 +52,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8ACC664E2A543B3C00C9B66A /* Kingfisher in Frameworks */,
 				8ACC66462A541B4600C9B66A /* RealmSwift in Frameworks */,
 				8ACC66442A541B4600C9B66A /* Realm in Frameworks */,
 				8A3FD6362A4D440E005D94B9 /* Lottie in Frameworks */,
+				8A6831CB2A5ADFCD00CC81F4 /* ImageSlideshow/Kingfisher in Frameworks */,
+				8A6831C92A5ADFCD00CC81F4 /* ImageSlideshow in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,7 +129,8 @@
 				8A3FD6352A4D440E005D94B9 /* Lottie */,
 				8ACC66432A541B4600C9B66A /* Realm */,
 				8ACC66452A541B4600C9B66A /* RealmSwift */,
-				8ACC664D2A543B3C00C9B66A /* Kingfisher */,
+				8A6831C82A5ADFCD00CC81F4 /* ImageSlideshow */,
+				8A6831CA2A5ADFCD00CC81F4 /* ImageSlideshow/Kingfisher */,
 			);
 			productName = NetflixDiaryApp;
 			productReference = 8A3FD6112A4C1061005D94B9 /* NetflixDiaryApp.app */;
@@ -160,7 +163,7 @@
 			packageReferences = (
 				8A3FD6342A4D440E005D94B9 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				8ACC66422A541B4600C9B66A /* XCRemoteSwiftPackageReference "realm-swift" */,
-				8ACC664C2A543B3C00C9B66A /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				8A6831C72A5ADFCD00CC81F4 /* XCRemoteSwiftPackageReference "ImageSlideshow" */,
 			);
 			productRefGroup = 8A3FD6122A4C1061005D94B9 /* Products */;
 			projectDirPath = "";
@@ -417,20 +420,20 @@
 				minimumVersion = 4.0.0;
 			};
 		};
+		8A6831C72A5ADFCD00CC81F4 /* XCRemoteSwiftPackageReference "ImageSlideshow" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/zvonicek/ImageSlideshow";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		8ACC66422A541B4600C9B66A /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
 			requirement = {
 				branch = master;
 				kind = branch;
-			};
-		};
-		8ACC664C2A543B3C00C9B66A /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -441,6 +444,16 @@
 			package = 8A3FD6342A4D440E005D94B9 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
 		};
+		8A6831C82A5ADFCD00CC81F4 /* ImageSlideshow */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8A6831C72A5ADFCD00CC81F4 /* XCRemoteSwiftPackageReference "ImageSlideshow" */;
+			productName = ImageSlideshow;
+		};
+		8A6831CA2A5ADFCD00CC81F4 /* ImageSlideshow/Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8A6831C72A5ADFCD00CC81F4 /* XCRemoteSwiftPackageReference "ImageSlideshow" */;
+			productName = ImageSlideshow/Kingfisher;
+		};
 		8ACC66432A541B4600C9B66A /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8ACC66422A541B4600C9B66A /* XCRemoteSwiftPackageReference "realm-swift" */;
@@ -450,11 +463,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8ACC66422A541B4600C9B66A /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
-		};
-		8ACC664D2A543B3C00C9B66A /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8ACC664C2A543B3C00C9B66A /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
