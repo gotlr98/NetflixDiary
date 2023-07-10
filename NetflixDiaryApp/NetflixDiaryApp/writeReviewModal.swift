@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 import SwiftUI
+import ImageSlideshow
+import ImageSlideshowKingfisher
 
 protocol SendDataDelegate {
     func recieveData(img_url : [String]) -> Void
@@ -78,6 +80,10 @@ class writeReviewModal: UIViewController{
         searchButton.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
         searchButton.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         searchButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+        
+        let slide = ImageSlideshow()
+        slide.setImageInputs([KingfisherSource(urlString: "https://image.tmdb.org/t/p/original/9WF6TxCYwdiZw51NM92ConaQz1w.jpg"),
+                              KingfisherSource(urlString: "https://image.tmdb.org/t/p/original/9WF6TxCYwdiZw51NM92ConaQz1w.jpg")])
 
     }
     
