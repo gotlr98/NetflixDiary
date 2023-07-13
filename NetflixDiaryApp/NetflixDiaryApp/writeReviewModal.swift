@@ -10,6 +10,7 @@ import UIKit
 import SwiftUI
 import ImageSlideshow
 import ImageSlideshowKingfisher
+import Kingfisher
 
 protocol SendDataDelegate: AnyObject {
     func recieveData(title: String)
@@ -24,6 +25,8 @@ class writeReviewModal: UIViewController{
     var select_title: String = ""
     var isButtonClicked: Bool = false
     var title_url: [String:String] = [:]
+    
+    var image = UIImageView()
     
     var searchButton: UIButton = .init(frame: .init())
     
@@ -60,7 +63,6 @@ class writeReviewModal: UIViewController{
         searchTextField.keyboardType = .default
         searchTextField.returnKeyType = .done
         searchTextField.autocapitalizationType = .none
-//        searchTextField.delegate =
         
         self.view.addSubview(searchTextField)
         searchTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -86,67 +88,22 @@ class writeReviewModal: UIViewController{
         searchButton.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         searchButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
         searchButton.addTarget(self, action: #selector(search), for: .touchUpInside)
-        
-//        self.view.addSubview(imageScrollView)
-//        self.view.addSubview(imagePageControl)
-//        self.view.addSubview(imageNumberLabel)
-//
-//        imageScrollView.translatesAutoresizingMaskIntoConstraints = false
-//        imageScrollView.isPagingEnabled = true
-//        imageScrollView.showsHorizontalScrollIndicator = false
-//        imageScrollView.delegate = self
-//
-//
-//        imagePageControl.translatesAutoresizingMaskIntoConstraints = false
-//        imagePageControl.currentPage = 0
-//        imagePageControl.pageIndicatorTintColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.5)
-//        imagePageControl.currentPageIndicatorTintColor = .white
-//        imagePageControl.hidesForSinglePage = true
-//
-//
-//        imageNumberLabel.translatesAutoresizingMaskIntoConstraints = false
-//        imageNumberLabel.backgroundColor = UIColor(red: 34/255, green: 34/255, blue: 34/255, alpha: 0.5)
-//        imageNumberLabel.layer.cornerRadius = 14
-//        imageNumberLabel.clipsToBounds = true
-//        imageNumberLabel.text = "0/1"
-//        imageNumberLabel.font = .systemFont(ofSize: 12, weight: .semibold)
-//        imageNumberLabel.textColor = .white
-//
-//
-//        img_url.append("https://image.tmdb.org/t/p/w220_and_h330_face/9WF6TxCYwdiZw51NM92ConaQz1w.jpg")
-//        img_url.append("https://image.tmdb.org/t/p/w220_and_h330_face/9WF6TxCYwdiZw51NM92ConaQz1w.jpg")
-//        img_url.append("https://image.tmdb.org/t/p/w220_and_h330_face/9WF6TxCYwdiZw51NM92ConaQz1w.jpg")
-//        img_url.append("https://image.tmdb.org/t/p/w220_and_h330_face/9WF6TxCYwdiZw51NM92ConaQz1w.jpg")
-//
-//        setImageSlider(images: img_url)
-        
-        
-//        let slide = ImageSlideshow()
-//
-//        lazy var labelView: UIView = {
-//            let view = UIView()
-//            view.backgroundColor = UIColor(white: 0.3, alpha: 0.3)
-//            return view
-//        }()
-//
-//        slide.contentScaleMode = .scaleAspectFit
-//        slide.pageIndicatorPosition = .init(horizontal: .right(padding: 20), vertical: .customBottom(padding: 20))
-//
-//        let labelIndicator = LabelPageIndicator()
-//        labelIndicator.textColor = .white
-//        labelIndicator.font = UIFont.systemFont(ofSize: 12, weight: .bold)
-//
-//        slide.addSubview(labelView)
-//        self.view.addSubview(slide)
-//
-//        slide.translatesAutoresizingMaskIntoConstraints = false
-//        slide.widthAnchor.constraint(equalToConstant: 300).isActive = true
-//        slide.heightAnchor.constraint(equalToConstant: 200).isActive = true
-//        slide.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 200).isActive = true
-//        slide.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-//
-//        slide.activityIndicator = DefaultActivityIndicator(style: .medium, color: .white)
-        
+
+
+        if !select_title.isEmpty{
+            
+            self.view.addSubview(image)
+            
+            image.translatesAutoresizingMaskIntoConstraints = false
+            image.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 100).isActive = true
+            image.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+            
+            image.kf.setImage(
+                with: URL(string: title_url[select_title]!),
+                placeholder: nil
+            )
+            
+        }
 
         
     }
@@ -159,7 +116,6 @@ class writeReviewModal: UIViewController{
             sheetPresentationController.detents = [.medium(), .large()]
             
         }
-        
     }
 
     @objc func cancel(){
@@ -188,9 +144,6 @@ class writeReviewModal: UIViewController{
                 await requestNet(name: self.searchTextField.text!)
                 
             }
-            
-
-            
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
                 let vc = searchMovie(a: self.title_url)
                 vc.delegate = self
@@ -263,36 +216,6 @@ class writeReviewModal: UIViewController{
             dataTask.resume()
         
     }
-//    func setImageSlider(images: [String]) { // scrolliVew에 imageView 추가하는 함수
-//        for index in 0..<images.count {
-//
-//            let url = URL(string: images[index])
-//            var image: UIImage?
-//
-//            DispatchQueue.global().async{
-//                let data = try? Data(contentsOf: url!)
-//                    DispatchQueue.main.async {
-//                        image = UIImage(data: data!)
-//                    }
-//            }
-//
-//            let imageView = UIImageView()
-//            imageView.image = image
-//            imageView.contentMode = .scaleAspectFit
-//            imageView.layer.cornerRadius = 5
-//            imageView.clipsToBounds = true
-//
-//            let xPosition = self.view.frame.width * CGFloat(index)
-//
-//            imageView.frame = CGRect(x: xPosition,
-//                                   y: 0,
-//                                   width: self.view.frame.width,
-//                                   height: self.view.frame.width)
-//
-//            imageScrollView.contentSize.width = self.view.frame.width * CGFloat(index+1)
-//            imageScrollView.addSubview(imageView)
-//        }
-//      }
 
 }
 
@@ -307,5 +230,7 @@ extension writeReviewModal: UIScrollViewDelegate {
 extension writeReviewModal: SendDataDelegate {
     func recieveData(title: String) {
         self.select_title = title
+        self.viewDidLoad()
+        print(self.select_title)
     }
 }

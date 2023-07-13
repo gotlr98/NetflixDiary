@@ -108,7 +108,12 @@ class searchMovie: UIViewController{
         delegate?.recieveData(title: move_title_url.keys[index])
 //        let vc = writeReviewModal()
 //        vc.select_title = move_title_url.keys[index]
-        print(move_title_url.keys[index])
+//        print(move_title_url.keys[index])
+        
+//        if let vc = presentingViewController as? writeReviewModal{
+//            vc.reloadInputViews()
+//            print("vc appear")
+//        }
         dismiss(animated: true)
     }
 
