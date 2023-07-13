@@ -28,6 +28,8 @@ class writeReviewModal: UIViewController{
     
     var image = UIImageView()
     
+    var titleLabel = UILabel()
+    
     var searchButton: UIButton = .init(frame: .init())
     
     lazy var imageScrollView = UIScrollView()
@@ -102,6 +104,15 @@ class writeReviewModal: UIViewController{
                 with: URL(string: title_url[select_title]!),
                 placeholder: nil
             )
+            
+            
+            self.view.addSubview(titleLabel)
+            
+            titleLabel.text = self.select_title
+            
+            titleLabel.translatesAutoresizingMaskIntoConstraints = false
+            titleLabel.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: 130).isActive = true
+            titleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
             
         }
 
@@ -230,6 +241,10 @@ extension writeReviewModal: UIScrollViewDelegate {
 extension writeReviewModal: SendDataDelegate {
     func recieveData(title: String) {
         self.select_title = title
+        self.searchTextField.text = ""
+        if (self.titleLabel.text != ""){
+            self.titleLabel.text = ""
+        }
         self.viewDidLoad()
         print(self.select_title)
     }
