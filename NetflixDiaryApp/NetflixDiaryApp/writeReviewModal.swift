@@ -25,6 +25,7 @@ class writeReviewModal: UIViewController{
     var select_title: String = ""
     var isButtonClicked: Bool = false
     var title_url: [String:String] = [:]
+    var is_search: Bool = false
     
     var image = UIImageView()
     
@@ -92,7 +93,7 @@ class writeReviewModal: UIViewController{
         searchButton.addTarget(self, action: #selector(search), for: .touchUpInside)
 
 
-        if !select_title.isEmpty{
+        if is_search{
             
             self.view.addSubview(image)
             
@@ -105,7 +106,6 @@ class writeReviewModal: UIViewController{
                 placeholder: nil
             )
             
-            
             self.view.addSubview(titleLabel)
             
             titleLabel.text = self.select_title
@@ -113,6 +113,8 @@ class writeReviewModal: UIViewController{
             titleLabel.translatesAutoresizingMaskIntoConstraints = false
             titleLabel.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: 130).isActive = true
             titleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+            
+            
             
         }
 
@@ -144,6 +146,12 @@ class writeReviewModal: UIViewController{
         
         alert.addAction(defaultAction)
         
+        self.title_url = [:]
+        
+        DispatchQueue.main.async {
+            self.searchTextField.resignFirstResponder()
+        }
+        
         if let text = searchTextField.text, text.isEmpty{
             
             self.present(alert, animated: false)
@@ -151,11 +159,13 @@ class writeReviewModal: UIViewController{
         }
         else{
             
+            print(self.searchTextField.text)
             Task{
                 await requestNet(name: self.searchTextField.text!)
                 
             }
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                
                 let vc = searchMovie(a: self.title_url)
                 vc.delegate = self
                 vc.modalPresentationStyle = .automatic
@@ -240,12 +250,22 @@ extension writeReviewModal: UIScrollViewDelegate {
 
 extension writeReviewModal: SendDataDelegate {
     func recieveData(title: String) {
+        
+        self.is_search = true
         self.select_title = title
-        self.searchTextField.text = ""
+        
         if (self.titleLabel.text != ""){
             self.titleLabel.text = ""
         }
+        self.searchTextField.clearsOnBeginEditing = true
+        self.searchTextField.text = ""
+        
+        
         self.viewDidLoad()
+        
+        
+        
+        
         print(self.select_title)
     }
 }

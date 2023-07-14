@@ -25,4 +25,8 @@ class User: Object{
             realm.add(user)
         }
     }
+    
+    func add_user_net(net: Netflix){
+        
+    }
 }
