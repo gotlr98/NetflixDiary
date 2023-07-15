@@ -28,6 +28,10 @@ class writeReviewModal: UIViewController{
     var is_search: Bool = false
     
     var image = UIImageView()
+    var image2 = UIImageView()
+    var image3 = UIImageView()
+    var image4 = UIImageView()
+    var image5 = UIImageView()
     
     var titleLabel = UILabel()
     
@@ -38,8 +42,43 @@ class writeReviewModal: UIViewController{
     let imageNumberLabel = UILabel()
     
     
+    
     override func viewDidLoad() {
-        self.view.backgroundColor = .gray
+//        self.view.backgroundColor = .gray
+        
+        let scrollView = UIScrollView()
+        
+        scrollView.showsVerticalScrollIndicator = true
+        scrollView.isDirectionalLockEnabled = true
+        
+        
+        let contentView = UIView()
+        
+        self.view.addSubview(scrollView)
+        
+        
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            scrollView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            scrollView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+        
+        scrollView.addSubview(contentView)
+        
+        NSLayoutConstraint.activate([
+            contentView.rightAnchor.constraint(equalTo: scrollView.contentLayoutGuide.rightAnchor),
+            contentView.leftAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leftAnchor),
+            contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
+            contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor)
+        ])
+        
+//        contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+        
         
         let registerBtn: UIButton = .init(frame: .init())
         
@@ -49,7 +88,7 @@ class writeReviewModal: UIViewController{
         registerBtn.setTitle("등록하기", for: .normal)
         registerBtn.addTarget(self, action: #selector(cancel), for: .touchUpInside)
         
-        self.view.addSubview(registerBtn)
+        contentView.addSubview(registerBtn)
         registerBtn.translatesAutoresizingMaskIntoConstraints = false
         registerBtn.widthAnchor.constraint(equalToConstant: 120).isActive = true
         registerBtn.heightAnchor.constraint(equalToConstant: 40).isActive = true
@@ -67,7 +106,7 @@ class writeReviewModal: UIViewController{
         searchTextField.returnKeyType = .done
         searchTextField.autocapitalizationType = .none
         
-        self.view.addSubview(searchTextField)
+        contentView.addSubview(searchTextField)
         searchTextField.translatesAutoresizingMaskIntoConstraints = false
         searchTextField.widthAnchor.constraint(equalToConstant: 250).isActive = true
         searchTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
@@ -83,7 +122,7 @@ class writeReviewModal: UIViewController{
 //        searchButton.addTarget(self, action: #selector(cancel), for: .touchUpInside)
 //        searchButton.addTarget(self, action: #selector(self.textFieldDidChanacge(_:)), for: .editingChanged)
         
-        self.view.addSubview(searchButton)
+        contentView.addSubview(searchButton)
         searchButton.translatesAutoresizingMaskIntoConstraints = false
         searchButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
         searchButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
@@ -95,24 +134,52 @@ class writeReviewModal: UIViewController{
 
         if is_search{
             
-            self.view.addSubview(image)
-            
+            contentView.addSubview(image)
             image.translatesAutoresizingMaskIntoConstraints = false
             image.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 100).isActive = true
             image.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+            image.heightAnchor.constraint(equalToConstant: 200).isActive = true
+            image.widthAnchor.constraint(equalToConstant: 200).isActive = true
+
             
             image.kf.setImage(
                 with: URL(string: title_url[select_title]!),
                 placeholder: nil
             )
             
-            self.view.addSubview(titleLabel)
+            contentView.addSubview(image2)
+            image2.translatesAutoresizingMaskIntoConstraints = false
+            image2.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 300).isActive = true
+            image2.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+            image2.heightAnchor.constraint(equalToConstant: 200).isActive = true
+            image2.widthAnchor.constraint(equalToConstant: 200).isActive = true
+            
+            image2.kf.setImage(
+                with: URL(string: title_url[select_title]!),
+                placeholder: nil
+            )
+            
+            contentView.addSubview(image3)
+            image3.translatesAutoresizingMaskIntoConstraints = false
+            image3.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 500).isActive = true
+            image3.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+            image3.heightAnchor.constraint(equalToConstant: 200).isActive = true
+            image3.widthAnchor.constraint(equalToConstant: 200).isActive = true
+            
+            image3.kf.setImage(
+                with: URL(string: title_url[select_title]!),
+                placeholder: nil
+            )
+            
+            
+            contentView.addSubview(titleLabel)
             
             titleLabel.text = self.select_title
             
             titleLabel.translatesAutoresizingMaskIntoConstraints = false
             titleLabel.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: 130).isActive = true
             titleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+            titleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
             
             
             
@@ -239,13 +306,13 @@ class writeReviewModal: UIViewController{
     }
 
 }
-
-extension writeReviewModal: UIScrollViewDelegate {
-  func scrollViewDidScroll(_ scrollView: UIScrollView) { // scrollView가 스와이프 될 때 발생 될 이벤트
-    self.imagePageControl.currentPage = Int(round(imageScrollView.contentOffset.x / UIScreen.main.bounds.width))
-    self.imageNumberLabel.text = "\(imagePageControl.currentPage)/\(imagePageControl.numberOfPages)"
-  }
-}
+//
+//extension writeReviewModal: UIScrollViewDelegate {
+//  func scrollViewDidScroll(_ scrollView: UIScrollView) { // scrollView가 스와이프 될 때 발생 될 이벤트
+//    self.imagePageControl.currentPage = Int(round(imageScrollView.contentOffset.x / UIScreen.main.bounds.width))
+//    self.imageNumberLabel.text = "\(imagePageControl.currentPage)/\(imagePageControl.numberOfPages)"
+//  }
+//}
 
 
 extension writeReviewModal: SendDataDelegate {
@@ -262,10 +329,6 @@ extension writeReviewModal: SendDataDelegate {
         
         
         self.viewDidLoad()
-        
-        
-        
-        
         print(self.select_title)
     }
 }
