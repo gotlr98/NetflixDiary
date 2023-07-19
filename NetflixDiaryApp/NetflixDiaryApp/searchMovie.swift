@@ -39,25 +39,6 @@ class searchMovie: UIViewController{
         
         
         self.view.backgroundColor = .yellow
-//
-//        requestNet(name: movie_title)
-//
-//        print(title_url)
-//
-//        let btn: UIButton = .init(frame: .init())
-//
-//
-//        btn.backgroundColor = .orange
-//
-//        btn.setTitle("되돌아가기", for: .normal)
-//        btn.addTarget(self, action: #selector(cancel), for: .touchUpInside)
-//
-//        self.view.addSubview(btn)
-//        btn.translatesAutoresizingMaskIntoConstraints = false
-//        btn.widthAnchor.constraint(equalToConstant: 120).isActive = true
-//        btn.heightAnchor.constraint(equalToConstant: 40).isActive = true
-//        btn.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
-//        btn.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         
         for i in move_title_url.values{
             let a = "https://image.tmdb.org/t/p/w220_and_h330_face" + i
@@ -92,28 +73,13 @@ class searchMovie: UIViewController{
         }
     }
     
-    @objc func cancel(){
-
-    }
     
     @objc func didTab(sender: UITapGestureRecognizer? = nil){
         let num = self.indicator.page
         let index = move_title_url.index(move_title_url.startIndex, offsetBy: num)
-        
-//        self.navigationController?.popViewController(animated: true)
-        
-//        if let viewcon = presentingViewController as? writeReviewModal{
-//            viewcon.select_title = move_title_url.keys[index]
-//        }
+
         delegate?.recieveData(title: move_title_url.keys[index])
-//        let vc = writeReviewModal()
-//        vc.select_title = move_title_url.keys[index]
-//        print(move_title_url.keys[index])
-        
-//        if let vc = presentingViewController as? writeReviewModal{
-//            vc.reloadInputViews()
-//            print("vc appear")
-//        }
+
         dismiss(animated: true)
     }
 

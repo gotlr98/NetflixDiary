@@ -9,9 +9,18 @@ import SwiftUI
 import Foundation
 import UIKit
 
+protocol reviewDelegate: AnyObject {
+    func recieveData(title: String, img_url: String, review: String)
+}
 
 class FirstTabBar: UIViewController{
     
+    
+    var delegate: reviewDelegate?
+    
+    var select_title: String = ""
+    var img_url: String = ""
+    var review: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,37 +64,30 @@ class FirstTabBar: UIViewController{
         contentViewHeight.isActive = true
         
         
-        var config = UIButton.Configuration.tinted()
-        config.title = "Button"
-        config.image = UIImage(systemName: "swift")
-        
-        let btn = UIButton(
-            configuration: config,
-            primaryAction: UIAction(handler: { _ in
-                print("button clicked")
-            })
-        )
-        
-        
-//        self.navigationController!.title = "NavigationTitle"
-//        contentView.addSubview(btn)
-//        
-//        btn.showsMenuAsPrimaryAction = true
-//        btn.menu = UIMenu(children: [
-//            UIAction(title: "remove", attributes: .destructive, handler: { _ in
-//                print("remove clicked")
+//        var config = UIButton.Configuration.tinted()
+//        config.title = "Button"
+//        config.image = UIImage(systemName: "swift")
+//
+//        let btn = UIButton(
+//            configuration: config,
+//            primaryAction: UIAction(handler: { _ in
+//                print("button clicked")
 //            })
-//        ])
-//                
-//        btn.translatesAutoresizingMaskIntoConstraints = false
-//        
-//        btn.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 100).isActive = true
-//        btn.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 50).isActive = true
-//        
-//        btn.widthAnchor.constraint(equalToConstant: 200).isActive = true
-//        btn.heightAnchor.constraint(equalToConstant: 20).isActive = true
+//        )
         
+        let registerBtn: UIButton = .init(frame: .init())
         
+        registerBtn.backgroundColor = .orange
+        
+        registerBtn.setTitle("등록하기", for: .normal)
+        registerBtn.addTarget(self, action: #selector(check), for: .touchUpInside)
+        
+        contentView.addSubview(registerBtn)
+        registerBtn.translatesAutoresizingMaskIntoConstraints = false
+        registerBtn.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        registerBtn.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        registerBtn.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        registerBtn.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         
     }
     
@@ -128,8 +130,16 @@ class FirstTabBar: UIViewController{
         button.backgroundColor = .black
     }
     
-    
-    
+    @objc func check(){
+        print("\(self.img_url)\(self.title)\(self.review)")
+    }
 }
 
+extension FirstTabBar: reviewDelegate {
+    func recieveData(title: String, img_url: String, review: String) {
+        self.select_title = title
+        self.img_url = img_url
+        self.review = review
+    }
+}
 

@@ -16,12 +16,13 @@ protocol SendDataDelegate: AnyObject {
     func recieveData(title: String)
 }
 
-
 class writeReviewModal: UIViewController{
     
     var searchTextField: UITextField!
     var reviewField: UITextView!
     var delegate: SendDataDelegate?
+    
+    weak var reviewDelegate: reviewDelegate?
     var img_url: [String] = []
     var select_title: String = ""
     var isButtonClicked: Bool = false
@@ -29,10 +30,6 @@ class writeReviewModal: UIViewController{
     var is_search: Bool = false
     
     var image = UIImageView()
-    var image2 = UIImageView()
-    var image3 = UIImageView()
-    var image4 = UIImageView()
-    var image5 = UIImageView()
     
     var titleLabel = UILabel()
     
@@ -89,7 +86,7 @@ class writeReviewModal: UIViewController{
         registerBtn.backgroundColor = .orange
         
         registerBtn.setTitle("등록하기", for: .normal)
-        registerBtn.addTarget(self, action: #selector(cancel), for: .touchUpInside)
+        registerBtn.addTarget(self, action: #selector(sendReview), for: .touchUpInside)
         
         contentView.addSubview(registerBtn)
         registerBtn.translatesAutoresizingMaskIntoConstraints = false
@@ -192,8 +189,15 @@ class writeReviewModal: UIViewController{
         }
     }
 
-    @objc func cancel(){
-        print(self.select_title)
+    @objc func sendReview(){
+        
+        reviewDelegate?.recieveData(title: self.select_title, img_url: self.title_url[select_title]!, review: self.reviewField.text)
+        self.tabBarController?.selectedIndex = 1
+
+        
+//        self.tabBarController?
+        self.navigationController?.popViewController(animated: true)
+        
     }
 
     @objc func textFieldDidChanacge(_ sender: Any?) {
@@ -300,14 +304,6 @@ class writeReviewModal: UIViewController{
     }
 
 }
-//
-//extension writeReviewModal: UIScrollViewDelegate {
-//  func scrollViewDidScroll(_ scrollView: UIScrollView) { // scrollView가 스와이프 될 때 발생 될 이벤트
-//    self.imagePageControl.currentPage = Int(round(imageScrollView.contentOffset.x / UIScreen.main.bounds.width))
-//    self.imageNumberLabel.text = "\(imagePageControl.currentPage)/\(imagePageControl.numberOfPages)"
-//  }
-//}
-
 
 extension writeReviewModal: SendDataDelegate {
     func recieveData(title: String) {
