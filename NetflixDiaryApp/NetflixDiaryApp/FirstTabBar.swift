@@ -26,11 +26,12 @@ class FirstTabBar: UIViewController{
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         
-        contentView.backgroundColor = .blue
+        contentView.backgroundColor = .gray
         
-        scrollView.contentInset = .init(top: 20, left: 0, bottom: 0, right: 0)
+//        scrollView.contentInset = .init(top: 20, left: 0, bottom: 0, right: 0)
         
-        
+        scrollView.showsVerticalScrollIndicator = true
+        scrollView.isDirectionalLockEnabled = true
         
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -40,10 +41,10 @@ class FirstTabBar: UIViewController{
         ])
         
         NSLayoutConstraint.activate([
-            contentView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            contentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            contentView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            contentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
+            contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor)
         ])
         
         contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
