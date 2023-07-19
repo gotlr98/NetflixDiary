@@ -20,6 +20,7 @@ protocol SendDataDelegate: AnyObject {
 class writeReviewModal: UIViewController{
     
     var searchTextField: UITextField!
+    var reviewField: UITextView!
     var delegate: SendDataDelegate?
     var img_url: [String] = []
     var select_title: String = ""
@@ -54,31 +55,33 @@ class writeReviewModal: UIViewController{
         
         let contentView = UIView()
         
-        self.view.addSubview(scrollView)
-        
-        
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
         
+        self.view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        
+        contentView.backgroundColor = .white
+        
         NSLayoutConstraint.activate([
-            scrollView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            scrollView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
         
-        scrollView.addSubview(contentView)
-        
         NSLayoutConstraint.activate([
-            contentView.rightAnchor.constraint(equalTo: scrollView.contentLayoutGuide.rightAnchor),
-            contentView.leftAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leftAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
             contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
-            contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor)
+            contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor)
         ])
         
-//        contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+        contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
         
+        let contentViewHeight = contentView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor)
+        contentViewHeight.priority = .defaultLow
+        contentViewHeight.isActive = true
         
         let registerBtn: UIButton = .init(frame: .init())
         
@@ -92,8 +95,8 @@ class writeReviewModal: UIViewController{
         registerBtn.translatesAutoresizingMaskIntoConstraints = false
         registerBtn.widthAnchor.constraint(equalToConstant: 120).isActive = true
         registerBtn.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        registerBtn.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
-        registerBtn.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        registerBtn.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        registerBtn.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         
         
         searchTextField = .init(frame: .init())
@@ -111,8 +114,8 @@ class writeReviewModal: UIViewController{
         searchTextField.widthAnchor.constraint(equalToConstant: 250).isActive = true
         searchTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
-        searchTextField.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        searchTextField.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
+        searchTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20).isActive = true
+        searchTextField.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20).isActive = true
         
         let searchButton: UIButton = .init(frame: .init())
         
@@ -126,8 +129,8 @@ class writeReviewModal: UIViewController{
         searchButton.translatesAutoresizingMaskIntoConstraints = false
         searchButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
         searchButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        searchButton.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        searchButton.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
+        searchButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20).isActive = true
+        searchButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20).isActive = true
         searchButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
         searchButton.addTarget(self, action: #selector(search), for: .touchUpInside)
 
@@ -136,8 +139,8 @@ class writeReviewModal: UIViewController{
             
             contentView.addSubview(image)
             image.translatesAutoresizingMaskIntoConstraints = false
-            image.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 100).isActive = true
-            image.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+            image.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 100).isActive = true
+            image.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
             image.heightAnchor.constraint(equalToConstant: 200).isActive = true
             image.widthAnchor.constraint(equalToConstant: 200).isActive = true
 
@@ -147,42 +150,33 @@ class writeReviewModal: UIViewController{
                 placeholder: nil
             )
             
-            contentView.addSubview(image2)
-            image2.translatesAutoresizingMaskIntoConstraints = false
-            image2.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 300).isActive = true
-            image2.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-            image2.heightAnchor.constraint(equalToConstant: 200).isActive = true
-            image2.widthAnchor.constraint(equalToConstant: 200).isActive = true
-            
-            image2.kf.setImage(
-                with: URL(string: title_url[select_title]!),
-                placeholder: nil
-            )
-            
-            contentView.addSubview(image3)
-            image3.translatesAutoresizingMaskIntoConstraints = false
-            image3.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 500).isActive = true
-            image3.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-            image3.heightAnchor.constraint(equalToConstant: 200).isActive = true
-            image3.widthAnchor.constraint(equalToConstant: 200).isActive = true
-            
-            image3.kf.setImage(
-                with: URL(string: title_url[select_title]!),
-                placeholder: nil
-            )
-            
-            
             contentView.addSubview(titleLabel)
             
             titleLabel.text = self.select_title
             
             titleLabel.translatesAutoresizingMaskIntoConstraints = false
-            titleLabel.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: 130).isActive = true
-            titleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+            titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 40).isActive = true
+            titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
             titleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
             
             
+            reviewField = .init(frame: .init())
             
+            reviewField.font = UIFont.systemFont(ofSize: 20)
+            reviewField.autocorrectionType = .no
+            reviewField.keyboardType = .default
+            reviewField.returnKeyType = .done
+            reviewField.autocapitalizationType = .none
+            reviewField.layer.borderWidth = 1.0
+            reviewField.layer.borderColor = UIColor.red.cgColor
+            
+            contentView.addSubview(reviewField)
+            reviewField.translatesAutoresizingMaskIntoConstraints = false
+            reviewField.widthAnchor.constraint(equalToConstant: 300).isActive = true
+            reviewField.heightAnchor.constraint(equalToConstant: 200).isActive = true
+            
+            reviewField.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+            reviewField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -40).isActive = true
         }
 
         
