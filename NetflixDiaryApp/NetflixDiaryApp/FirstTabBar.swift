@@ -85,9 +85,23 @@ class FirstTabBar: UIViewController{
         contentView.addSubview(registerBtn)
         registerBtn.translatesAutoresizingMaskIntoConstraints = false
         registerBtn.widthAnchor.constraint(equalToConstant: 120).isActive = true
-        registerBtn.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        registerBtn.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        registerBtn.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        registerBtn.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
         registerBtn.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        
+        let a: UIButton = .init(frame: .init())
+        
+        a.backgroundColor = .orange
+        
+        a.setTitle("등록하기", for: .normal)
+        a.addTarget(self, action: #selector(check2), for: .touchUpInside)
+        
+        contentView.addSubview(a)
+        a.translatesAutoresizingMaskIntoConstraints = false
+        a.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        a.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        a.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
+        a.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         
     }
     
@@ -131,7 +145,15 @@ class FirstTabBar: UIViewController{
     }
     
     @objc func check(){
-        print("\(self.img_url)\(self.title)\(self.review)")
+//        print("\(self.img_url)\(self.title)\(self.review)")
+        User().delete_all()
+        //64b8cad0539de0f64821ca5d
+//        User().set_user()
+        
+    }
+    
+    @objc func check2(){
+        
     }
 }
 

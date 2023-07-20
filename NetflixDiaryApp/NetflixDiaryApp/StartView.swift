@@ -46,6 +46,10 @@ class StartView: UIViewController{
         let animationView: LottieAnimationView = .init(name: "netflix")
         self.view.addSubview(animationView)
         
+        if User().get_user_count() == 0{
+            User().set_user()
+        }
+        
         animationView.frame = self.view.bounds
         animationView.center = self.view.center
         animationView.contentMode = .scaleAspectFit
