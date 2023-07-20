@@ -191,9 +191,11 @@ class writeReviewModal: UIViewController{
 
     @objc func sendReview(){
         
-        reviewDelegate?.recieveData(title: self.select_title, img_url: self.title_url[select_title]!, review: self.reviewField.text)
-        self.tabBarController?.selectedIndex = 1
-
+//        reviewDelegate?.recieveData(title: self.select_title, img_url: self.title_url[select_title]!, review: self.reviewField.text)
+//        self.tabBarController?.selectedIndex = 1
+        Netflix().set_net(title: select_title, url: title_url[select_title]!, review: reviewField.text)
+        
+        User().add_user_net(net: Netflix(title: select_title, img_url: title_url[select_title]!, review: reviewField.text))
         
 //        self.tabBarController?
         self.navigationController?.popViewController(animated: true)

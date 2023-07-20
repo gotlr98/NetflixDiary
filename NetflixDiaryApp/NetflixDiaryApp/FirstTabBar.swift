@@ -154,6 +154,7 @@ class FirstTabBar: UIViewController{
     
     @objc func check2(){
         
+        print(User().get_user())
     }
 }
 

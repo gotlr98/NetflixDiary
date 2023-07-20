@@ -29,13 +29,25 @@ class User: Object{
         }
     }
 
-    func add_user_net(user: User, net: Netflix){
+    func add_user_net(net: Netflix){
         
         let realm = try! Realm()
         
-        try! realm.write{
-            user.user_net.append(net)
+        let user = realm.objects(User.self)
+    
+        for i in user{
+            try! realm.write{
+                i.user_net.append(net)
+            }
         }
+        
+    }
+    
+    func get_user() -> Results<User>{
+        
+        let realm = try! Realm()
+        
+        return realm.objects(User.self)
     }
     
     func get_user_count() -> Int {
