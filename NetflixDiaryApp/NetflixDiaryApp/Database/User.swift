@@ -65,33 +65,41 @@ class User: Object{
             realm.deleteAll()
         }
     }
+
     
-//    func get_user_id() -> AnyObject{
-//
-//        let realm = try! Realm()
-//
-//        for i in realm.objects(User.self){
-//            let id = i._id
-//        }
-//
-//        return id
-//    }
+    func get_user_net() -> [Netflix]{
+
+        let realm = try! Realm()
+
+        let user = realm.objects(User.self)
+        
+        var net: [Netflix] = []
+        
+        for i in user{
+            net.append(contentsOf: i.user_net)
+        }
+        
+        return net
+    }
     
-//    func get_user_net(user: User) -> Results<User>{
-//
-//        let realm = try! Realm()
-//
-//        return realm.objects(User.self).filter("id == '\(user.id)'")
-//    }
-//
-//    func delete_net(user: User, net: Netflix){
-//
-//        let realm = try! Realm()
-//
-//        let delete = realm.objects(User.self).filter("id == '\(user.id)' && title == '\(net.title)'")
-//
-//        try! realm.write{
-//            realm.delete(delete)
-//        }
-//    }
+
+    func delete_net(title: String){
+
+        let realm = try! Realm()
+
+        let a = realm.objects(User.self)
+        var net: [Netflix] = []
+        
+        for i in a{
+            net.append(contentsOf: i.user_net)
+        }
+        
+        for j in net{
+            if j.title == title{
+                try! realm.write{
+                    realm.delete(j)
+                }
+            }
+        }
+    }
 }

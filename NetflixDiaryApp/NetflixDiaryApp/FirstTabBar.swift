@@ -154,7 +154,17 @@ class FirstTabBar: UIViewController{
     
     @objc func check2(){
         
-        print(User().get_user())
+        User().add_user_net(net: Netflix(title: "어벤져스", img_url: "asdf", review: "sdfdf"))
+        let net = User().get_user_net()
+        
+        print(net)
+        
+        
+        User().delete_net(title: "어벤져스")
+        
+        let user_net = User().get_user_net()
+        
+        print(user_net)
     }
 }
 
