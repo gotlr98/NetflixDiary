@@ -8,15 +8,28 @@
 import SwiftUI
 import Foundation
 import UIKit
+import Kingfisher
 
-protocol reviewDelegate: AnyObject {
-    func recieveData(title: String, img_url: String, review: String)
+//protocol reviewDelegate: AnyObject {
+//    func recieveData(title: String, img_url: String, review: String)
+//}
+
+struct Poster{
+    let image_url: String
+    let title: String
 }
 
 class FirstTabBar: UIViewController{
     
     
-    var delegate: reviewDelegate?
+    let poster: [Poster] = [Poster(image_url: "https://www.themoviedb.org/t/p/w220_and_h330_face/yymsCwKPbJIF1xcl2ih8fl7OxAa.jpg", title: "임시"),
+        Poster(image_url: "https://www.themoviedb.org/t/p/w220_and_h330_face/yymsCwKPbJIF1xcl2ih8fl7OxAa.jpg", title: "임시")
+    ]
+    
+//    let img = UIImageView().kf.setImage(with: URL(string: ""))
+    
+    let table = UITableView()
+    
     
     var select_title: String = ""
     var img_url: String = ""
@@ -25,83 +38,86 @@ class FirstTabBar: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        table.delegate = self
+        table.dataSource = self
         
-        let scrollView: UIScrollView! = UIScrollView()
-        let contentView: UIView! = UIView()
+        table.register(reviewCell.self, forCellReuseIdentifier: reviewCell.cell)
         
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubview(scrollView)
-        scrollView.addSubview(contentView)
-        
-        contentView.backgroundColor = .gray
-        
-//        scrollView.contentInset = .init(top: 20, left: 0, bottom: 0, right: 0)
-        
-        scrollView.showsVerticalScrollIndicator = true
-        scrollView.isDirectionalLockEnabled = true
+        view.addSubview(table)
+        table.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            table.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            table.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            table.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            table.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
         
-        NSLayoutConstraint.activate([
-            contentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
-            contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor)
-        ])
-        
-        contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-        
-        let contentViewHeight = contentView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor)
-        
-        contentViewHeight.priority = .defaultLow
-        contentViewHeight.isActive = true
         
         
-//        var config = UIButton.Configuration.tinted()
-//        config.title = "Button"
-//        config.image = UIImage(systemName: "swift")
+//        let scrollView: UIScrollView! = UIScrollView()
+//        let contentView: UIView! = UIView()
 //
-//        let btn = UIButton(
-//            configuration: config,
-//            primaryAction: UIAction(handler: { _ in
-//                print("button clicked")
-//            })
-//        )
+//        scrollView.translatesAutoresizingMaskIntoConstraints = false
+//        contentView.translatesAutoresizingMaskIntoConstraints = false
+//
+//        view.addSubview(scrollView)
+//        scrollView.addSubview(contentView)
+//
+//        contentView.backgroundColor = .gray
+//
+//        scrollView.showsVerticalScrollIndicator = true
+//        scrollView.isDirectionalLockEnabled = true
+//
+//        NSLayoutConstraint.activate([
+//            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+//            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+//            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+//            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+//        ])
+//
+//        NSLayoutConstraint.activate([
+//            contentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
+//            contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
+//            contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+//            contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor)
+//        ])
+//
+//        contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+//
+//        let contentViewHeight = contentView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor)
+//
+//        contentViewHeight.priority = .defaultLow
+//        contentViewHeight.isActive = true
+
         
-        let registerBtn: UIButton = .init(frame: .init())
-        
-        registerBtn.backgroundColor = .orange
-        
-        registerBtn.setTitle("등록하기", for: .normal)
-        registerBtn.addTarget(self, action: #selector(check), for: .touchUpInside)
-        
-        contentView.addSubview(registerBtn)
-        registerBtn.translatesAutoresizingMaskIntoConstraints = false
-        registerBtn.widthAnchor.constraint(equalToConstant: 120).isActive = true
-        registerBtn.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        registerBtn.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        registerBtn.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        
-        let a: UIButton = .init(frame: .init())
-        
-        a.backgroundColor = .orange
-        
-        a.setTitle("등록하기", for: .normal)
-        a.addTarget(self, action: #selector(check2), for: .touchUpInside)
-        
-        contentView.addSubview(a)
-        a.translatesAutoresizingMaskIntoConstraints = false
-        a.widthAnchor.constraint(equalToConstant: 120).isActive = true
-        a.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        a.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
-        a.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+//        let registerBtn: UIButton = .init(frame: .init())
+//
+//        registerBtn.backgroundColor = .orange
+//
+//        registerBtn.setTitle("등록하기", for: .normal)
+//        registerBtn.addTarget(self, action: #selector(check), for: .touchUpInside)
+//
+//        contentView.addSubview(registerBtn)
+//        registerBtn.translatesAutoresizingMaskIntoConstraints = false
+//        registerBtn.widthAnchor.constraint(equalToConstant: 120).isActive = true
+//        registerBtn.heightAnchor.constraint(equalToConstant: 60).isActive = true
+//        registerBtn.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
+//        registerBtn.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+//
+//        let a: UIButton = .init(frame: .init())
+//
+//        a.backgroundColor = .orange
+//
+//        a.setTitle("등록하기", for: .normal)
+//        a.addTarget(self, action: #selector(check2), for: .touchUpInside)
+//
+//        contentView.addSubview(a)
+//        a.translatesAutoresizingMaskIntoConstraints = false
+//        a.widthAnchor.constraint(equalToConstant: 120).isActive = true
+//        a.heightAnchor.constraint(equalToConstant: 60).isActive = true
+//        a.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
+//        a.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         
     }
     
@@ -116,6 +132,8 @@ class FirstTabBar: UIViewController{
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+
+    
     
 //    func toolbar(){
 //
@@ -125,24 +143,6 @@ class FirstTabBar: UIViewController{
 //        var trashButton: UIBarButtonItem!
 //    }
     
-    func makeButton(){
-        
-        var button = UIButton()
-        self.view.addSubview(button)
-        
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
-        button.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 100).isActive = true
-        button.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 50).isActive = true
-        
-        button.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        button.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        
-        button.setTitle("Button", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        
-        button.backgroundColor = .black
-    }
     
     @objc func check(){
 //        print("\(self.img_url)\(self.title)\(self.review)")
@@ -168,11 +168,26 @@ class FirstTabBar: UIViewController{
     }
 }
 
-extension FirstTabBar: reviewDelegate {
-    func recieveData(title: String, img_url: String, review: String) {
-        self.select_title = title
-        self.img_url = img_url
-        self.review = review
+extension FirstTabBar:  UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return poster.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: reviewCell.cell, for: indexPath) as! reviewCell
+        
+        cell.image.kf.setImage(with: URL(string: poster[indexPath.row].image_url))
+        cell.name.text = poster[indexPath.row].title
+        
+        return cell
     }
 }
-
+//
+//extension FirstTabBar: reviewDelegate {
+//    func recieveData(title: String, img_url: String, review: String) {
+//        self.select_title = title
+//        self.img_url = img_url
+//        self.review = review
+//    }
+//}
+//

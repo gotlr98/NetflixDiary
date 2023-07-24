@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A24D0A62A6A70DB00A61006 /* reviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A24D0A52A6A70DB00A61006 /* reviewCell.swift */; };
 		8A3FD6152A4C1061005D94B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3FD6142A4C1061005D94B9 /* AppDelegate.swift */; };
 		8A3FD6172A4C1061005D94B9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3FD6162A4C1061005D94B9 /* SceneDelegate.swift */; };
 		8A3FD6192A4C1061005D94B9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3FD6182A4C1061005D94B9 /* ViewController.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8A24D0A52A6A70DB00A61006 /* reviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reviewCell.swift; sourceTree = "<group>"; };
 		8A3FD6112A4C1061005D94B9 /* NetflixDiaryApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NetflixDiaryApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A3FD6142A4C1061005D94B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A3FD6162A4C1061005D94B9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				8A3FD6392A4D57C0005D94B9 /* StartView.swift */,
 				8ACC664F2A554B9E00C9B66A /* writeReviewModal.swift */,
 				8ACC66512A56954C00C9B66A /* searchMovie.swift */,
+				8A24D0A52A6A70DB00A61006 /* reviewCell.swift */,
 			);
 			path = NetflixDiaryApp;
 			sourceTree = "<group>";
@@ -201,6 +204,7 @@
 				8ACC66492A541CB800C9B66A /* User.swift in Sources */,
 				8A3FD6172A4C1061005D94B9 /* SceneDelegate.swift in Sources */,
 				8A3FD6332A4D42D3005D94B9 /* ThirdTabBar.swift in Sources */,
+				8A24D0A62A6A70DB00A61006 /* reviewCell.swift in Sources */,
 				8A3FD63A2A4D57C0005D94B9 /* StartView.swift in Sources */,
 				8ACC66522A56954C00C9B66A /* searchMovie.swift in Sources */,
 			);

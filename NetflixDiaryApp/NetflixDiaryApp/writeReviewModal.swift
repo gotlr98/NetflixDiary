@@ -22,7 +22,6 @@ class writeReviewModal: UIViewController{
     var reviewField: UITextView!
     var delegate: SendDataDelegate?
     
-    weak var reviewDelegate: reviewDelegate?
     var img_url: [String] = []
     var select_title: String = ""
     var isButtonClicked: Bool = false
