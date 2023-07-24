@@ -22,9 +22,7 @@ struct Poster{
 class FirstTabBar: UIViewController{
     
     
-    let poster: [Poster] = [Poster(image_url: "https://www.themoviedb.org/t/p/w220_and_h330_face/yymsCwKPbJIF1xcl2ih8fl7OxAa.jpg", title: "임시"),
-        Poster(image_url: "https://www.themoviedb.org/t/p/w220_and_h330_face/yymsCwKPbJIF1xcl2ih8fl7OxAa.jpg", title: "임시")
-    ]
+    var poster: [Poster] = []
     
 //    let img = UIImageView().kf.setImage(with: URL(string: ""))
     
@@ -37,6 +35,8 @@ class FirstTabBar: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         table.delegate = self
         table.dataSource = self
@@ -132,8 +132,22 @@ class FirstTabBar: UIViewController{
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-
     
+    override func viewWillAppear(_ animated: Bool) {
+        let net = User().get_user_net()
+        
+        var empty: [Poster] = []
+        
+        if !net.isEmpty && (net.count != poster.count){
+            for i in net{
+                let post = Poster(image_url: i.img_url, title: i.title)
+                empty.append(post)
+            }
+            poster = empty
+        }
+        
+        self.table.reloadData()
+    }
     
 //    func toolbar(){
 //
@@ -170,7 +184,7 @@ class FirstTabBar: UIViewController{
 
 extension FirstTabBar:  UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return poster.count
+        return self.poster.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
