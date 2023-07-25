@@ -180,6 +180,10 @@ class FirstTabBar: UIViewController{
         
         print(user_net)
     }
+    
+    @objc func cellTap(gesture: CustomTapGesture){
+        print(gesture.title)
+    }
 }
 
 extension FirstTabBar:  UITableViewDataSource, UITableViewDelegate {
@@ -193,9 +197,20 @@ extension FirstTabBar:  UITableViewDataSource, UITableViewDelegate {
         cell.image.kf.setImage(with: URL(string: poster[indexPath.row].image_url))
         cell.name.text = poster[indexPath.row].title
         
+        let gesture = CustomTapGesture(target: self, action: #selector(self.cellTap(gesture:)))
+        gesture.title = poster[indexPath.row].title
+        
+        cell.addGestureRecognizer(gesture)
+        
         return cell
     }
 }
+
+class CustomTapGesture: UITapGestureRecognizer {
+  var title: String?
+}
+
+
 //
 //extension FirstTabBar: reviewDelegate {
 //    func recieveData(title: String, img_url: String, review: String) {
