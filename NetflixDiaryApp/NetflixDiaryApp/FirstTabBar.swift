@@ -37,7 +37,12 @@ class FirstTabBar: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        NotificationCenter.default.addObserver(
+                  self,
+                  selector: #selector(self.didDismissDetailNotification(_:)),
+                  name: NSNotification.Name("DismissModal"),
+                  object: nil
+              )
         
         table.delegate = self
         table.dataSource = self
@@ -81,8 +86,24 @@ class FirstTabBar: UIViewController{
             }
             poster = empty
         }
-        
         self.table.reloadData()
+    }
+    
+    @objc func didDismissDetailNotification(_ notification: Notification) {
+        DispatchQueue.main.async {
+            
+            let net = User().get_user_net()
+            
+            var temp: [Poster] = []
+            
+            for i in net{
+                let post = Poster(image_url: i.img_url, title: i.title, review: i.review)
+                temp.append(post)
+            }
+            
+            self.poster = temp
+            self.table.reloadData()
+        }
     }
 
     
@@ -107,10 +128,8 @@ class FirstTabBar: UIViewController{
     }
     
     @objc func cellTap(gesture: CustomTapGesture){
-        print(gesture.title)
         
         let vc = reviewPopup(movie_title: gesture.title!, img_url: gesture.img_url!, review: gesture.review!)
-        print(gesture.review)
         
         vc.modalPresentationStyle = .formSheet
         
@@ -125,6 +144,7 @@ extension FirstTabBar:  UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reviewCell.cell, for: indexPath) as! reviewCell
+        
         
         cell.image.kf.setImage(with: URL(string: poster[indexPath.row].image_url))
         cell.name.text = poster[indexPath.row].title

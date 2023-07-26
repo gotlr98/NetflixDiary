@@ -102,4 +102,26 @@ class User: Object{
             }
         }
     }
+    
+    func update_review(title: String, review: String, change_review: String){
+        
+        let realm = try! Realm()
+        
+        let a = realm.objects(User.self)
+        
+        var net: [Netflix] = []
+        
+        for i in a{
+            net.append(contentsOf: i.user_net)
+        }
+        
+        for j in net{
+            if j.title == title && j.review == review{
+                try! realm.write{
+                    j.review = change_review
+                }
+                print(change_review)
+            }
+        }
+    }
 }
