@@ -9,11 +9,21 @@ import Foundation
 import UIKit
 
 
-class reviewPopup: UIViewController{
+class reviewPopup: UIViewController, UITextViewDelegate{
     
     var movie_title: String
     var img_url: String
     var review: String
+    
+    lazy var review_view: UITextView = {
+        
+        let text = UITextView()
+        
+        text.translatesAutoresizingMaskIntoConstraints = false
+        text.delegate = self
+        
+        return text
+    }()
     
     init(movie_title: String, img_url: String, review: String){
         
@@ -33,6 +43,17 @@ class reviewPopup: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = .white
+        
+        let title_label = UILabel()
+        
+        self.view.addSubview(title_label)
+        
+        
+        title_label.text = "' " + movie_title + " ' " + "리뷰: "
+        title_label.translatesAutoresizingMaskIntoConstraints = false
+        
+        
         let image = UIImageView()
         
         self.view.addSubview(image)
@@ -48,12 +69,24 @@ class reviewPopup: UIViewController{
             placeholder: nil
         )
         
-        let review_view = UITextView()
+        
+        
+        title_label.bottomAnchor.constraint(equalTo: image.topAnchor, constant: -10).isActive = true
+        title_label.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        title_label.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        title_label.widthAnchor.constraint(equalToConstant: 300).isActive = true
+
         
         self.view.addSubview(review_view)
         
-        review_view.text = review
+        review_view.text = self.review
+        review_view.textColor = .black
+        review_view.font = UIFont(name: "Callout", size: 50)
+        
         review_view.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 20).isActive = true
         review_view.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        review_view.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        review_view.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        
     }
 }

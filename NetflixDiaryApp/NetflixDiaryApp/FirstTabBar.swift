@@ -110,6 +110,9 @@ class FirstTabBar: UIViewController{
         print(gesture.title)
         
         let vc = reviewPopup(movie_title: gesture.title!, img_url: gesture.img_url!, review: gesture.review!)
+        print(gesture.review)
+        
+        vc.modalPresentationStyle = .formSheet
         
         self.present(vc, animated: true)
     }
