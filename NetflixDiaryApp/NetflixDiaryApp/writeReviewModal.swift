@@ -48,6 +48,8 @@ class writeReviewModal: UIViewController{
         scrollView.showsVerticalScrollIndicator = true
         scrollView.isDirectionalLockEnabled = true
         
+        self.hideKeyboard()
+        
         
         let contentView = UIView()
         
@@ -102,6 +104,7 @@ class writeReviewModal: UIViewController{
         searchTextField.borderStyle = .line
         searchTextField.autocorrectionType = .no
         searchTextField.keyboardType = .default
+        searchTextField.textColor = .black
         searchTextField.returnKeyType = .done
         searchTextField.autocapitalizationType = .none
         
@@ -160,8 +163,10 @@ class writeReviewModal: UIViewController{
             
             reviewField.font = UIFont.systemFont(ofSize: 20)
             reviewField.autocorrectionType = .no
+            reviewField.backgroundColor = .white
             reviewField.keyboardType = .default
             reviewField.returnKeyType = .done
+            reviewField.textColor = .black
             reviewField.autocapitalizationType = .none
             reviewField.layer.borderWidth = 1.0
             reviewField.layer.borderColor = UIColor.red.cgColor
@@ -320,6 +325,20 @@ class writeReviewModal: UIViewController{
         
     }
 
+}
+
+extension writeReviewModal{
+    
+    func hideKeyboard(){
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard(){
+        view.endEditing(true)
+    }
 }
 
 extension writeReviewModal: SendDataDelegate {

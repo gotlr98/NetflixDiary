@@ -42,6 +42,8 @@ class ViewController: UITabBarController {
     init(){
         super.init(nibName: nil, bundle: nil)
         
+        self.view.backgroundColor = .white
+        
         let firstTab: UIViewController = FirstTabBar()
         let secondTab: UIViewController = SecondTabBar()
         let thirdTab: UIViewController = ThirdTabBar()

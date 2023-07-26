@@ -48,7 +48,7 @@ class reviewPopup: UIViewController, UITextViewDelegate{
         
         self.view.backgroundColor = .white
         
-        
+        self.hideKeyboard()
         
         let title_label = UILabel()
         
@@ -139,6 +139,20 @@ class reviewPopup: UIViewController, UITextViewDelegate{
 //        print(textView.text)
 //        is_text_edit = true
 //    }
+}
+
+extension reviewPopup{
+    
+    func hideKeyboard(){
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard(){
+        view.endEditing(true)
+    }
 }
 
 extension reviewPopup: NSTextStorageDelegate {
