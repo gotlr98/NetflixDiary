@@ -17,6 +17,7 @@ import Kingfisher
 struct Poster{
     let image_url: String
     let title: String
+    let review: String
 }
 
 class FirstTabBar: UIViewController{
@@ -52,72 +53,7 @@ class FirstTabBar: UIViewController{
             table.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             table.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
-        
-        
-        
-//        let scrollView: UIScrollView! = UIScrollView()
-//        let contentView: UIView! = UIView()
-//
-//        scrollView.translatesAutoresizingMaskIntoConstraints = false
-//        contentView.translatesAutoresizingMaskIntoConstraints = false
-//
-//        view.addSubview(scrollView)
-//        scrollView.addSubview(contentView)
-//
-//        contentView.backgroundColor = .gray
-//
-//        scrollView.showsVerticalScrollIndicator = true
-//        scrollView.isDirectionalLockEnabled = true
-//
-//        NSLayoutConstraint.activate([
-//            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-//            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-//            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-//            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-//        ])
-//
-//        NSLayoutConstraint.activate([
-//            contentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
-//            contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
-//            contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
-//            contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor)
-//        ])
-//
-//        contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-//
-//        let contentViewHeight = contentView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor)
-//
-//        contentViewHeight.priority = .defaultLow
-//        contentViewHeight.isActive = true
 
-        
-//        let registerBtn: UIButton = .init(frame: .init())
-//
-//        registerBtn.backgroundColor = .orange
-//
-//        registerBtn.setTitle("등록하기", for: .normal)
-//        registerBtn.addTarget(self, action: #selector(check), for: .touchUpInside)
-//
-//        contentView.addSubview(registerBtn)
-//        registerBtn.translatesAutoresizingMaskIntoConstraints = false
-//        registerBtn.widthAnchor.constraint(equalToConstant: 120).isActive = true
-//        registerBtn.heightAnchor.constraint(equalToConstant: 60).isActive = true
-//        registerBtn.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-//        registerBtn.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-//
-//        let a: UIButton = .init(frame: .init())
-//
-//        a.backgroundColor = .orange
-//
-//        a.setTitle("등록하기", for: .normal)
-//        a.addTarget(self, action: #selector(check2), for: .touchUpInside)
-//
-//        contentView.addSubview(a)
-//        a.translatesAutoresizingMaskIntoConstraints = false
-//        a.widthAnchor.constraint(equalToConstant: 120).isActive = true
-//        a.heightAnchor.constraint(equalToConstant: 60).isActive = true
-//        a.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
-//        a.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         
     }
     
@@ -140,7 +76,7 @@ class FirstTabBar: UIViewController{
         
         if !net.isEmpty && (net.count != poster.count){
             for i in net{
-                let post = Poster(image_url: i.img_url, title: i.title)
+                let post = Poster(image_url: i.img_url, title: i.title, review: i.review)
                 empty.append(post)
             }
             poster = empty
@@ -148,21 +84,10 @@ class FirstTabBar: UIViewController{
         
         self.table.reloadData()
     }
-    
-//    func toolbar(){
-//
-//        self.navigationController?.isToolbarHidden = false
-//
-//        var shareButton: UIBarButtonItem!
-//        var trashButton: UIBarButtonItem!
-//    }
-    
+
     
     @objc func check(){
-//        print("\(self.img_url)\(self.title)\(self.review)")
         User().delete_all()
-        //64b8cad0539de0f64821ca5d
-//        User().set_user()
         
     }
     
@@ -183,6 +108,10 @@ class FirstTabBar: UIViewController{
     
     @objc func cellTap(gesture: CustomTapGesture){
         print(gesture.title)
+        
+        let vc = reviewPopup(movie_title: gesture.title!, img_url: gesture.img_url!, review: gesture.review!)
+        
+        self.present(vc, animated: true)
     }
 }
 
@@ -199,6 +128,8 @@ extension FirstTabBar:  UITableViewDataSource, UITableViewDelegate {
         
         let gesture = CustomTapGesture(target: self, action: #selector(self.cellTap(gesture:)))
         gesture.title = poster[indexPath.row].title
+        gesture.img_url = poster[indexPath.row].image_url
+        gesture.review = poster[indexPath.row].review
         
         cell.addGestureRecognizer(gesture)
         
@@ -207,7 +138,9 @@ extension FirstTabBar:  UITableViewDataSource, UITableViewDelegate {
 }
 
 class CustomTapGesture: UITapGestureRecognizer {
-  var title: String?
+    var title: String?
+    var img_url: String?
+    var review: String?
 }
 
 
