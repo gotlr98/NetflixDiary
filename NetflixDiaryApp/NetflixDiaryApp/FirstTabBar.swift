@@ -41,7 +41,6 @@ class FirstTabBar: UIViewController{
         
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        navigationController?.title = "나의 리뷰"
         
         
         NotificationCenter.default.addObserver(
@@ -87,6 +86,9 @@ class FirstTabBar: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         
         navigationController?.setNavigationBarHidden(false, animated: false)
+        
+        self.tabBarController?.navigationItem.title = "나의 리뷰"
+        self.tabBarController?.navigationItem.title
 
         let net = User().get_user_net()
         

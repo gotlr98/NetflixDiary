@@ -18,7 +18,7 @@ class ViewController: UITabBarController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        self.navigationItem.prompt = "UITabBarController"
+//        self.navigationItem.prompt = "UITabBarController"
         
         self.navigationItem.setHidesBackButton(true, animated: true)
         
