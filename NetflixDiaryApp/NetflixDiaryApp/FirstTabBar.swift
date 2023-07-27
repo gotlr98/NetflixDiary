@@ -39,9 +39,10 @@ class FirstTabBar: UIViewController{
         
         self.table.backgroundColor = .white
         
-        self.navigationItem.title = "나의 리뷰"
+        navigationController?.navigationBar.prefersLargeTitles = true
         
-
+        navigationController?.title = "나의 리뷰"
+        
         
         NotificationCenter.default.addObserver(
                   self,
@@ -84,6 +85,9 @@ class FirstTabBar: UIViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
+        navigationController?.setNavigationBarHidden(false, animated: false)
+
         let net = User().get_user_net()
         
         var empty: [Poster] = []

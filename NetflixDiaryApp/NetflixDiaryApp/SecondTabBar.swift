@@ -14,6 +14,10 @@ class SecondTabBar: UIViewController{
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
     init(){
         super.init(nibName: nil, bundle: nil)
         
