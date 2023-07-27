@@ -41,6 +41,8 @@ class FirstTabBar: UIViewController{
         
         self.navigationItem.title = "나의 리뷰"
         
+
+        
         NotificationCenter.default.addObserver(
                   self,
                   selector: #selector(self.didDismissDetailNotification(_:)),
