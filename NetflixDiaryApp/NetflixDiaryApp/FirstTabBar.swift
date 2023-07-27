@@ -37,7 +37,9 @@ class FirstTabBar: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = .white
+        self.table.backgroundColor = .white
+        
+        self.navigationItem.title = "나의 리뷰"
         
         NotificationCenter.default.addObserver(
                   self,
@@ -60,6 +62,9 @@ class FirstTabBar: UIViewController{
             table.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             table.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
+        
+        table.rowHeight = 60
+
 
         
     }
@@ -107,27 +112,6 @@ class FirstTabBar: UIViewController{
             self.table.reloadData()
         }
     }
-
-    
-    @objc func check(){
-        User().delete_all()
-        
-    }
-    
-    @objc func check2(){
-        
-        User().add_user_net(net: Netflix(title: "어벤져스", img_url: "asdf", review: "sdfdf"))
-        let net = User().get_user_net()
-        
-        print(net)
-        
-        
-        User().delete_net(title: "어벤져스")
-        
-        let user_net = User().get_user_net()
-        
-        print(user_net)
-    }
     
     @objc func cellTap(gesture: CustomTapGesture){
         
@@ -150,6 +134,8 @@ extension FirstTabBar:  UITableViewDataSource, UITableViewDelegate {
         
         cell.image.kf.setImage(with: URL(string: poster[indexPath.row].image_url))
         cell.name.text = poster[indexPath.row].title
+        
+        cell.backgroundColor = .gray
         
         let gesture = CustomTapGesture(target: self, action: #selector(self.cellTap(gesture:)))
         gesture.title = poster[indexPath.row].title

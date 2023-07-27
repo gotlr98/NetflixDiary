@@ -57,6 +57,7 @@ class reviewPopup: UIViewController, UITextViewDelegate{
         
         title_label.text = "' " + movie_title + " ' " + "리뷰: "
         title_label.translatesAutoresizingMaskIntoConstraints = false
+        title_label.textColor = .black
         
         
         let image = UIImageView()
@@ -87,6 +88,7 @@ class reviewPopup: UIViewController, UITextViewDelegate{
         review_view.text = self.review
         review_view.textColor = .black
         review_view.font = UIFont(name: "Callout", size: 50)
+        review_view.backgroundColor = .white
         
         review_view.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 20).isActive = true
         review_view.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true

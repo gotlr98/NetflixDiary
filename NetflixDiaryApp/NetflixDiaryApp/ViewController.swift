@@ -23,7 +23,8 @@ class ViewController: UITabBarController {
         self.navigationItem.setHidesBackButton(true, animated: true)
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "추가하기", image: UIImage(systemName: "plus"), target: nil, action: nil)
-
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
