@@ -75,9 +75,7 @@ class reviewPopup: UIViewController, UITextViewDelegate{
             placeholder: nil
         )
         
-        
-        
-        title_label.bottomAnchor.constraint(equalTo: image.topAnchor, constant: -10).isActive = true
+        title_label.topAnchor.constraint(equalTo: image.bottomAnchor, constant: -10).isActive = true
         title_label.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         title_label.heightAnchor.constraint(equalToConstant: 100).isActive = true
         title_label.widthAnchor.constraint(equalToConstant: 300).isActive = true

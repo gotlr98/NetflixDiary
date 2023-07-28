@@ -154,7 +154,7 @@ class writeReviewModal: UIViewController{
             titleLabel.text = self.select_title
             
             titleLabel.translatesAutoresizingMaskIntoConstraints = false
-            titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 40).isActive = true
+            titleLabel.topAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 10).isActive = true
             titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
             titleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
             
@@ -175,6 +175,7 @@ class writeReviewModal: UIViewController{
             reviewField.translatesAutoresizingMaskIntoConstraints = false
             reviewField.widthAnchor.constraint(equalToConstant: 300).isActive = true
             reviewField.heightAnchor.constraint(equalToConstant: 200).isActive = true
+            reviewField.topAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 30).isActive = true
             
             reviewField.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
             reviewField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -40).isActive = true

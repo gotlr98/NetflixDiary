@@ -25,7 +25,6 @@ class FirstTabBar: UIViewController{
     
     var poster: [Poster] = []
     
-//    let img = UIImageView().kf.setImage(with: URL(string: ""))
     
     let table = UITableView()
     
@@ -40,8 +39,6 @@ class FirstTabBar: UIViewController{
         self.table.backgroundColor = .white
         
         navigationController?.navigationBar.prefersLargeTitles = true
-        
-        
         
         NotificationCenter.default.addObserver(
                   self,
@@ -67,8 +64,6 @@ class FirstTabBar: UIViewController{
         
         table.rowHeight = 60
 
-
-        
     }
     
     init(){
@@ -87,8 +82,13 @@ class FirstTabBar: UIViewController{
         
         navigationController?.setNavigationBarHidden(false, animated: false)
         
-        self.tabBarController?.navigationItem.title = "나의 리뷰"
-        self.tabBarController?.navigationItem.title
+        let navigationTitle = UILabel()
+        
+        navigationTitle.text = "나의 리뷰"
+        navigationTitle.font = UIFont.systemFont(ofSize: 20)
+        navigationTitle.textAlignment = .left
+        
+        self.tabBarController?.navigationItem.titleView = navigationTitle
 
         let net = User().get_user_net()
         
@@ -144,7 +144,7 @@ extension FirstTabBar:  UITableViewDataSource, UITableViewDelegate {
         cell.name.text = poster[indexPath.row].title
         
         cell.backgroundColor = .gray
-        
+                
         let gesture = CustomTapGesture(target: self, action: #selector(self.cellTap(gesture:)))
         gesture.title = poster[indexPath.row].title
         gesture.img_url = poster[indexPath.row].image_url
@@ -154,6 +154,7 @@ extension FirstTabBar:  UITableViewDataSource, UITableViewDelegate {
         
         return cell
     }
+
 }
 
 class CustomTapGesture: UITapGestureRecognizer {
