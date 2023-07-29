@@ -99,7 +99,10 @@ class writeReviewModal: UIViewController{
         
         searchTextField = .init(frame: .init())
         
-        searchTextField.placeholder = "검색할 작품을 입력해주세요"
+        searchTextField.attributedPlaceholder = NSAttributedString(
+            string: "검색할 작품을 입력해주세요",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.black]
+        )
         searchTextField.font = UIFont.systemFont(ofSize: 20)
         searchTextField.borderStyle = .line
         searchTextField.autocorrectionType = .no
@@ -107,6 +110,9 @@ class writeReviewModal: UIViewController{
         searchTextField.textColor = .black
         searchTextField.returnKeyType = .done
         searchTextField.autocapitalizationType = .none
+        
+        searchTextField.layer.borderWidth = 1.0
+        searchTextField.layer.borderColor = UIColor.black.cgColor
         
         contentView.addSubview(searchTextField)
         searchTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -154,7 +160,7 @@ class writeReviewModal: UIViewController{
             titleLabel.text = self.select_title
             
             titleLabel.translatesAutoresizingMaskIntoConstraints = false
-            titleLabel.topAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 10).isActive = true
+            titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 40).isActive = true
             titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
             titleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
             
@@ -175,7 +181,6 @@ class writeReviewModal: UIViewController{
             reviewField.translatesAutoresizingMaskIntoConstraints = false
             reviewField.widthAnchor.constraint(equalToConstant: 300).isActive = true
             reviewField.heightAnchor.constraint(equalToConstant: 200).isActive = true
-            reviewField.topAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 30).isActive = true
             
             reviewField.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
             reviewField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -40).isActive = true
