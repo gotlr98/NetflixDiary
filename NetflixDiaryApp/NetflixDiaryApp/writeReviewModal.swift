@@ -350,6 +350,9 @@ extension writeReviewModal{
 extension writeReviewModal: SendDataDelegate {
     func recieveData(title: String) {
         
+        view.subviews.forEach{ subview in
+            subview.removeFromSuperview()
+        }
         self.is_search = true
         self.select_title = title
         
