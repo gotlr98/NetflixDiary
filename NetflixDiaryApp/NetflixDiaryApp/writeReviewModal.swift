@@ -251,8 +251,6 @@ class writeReviewModal: UIViewController{
             return
         }
         else{
-            
-            print(self.searchTextField.text)
             Task{
                 await requestNet(name: self.searchTextField.text!)
                 
@@ -364,6 +362,5 @@ extension writeReviewModal: SendDataDelegate {
         
         
         self.viewDidLoad()
-        print(self.select_title)
     }
 }
