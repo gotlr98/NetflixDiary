@@ -93,7 +93,7 @@ class writeReviewModal: UIViewController{
         registerBtn.translatesAutoresizingMaskIntoConstraints = false
         registerBtn.widthAnchor.constraint(equalToConstant: 120).isActive = true
         registerBtn.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        registerBtn.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        registerBtn.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20).isActive = true
         registerBtn.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         
         
@@ -149,7 +149,6 @@ class writeReviewModal: UIViewController{
             image.heightAnchor.constraint(equalToConstant: 200).isActive = true
             image.widthAnchor.constraint(equalToConstant: 200).isActive = true
 
-            
             image.kf.setImage(
                 with: URL(string: title_url[select_title]!),
                 placeholder: nil
@@ -160,7 +159,8 @@ class writeReviewModal: UIViewController{
             titleLabel.text = self.select_title
             
             titleLabel.translatesAutoresizingMaskIntoConstraints = false
-            titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 40).isActive = true
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 400).isActive = true
+//            titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 40).isActive = true
             titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
             titleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
             
@@ -183,7 +183,7 @@ class writeReviewModal: UIViewController{
             reviewField.heightAnchor.constraint(equalToConstant: 200).isActive = true
             
             reviewField.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-            reviewField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -40).isActive = true
+            reviewField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -150).isActive = true
         }
 
         

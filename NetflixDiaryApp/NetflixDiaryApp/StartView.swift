@@ -54,11 +54,8 @@ class StartView: UIViewController{
         animationView.center = self.view.center
         animationView.contentMode = .scaleAspectFit
         animationView.play{ (finish) in
-            print("animation finished")
             
             animationView.removeFromSuperview()
-
-//            self.requestNet()
             
             self.navigationController?.pushViewController(ViewController(), animated: false)
 
