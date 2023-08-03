@@ -40,6 +40,13 @@ class FirstTabBar: UIViewController{
         
         navigationController?.navigationBar.prefersLargeTitles = true
         
+        let rightbarbutton = UIBarButtonItem(title: "추가하기", image: UIImage(systemName: "plus"), target: nil, action: #selector(rightClick))
+
+        
+        self.navigationController?.navigationItem.setRightBarButton(rightbarbutton, animated: true)
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "추가하기", image: UIImage(systemName: "plus"), target: nil, action: nil)
+        
+        
         NotificationCenter.default.addObserver(
                   self,
                   selector: #selector(self.didDismissDetailNotification(_:)),
@@ -102,6 +109,22 @@ class FirstTabBar: UIViewController{
             poster = empty
         }
         self.table.reloadData()
+    }
+    
+    @objc func rightClick(){
+        self.navigationController?.pushViewController(writeReviewModal(), animated: true)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+//        navigationItem.rightBarButtonItem!.menu = UIMenu(children: [
+//            UIAction(title: "리뷰쓰기", attributes: .destructive, handler: { _ in
+////                let modal = writeReviewModal()
+////                modal.modalPresentationStyle = .fullScreen
+////                self.present(modal, animated: true)
+//
+//                self.navigationController?.pushViewController(writeReviewModal(), animated: true)
+//            })
+//        ])
     }
     
     @objc func didDismissDetailNotification(_ notification: Notification) {

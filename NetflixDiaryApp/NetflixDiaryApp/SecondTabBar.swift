@@ -15,7 +15,9 @@ class SecondTabBar: UIViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationController?.setNavigationBarHidden(false, animated: false)
+        
+//        navigationController.item
     }
     
     init(){

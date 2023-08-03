@@ -186,7 +186,6 @@ class writeReviewModal: UIViewController{
             reviewField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -150).isActive = true
         }
 
-        
     }
         
     override func viewDidAppear(_ animated: Bool) {
