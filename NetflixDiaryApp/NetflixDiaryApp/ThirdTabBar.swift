@@ -23,7 +23,7 @@ class ThirdTabBar: UIViewController{
         
         self.view.backgroundColor = .white
         
-        self.tabBarItem = UITabBarItem(title: "profile", image: UIImage(systemName: "person.circle.fill"), tag: 3)
+//        self.tabBarItem = UITabBarItem(title: "profile", image: UIImage(systemName: "person.circle.fill"), tag: 3)
     }
     
     required init?(coder aDecoder: NSCoder) {

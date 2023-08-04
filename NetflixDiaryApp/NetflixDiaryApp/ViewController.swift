@@ -10,12 +10,14 @@ import UIKit
 import Lottie
 
 
-class ViewController: UITabBarController {
+class ViewController: UITabBarController, UITabBarControllerDelegate {
     
     let label = UILabel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.delegate = self
         // Do any additional setup after loading the view.
         
 //        self.navigationItem.prompt = "UITabBarController"
@@ -27,8 +29,8 @@ class ViewController: UITabBarController {
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
 //        navigationItem.rightBarButtonItem!.menu = UIMenu(children: [
 //            UIAction(title: "리뷰쓰기", attributes: .destructive, handler: { _ in
 ////                let modal = writeReviewModal()
@@ -38,26 +40,49 @@ class ViewController: UITabBarController {
 //                self.navigationController?.pushViewController(writeReviewModal(), animated: true)
 //            })
 //        ])
+        
+        self.navigationController?.isNavigationBarHidden = true
+        let firstTab = UINavigationController(rootViewController: FirstTabBar())
+        let tabone = UITabBarItem(title: "home", image: UIImage(systemName: "house.fill"), tag: 1)
+        firstTab.tabBarItem = tabone
+
+        
+        
+        let secondTab = UINavigationController(rootViewController: SecondTabBar())
+        let tabtwo = UITabBarItem(title: "search", image: UIImage(systemName: "magnifyingglass"), tag: 2)
+        secondTab.tabBarItem = tabtwo
+        secondTab.tabBarController?.tabBar.isHidden = true
+        
+        let thirdTab = UINavigationController(rootViewController: ThirdTabBar())
+        let tabthree = UITabBarItem(title: "profile", image: UIImage(systemName: "person.circle.fill"), tag: 3)
+        thirdTab.tabBarItem = tabthree
+        
+        self.viewControllers = [firstTab, secondTab, thirdTab]
     }
+    
     
     init(){
         super.init(nibName: nil, bundle: nil)
         
-        self.view.backgroundColor = .white
-        
-        let firstTab: UIViewController = FirstTabBar()
-        let secondTab: UIViewController = SecondTabBar()
-        let thirdTab: UIViewController = ThirdTabBar()
-        
-        // Create an Array of Tables with Tabs as Elements.
-        let tabs = NSArray(objects: firstTab, secondTab, thirdTab)
-        
-        // Set the ViewController.
-        self.setViewControllers(tabs as? [UIViewController], animated: false)
+//        self.view.backgroundColor = .white
+//
+//        let firstTab: UIViewController = FirstTabBar()
+//        let secondTab: UIViewController = SecondTabBar()
+//        let thirdTab: UIViewController = ThirdTabBar()
+//
+//        // Create an Array of Tables with Tabs as Elements.
+//        let tabs = NSArray(objects: firstTab, secondTab, thirdTab)
+//
+//        // Set the ViewController.
+//        self.setViewControllers(tabs as? [UIViewController], animated: false)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init has not implemented")
+    }
+    
+    @objc func rightClick(){
+        self.navigationController?.pushViewController(writeReviewModal(), animated: true)
     }
 
 }

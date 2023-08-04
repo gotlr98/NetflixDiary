@@ -40,11 +40,13 @@ class FirstTabBar: UIViewController{
         
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        let rightbarbutton = UIBarButtonItem(title: "추가하기", image: UIImage(systemName: "plus"), target: nil, action: #selector(rightClick))
-
-        
-        self.navigationController?.navigationItem.setRightBarButton(rightbarbutton, animated: true)
+//        let rightbarbutton = UIBarButtonItem(title: "추가하기", image: UIImage(systemName: "plus"), target: nil, action: #selector(rightClick))
+//
+//        
+//        self.navigationController?.navigationItem.setRightBarButton(rightbarbutton, animated: true)
 //        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "추가하기", image: UIImage(systemName: "plus"), target: nil, action: nil)
+        
+        
         
         
         NotificationCenter.default.addObserver(
@@ -78,7 +80,7 @@ class FirstTabBar: UIViewController{
         
         self.view.backgroundColor = .white
         
-        self.tabBarItem = UITabBarItem(title: "home", image: UIImage(systemName: "house.fill"), tag: 1)
+//        self.tabBarItem = UITabBarItem(title: "home", image: UIImage(systemName: "house.fill"), tag: 1)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -87,7 +89,7 @@ class FirstTabBar: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         
-        navigationController?.setNavigationBarHidden(false, animated: false)
+//        navigationController?.setNavigationBarHidden(false, animated: false)
         
         let navigationTitle = UILabel()
         
@@ -95,7 +97,30 @@ class FirstTabBar: UIViewController{
         navigationTitle.font = UIFont.systemFont(ofSize: 20)
         navigationTitle.textAlignment = .left
         
-        self.tabBarController?.navigationItem.titleView = navigationTitle
+
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "추가하기", image: UIImage(systemName: "plus"), target: nil, action: nil)
+
+        self.navigationItem.rightBarButtonItem!.menu = UIMenu(children: [
+                        UIAction(title: "리뷰쓰기", attributes: .destructive, handler: { _ in
+
+                            self.navigationController?.pushViewController(writeReviewModal(), animated: true)
+                        })
+                    ])
+
+        
+//        self.tabBarController?.navigationItem.titleView = navigationTitle
+//        
+//        self.tabBarController?.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "추가하기", image: UIImage(systemName: "plus"), target: nil, action: nil)
+//
+//        self.tabBarController?.navigationItem.rightBarButtonItem!.menu = UIMenu(children: [
+//                        UIAction(title: "리뷰쓰기", attributes: .destructive, handler: { _ in
+//            //                let modal = writeReviewModal()
+//            //                modal.modalPresentationStyle = .fullScreen
+//            //                self.present(modal, animated: true)
+//
+//                            self.navigationController?.pushViewController(writeReviewModal(), animated: true)
+//                        })
+//                    ])
 
         let net = User().get_user_net()
         
