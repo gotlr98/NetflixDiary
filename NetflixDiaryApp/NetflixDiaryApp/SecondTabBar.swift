@@ -27,6 +27,10 @@ class SecondTabBar: UIViewController{
                             self.navigationController?.pushViewController(writeReviewModal(), animated: true)
                         })
                     ])
+        
+        let refresh = UIRefreshControl()
+        
+        refresh.addTarget(self, action: #selector(getData), for: .valueChanged)
     }
     
     init(){
@@ -39,6 +43,11 @@ class SecondTabBar: UIViewController{
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    @objc func getData(){
+        
+        
     }
     
     

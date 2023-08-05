@@ -97,6 +97,7 @@ class FirstTabBar: UIViewController{
         navigationTitle.font = UIFont.systemFont(ofSize: 20)
         navigationTitle.textAlignment = .left
         
+        self.navigationItem.titleView = navigationTitle
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "추가하기", image: UIImage(systemName: "plus"), target: nil, action: nil)
 

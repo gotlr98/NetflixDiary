@@ -51,6 +51,7 @@ class searchMovie: UIViewController{
         slide.pageIndicator = indicator
         slide.setImageInputs(title_url)
         
+        
         slide.translatesAutoresizingMaskIntoConstraints = false
         
         self.view.addSubview(slide)
