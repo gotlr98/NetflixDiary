@@ -15,9 +15,7 @@ class SecondTabBar: UIViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        navigationController?.setNavigationBarHidden(false, animated: false)
-        
-//        navigationController.item
+
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "추가하기", image: UIImage(systemName: "magnifyingglass"), target: nil, action: nil)
 
@@ -38,7 +36,6 @@ class SecondTabBar: UIViewController{
         
         self.view.backgroundColor = .white
         
-//        self.tabBarItem = UITabBarItem(title: "search", image: UIImage(systemName: "magnifyingglass"), tag: 2)
     }
     
     required init?(coder aDecoder: NSCoder) {
