@@ -10,8 +10,26 @@ import UIKit
 
 class SecondTabBar: UIViewController{
     
+//    let pop = popularMoviewView()
+    
+    lazy var collectionView: UICollectionView = {
+       
+        
+        let lay = UICollectionViewFlowLayout()
+        lay.scrollDirection = .horizontal
+        
+        lay.minimumLineSpacing = 50
+        
+        let view = UICollectionView(frame: .zero, collectionViewLayout: lay)
+        view.backgroundColor = .white
+        
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -26,15 +44,16 @@ class SecondTabBar: UIViewController{
                         })
                     ])
         
-        let refresh = UIRefreshControl()
+//        let refresh = UIRefreshControl()
+//
+//        refresh.addTarget(self, action: #selector(getData), for: .valueChanged)
         
-        refresh.addTarget(self, action: #selector(getData), for: .valueChanged)
     }
     
     init(){
         super.init(nibName: nil, bundle: nil)
         
-        self.view.backgroundColor = .white
+//        self.view.backgroundColor = .white
         
     }
     
@@ -47,33 +66,25 @@ class SecondTabBar: UIViewController{
         
         var timer: Int = 0
         
-        
+        findPopularFilm()
         
     }
     
-    func findPopularFilm(name: String) async {
-        let headers = [
-          "accept": "application/json",
-          "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlOGNiMmEwNTRjYTZmMTEyZDY2YjFlODE2ZTIzOWVlNiIsInN1YiI6IjY0OWJkOWUwNzdjMDFmMDBjYTVhNzkwZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.YXEMCu81V6_te2LwVDZiNCFrn1GUZeCcTAj4WYTGwug"
-        ]
+    @objc func findPopularFilm() {
 
-        let request = NSMutableURLRequest(url: NSURL(string: "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=ko-KR&page=1&sort_by=popularity.desc&with_watch_providers=providers%3A8")! as URL,
-                                                cachePolicy: .useProtocolCachePolicy,
-                                            timeoutInterval: 10.0)
-        request.httpMethod = "GET"
-        request.allHTTPHeaderFields = headers
-        
         let API_KEY = "e8cb2a054ca6f112d66b1e816e239ee6"
-        var movieSearchURL = URLComponents(string: "https://api.themoviedb.org/3/search/movie?")
+        var movieSearchURL = URLComponents(string: "https://api.themoviedb.org/3/discover/movie?")
 
         // 쿼리 아이템 정의
         let apiQuery = URLQueryItem(name: "api_key", value: API_KEY)
         let languageQuery = URLQueryItem(name: "language", value: "ko-KR")
-        let searchQuery = URLQueryItem(name: "query", value: name)
-        
+//        let searchQuery = URLQueryItem(name: "query", value: name)
+        let watchProvider = URLQueryItem(name: "with_watch_providers", value: "8")
+
         movieSearchURL?.queryItems?.append(apiQuery)
         movieSearchURL?.queryItems?.append(languageQuery)
-        movieSearchURL?.queryItems?.append(searchQuery)
+//        movieSearchURL?.queryItems?.append(searchQuery)
+        movieSearchURL?.queryItems?.append(watchProvider)
         
         guard let requestMovieSearchURL = movieSearchURL?.url else { return }
         
@@ -93,13 +104,13 @@ class SecondTabBar: UIViewController{
                       let searchMovie = respons.result
                       
                       for i in searchMovie{
-    //                      print("영화 제목 : \(i.title ?? "")")
-    //                      print("영화 평점 : \(i.rating ?? 0)")
-    //                      print("영화 줄거리 : \(i.summary ?? "")")
-    //                      print("포스터 경로 : \(i.post ?? "")")
-    //
-    //                      print("--------------------------")
-                          self.title_url[i.title!] = "https://image.tmdb.org/t/p/w220_and_h330_face" + i.post!
+                          print("영화 제목 : \(i.title ?? "")")
+                          print("영화 평점 : \(i.rating ?? 0)")
+                          print("영화 줄거리 : \(i.summary ?? "")")
+                          print("포스터 경로 : \(i.post ?? "")")
+    
+                          print("--------------------------")
+//                          self.title_url[i.title!] = "https://image.tmdb.org/t/p/w220_and_h330_face" + i.post!
                       }
                       
                   }catch let error{

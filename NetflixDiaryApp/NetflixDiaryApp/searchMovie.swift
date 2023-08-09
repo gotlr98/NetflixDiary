@@ -66,6 +66,7 @@ class searchMovie: UIViewController{
         let gesture = UITapGestureRecognizer(target: self, action: #selector(didTab(sender: )))
         slide.addGestureRecognizer(gesture)
         
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {

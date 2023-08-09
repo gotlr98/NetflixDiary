@@ -51,7 +51,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate {
         let secondTab = UINavigationController(rootViewController: SecondTabBar())
         let tabtwo = UITabBarItem(title: "search", image: UIImage(systemName: "magnifyingglass"), tag: 2)
         secondTab.tabBarItem = tabtwo
-        secondTab.tabBarController?.tabBar.isHidden = true
+//        secondTab.tabBarController?.tabBar.isHidden = true
         
         let thirdTab = UINavigationController(rootViewController: ThirdTabBar())
         let tabthree = UITabBarItem(title: "profile", image: UIImage(systemName: "person.circle.fill"), tag: 3)

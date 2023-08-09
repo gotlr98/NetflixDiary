@@ -269,16 +269,6 @@ class writeReviewModal: UIViewController{
     }
     
     func requestNet(name: String) async {
-        let headers = [
-          "accept": "application/json",
-          "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlOGNiMmEwNTRjYTZmMTEyZDY2YjFlODE2ZTIzOWVlNiIsInN1YiI6IjY0OWJkOWUwNzdjMDFmMDBjYTVhNzkwZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.YXEMCu81V6_te2LwVDZiNCFrn1GUZeCcTAj4WYTGwug"
-        ]
-
-        let request = NSMutableURLRequest(url: NSURL(string: "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=ko-KR&page=1&sort_by=popularity.desc&with_watch_providers=providers%3A8")! as URL,
-                                                cachePolicy: .useProtocolCachePolicy,
-                                            timeoutInterval: 10.0)
-        request.httpMethod = "GET"
-        request.allHTTPHeaderFields = headers
         
         let API_KEY = "e8cb2a054ca6f112d66b1e816e239ee6"
         var movieSearchURL = URLComponents(string: "https://api.themoviedb.org/3/search/movie?")
@@ -287,10 +277,12 @@ class writeReviewModal: UIViewController{
         let apiQuery = URLQueryItem(name: "api_key", value: API_KEY)
         let languageQuery = URLQueryItem(name: "language", value: "ko-KR")
         let searchQuery = URLQueryItem(name: "query", value: name)
+        let watchProvider = URLQueryItem(name: "with_watch_providers", value: "8")
         
         movieSearchURL?.queryItems?.append(apiQuery)
         movieSearchURL?.queryItems?.append(languageQuery)
         movieSearchURL?.queryItems?.append(searchQuery)
+        movieSearchURL?.queryItems?.append(watchProvider)
         
         guard let requestMovieSearchURL = movieSearchURL?.url else { return }
         
