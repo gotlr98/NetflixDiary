@@ -91,6 +91,12 @@ class FirstTabBar: UIViewController{
         
 //        navigationController?.setNavigationBarHidden(false, animated: false)
         
+        let refresh = UIRefreshControl()
+
+        refresh.addTarget(self, action: #selector(getData), for: .valueChanged)
+        
+        self.table.refreshControl = refresh
+        
         let navigationTitle = UILabel()
         
         navigationTitle.text = "나의 리뷰"
@@ -139,6 +145,15 @@ class FirstTabBar: UIViewController{
     
     @objc func rightClick(){
         self.navigationController?.pushViewController(writeReviewModal(), animated: true)
+    }
+    
+    @objc func getData(){
+        
+        print("refresh")
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.table.refreshControl?.endRefreshing()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
