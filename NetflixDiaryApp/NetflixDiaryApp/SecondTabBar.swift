@@ -29,6 +29,13 @@ class SecondTabBar: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let refresh = UIRefreshControl()
+
+        refresh.addTarget(self, action: #selector(getData), for: .valueChanged)
+        
+        self.collectionView.refreshControl = refresh
+        
+        
         
     }
     

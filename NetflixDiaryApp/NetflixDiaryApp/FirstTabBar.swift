@@ -157,15 +157,7 @@ class FirstTabBar: UIViewController{
     }
     
     override func viewDidAppear(_ animated: Bool) {
-//        navigationItem.rightBarButtonItem!.menu = UIMenu(children: [
-//            UIAction(title: "리뷰쓰기", attributes: .destructive, handler: { _ in
-////                let modal = writeReviewModal()
-////                modal.modalPresentationStyle = .fullScreen
-////                self.present(modal, animated: true)
-//
-//                self.navigationController?.pushViewController(writeReviewModal(), animated: true)
-//            })
-//        ])
+
     }
     
     @objc func didDismissDetailNotification(_ notification: Notification) {
