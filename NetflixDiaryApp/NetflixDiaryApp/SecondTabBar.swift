@@ -51,9 +51,14 @@ class SecondTabBar: UIViewController{
                         })
                     ])
         
-//        let refresh = UIRefreshControl()
-//
-//        refresh.addTarget(self, action: #selector(getData), for: .valueChanged)
+        if self.movie_info.isEmpty{
+            getData()
+        }
+        
+        let movie_title = UILabel()
+        let rating = UILabel()
+        let summary = UILabel()
+        let post_url = UILabel()
         
     }
     
@@ -118,6 +123,8 @@ class SecondTabBar: UIViewController{
                           print("--------------------------")
                           
                           self.movie_info.append([i.title, i.rating, i.summary, i.post])
+                          
+                          
                       }
                       
                   }catch let error{
