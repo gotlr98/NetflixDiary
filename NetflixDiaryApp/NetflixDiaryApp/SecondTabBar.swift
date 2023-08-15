@@ -12,7 +12,7 @@ class SecondTabBar: UIViewController{
     
 //    let pop = popularMoviewView()
     
-    var movie_info = [[]]
+    var movie_info: [[String]] = [[]]
     
     lazy var collectionView: UICollectionView = {
        
@@ -40,7 +40,9 @@ class SecondTabBar: UIViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
-
+        
+        
+        getData()
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "추가하기", image: UIImage(systemName: "magnifyingglass"), target: nil, action: nil)
 
@@ -51,15 +53,27 @@ class SecondTabBar: UIViewController{
                         })
                     ])
         
-        if self.movie_info.isEmpty{
-            getData()
-        }
+//        if self.movie_info.isEmpty{
+//            getData()
+//        }
         
         let movie_title = UILabel()
         let rating = UILabel()
         let summary = UILabel()
         let post_url = UILabel()
         
+        self.view.addSubview(movie_title)
+        self.view.addSubview(rating)
+        self.view.addSubview(summary)
+        self.view.addSubview(post_url)
+        
+        movie_title.translatesAutoresizingMaskIntoConstraints = false
+        rating.translatesAutoresizingMaskIntoConstraints = false
+        summary.translatesAutoresizingMaskIntoConstraints = false
+        post_url.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        print(movie_info)
     }
     
     init(){
@@ -76,8 +90,6 @@ class SecondTabBar: UIViewController{
         
         
         var timer: Int = 0
-        
-        
         
         findPopularFilm()
         
@@ -122,7 +134,7 @@ class SecondTabBar: UIViewController{
     
                           print("--------------------------")
                           
-                          self.movie_info.append([i.title, i.rating, i.summary, i.post])
+                          self.movie_info.append(contentsOf: [i.title, i.rating, i.summary, i.post])
                           
                           
                       }
