@@ -14,9 +14,9 @@ class SecondTabBar: UIViewController{
     
 //    let pop = popularMoviewView()
     
-    var movie_info = [[Any]]()
+    var delegate: sendMovieInfo?
     
-//    var delegate: sendMovieInfo?
+    var movie = [[String]]()
     
     lazy var collectionView: UICollectionView = {
        
@@ -41,12 +41,38 @@ class SecondTabBar: UIViewController{
         
         self.collectionView.refreshControl = refresh
         
+        view.addSubview(collectionView)
+        
+        
+        
+        if self.movie.isEmpty{
+            getData()
+
+        }
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+            
+        }
+        
+        
+        collectionView.delegate = self
+        
+        collectionView.dataSource = self
+        
+        collectionView.register(popularMovieCell.self, forCellWithReuseIdentifier: popularMovieCell.id)
+        
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        collectionView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        collectionView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        collectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        collectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        collectionView.heightAnchor.constraint(equalToConstant: 320).isActive = true
+        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
-        
-//        getData()
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "추가하기", image: UIImage(systemName: "magnifyingglass"), target: nil, action: nil)
 
@@ -57,19 +83,19 @@ class SecondTabBar: UIViewController{
                         })
                     ])
         
-//        if self.movie_info.isEmpty{
-//            getData()
+//        if self.movie.isEmpty{
+//            print(FirstTabBar().movie_info)
+//            self.movie = FirstTabBar().movie_info
 //        }
-        
-        print(self.movie_info)
-        
-        
-        
+
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print(self.movie)
     }
     
     init(){
         super.init(nibName: nil, bundle: nil)
-        
         
     }
     
@@ -78,7 +104,6 @@ class SecondTabBar: UIViewController{
     }
     
     @objc func getData(){
-        
         
         var timer: Int = 0
         
@@ -124,11 +149,13 @@ class SecondTabBar: UIViewController{
 //                          print("포스터 경로 : \(i.post ?? "")")
 //
 //                          print("--------------------------")
-                          let a = [i.title!, i.rating!, i.summary!, i.post!]
-                          self.movie_info.append(a)
+                          let a = String(i.title!)
+                          let b = String(i.rating!)
+                          let c = String(i.summary!)
+                          let d = String(i.post!)
                           
-                          print("func called")
-                          
+                          self.movie.append([a,b,c,d])
+                                                    
                       }
                       
                   }catch let error{
@@ -142,7 +169,33 @@ class SecondTabBar: UIViewController{
 }
 
 extension SecondTabBar: sendMovieInfo {
+    
     func recieveData(info: [[Any]]) {
-        self.movie_info.append(contentsOf: info)
+//        self.movie = info
+    }
+}
+
+extension SecondTabBar: UICollectionViewDelegate, UICollectionViewDataSource {
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return movie.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: popularMovieCell.id, for: indexPath)
+        if let cell = cell as? popularMovieCell {
+            cell.name.text = movie[indexPath.item][0]
+            cell.rating.text = movie[indexPath.item][1]
+            cell.comment.text = movie[indexPath.item][2]
+            cell.image.kf.setImage(with: URL(string: "https://image.tmdb.org/t/p/w220_and_h330_face" + movie[indexPath.item][3]))
+        }
+
+        return cell
+    }
+}
+
+extension SecondTabBar: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 320, height: collectionView.frame.height) // point
     }
 }

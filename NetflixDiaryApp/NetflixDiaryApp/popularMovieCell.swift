@@ -15,15 +15,18 @@ import UIKit
 
 class popularMovieCell: UICollectionViewCell{
     
-    static let moviecell = "moviecell"
+//    static let moviecell = "moviecell"
+    
+    static var id: String{ NSStringFromClass(Self.self).components(separatedBy: ".").last ?? ""}
     
     var delegate: sendMovieInfo?
     
     var movie_info = [[Any]]()
     
-    let image = UIImageView()
-    let name = UILabel()
-    let comment = UILabel()
+    var image = UIImageView()
+    var name = UILabel()
+    var comment = UILabel()
+    var rating = UILabel()
     
     override init(frame: CGRect){
         super.init(frame: frame)
@@ -31,10 +34,11 @@ class popularMovieCell: UICollectionViewCell{
         self.addSubview(image)
         self.addSubview(name)
         self.addSubview(comment)
+        self.addSubview(rating)
         
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
-        image.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        image.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        image.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
         image.widthAnchor.constraint(equalToConstant: 100).isActive = true
         image.heightAnchor.constraint(equalToConstant: 100).isActive = true
         

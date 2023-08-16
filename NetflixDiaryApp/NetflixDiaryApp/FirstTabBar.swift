@@ -29,6 +29,7 @@ class FirstTabBar: UIViewController{
     
     var poster: [Poster] = []
     
+    let vc = SecondTabBar()
     
     weak var delegate: sendMovieInfo?
     var movie_info = [[Any]]()
@@ -54,7 +55,7 @@ class FirstTabBar: UIViewController{
 //        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "추가하기", image: UIImage(systemName: "plus"), target: nil, action: nil)
         
         
-        
+        self.delegate = vc
         
         NotificationCenter.default.addObserver(
                   self,
@@ -79,7 +80,12 @@ class FirstTabBar: UIViewController{
         ])
         
         table.rowHeight = 60
-
+        
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+            self.delegate?.recieveData(info: self.movie_info)
+        }
+        
     }
     
     init(){
@@ -129,20 +135,7 @@ class FirstTabBar: UIViewController{
                         })
                     ])
 
-        
-//        self.tabBarController?.navigationItem.titleView = navigationTitle
-//        
-//        self.tabBarController?.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "추가하기", image: UIImage(systemName: "plus"), target: nil, action: nil)
-//
-//        self.tabBarController?.navigationItem.rightBarButtonItem!.menu = UIMenu(children: [
-//                        UIAction(title: "리뷰쓰기", attributes: .destructive, handler: { _ in
-//            //                let modal = writeReviewModal()
-//            //                modal.modalPresentationStyle = .fullScreen
-//            //                self.present(modal, animated: true)
-//
-//                            self.navigationController?.pushViewController(writeReviewModal(), animated: true)
-//                        })
-//                    ])
+
 
         let net = User().get_user_net()
         
@@ -171,14 +164,11 @@ class FirstTabBar: UIViewController{
         }
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         
-        let vc = SecondTabBar()
-        delegate = vc
-        
-        delegate?.recieveData(info: self.movie_info)
         
     }
+    
     
     @objc func didDismissDetailNotification(_ notification: Notification) {
         DispatchQueue.main.async {
