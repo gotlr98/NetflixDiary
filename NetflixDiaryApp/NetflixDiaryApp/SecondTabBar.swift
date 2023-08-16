@@ -8,11 +8,15 @@
 import Foundation
 import UIKit
 
+
+
 class SecondTabBar: UIViewController{
     
 //    let pop = popularMoviewView()
     
-    var movie_info: [[String]] = [[]]
+    var movie_info = [[Any]]()
+    
+//    var delegate: sendMovieInfo?
     
     lazy var collectionView: UICollectionView = {
        
@@ -42,7 +46,7 @@ class SecondTabBar: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         
         
-        getData()
+//        getData()
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "추가하기", image: UIImage(systemName: "magnifyingglass"), target: nil, action: nil)
 
@@ -57,23 +61,10 @@ class SecondTabBar: UIViewController{
 //            getData()
 //        }
         
-        let movie_title = UILabel()
-        let rating = UILabel()
-        let summary = UILabel()
-        let post_url = UILabel()
-        
-        self.view.addSubview(movie_title)
-        self.view.addSubview(rating)
-        self.view.addSubview(summary)
-        self.view.addSubview(post_url)
-        
-        movie_title.translatesAutoresizingMaskIntoConstraints = false
-        rating.translatesAutoresizingMaskIntoConstraints = false
-        summary.translatesAutoresizingMaskIntoConstraints = false
-        post_url.translatesAutoresizingMaskIntoConstraints = false
+        print(self.movie_info)
         
         
-        print(movie_info)
+        
     }
     
     init(){
@@ -127,15 +118,16 @@ class SecondTabBar: UIViewController{
                       let searchMovie = respons.result
                       
                       for i in searchMovie{
-                          print("영화 제목 : \(i.title ?? "")")
-                          print("영화 평점 : \(i.rating ?? 0)")
-                          print("영화 줄거리 : \(i.summary ?? "")")
-                          print("포스터 경로 : \(i.post ?? "")")
-    
-                          print("--------------------------")
+//                          print("영화 제목 : \(i.title ?? "")")
+//                          print("영화 평점 : \(i.rating ?? 0)")
+//                          print("영화 줄거리 : \(i.summary ?? "")")
+//                          print("포스터 경로 : \(i.post ?? "")")
+//
+//                          print("--------------------------")
+                          let a = [i.title!, i.rating!, i.summary!, i.post!]
+                          self.movie_info.append(a)
                           
-                          self.movie_info.append(contentsOf: [i.title, i.rating, i.summary, i.post])
-                          
+                          print("func called")
                           
                       }
                       
@@ -147,6 +139,10 @@ class SecondTabBar: UIViewController{
             dataTask.resume()
         
     }
-    
-    
+}
+
+extension SecondTabBar: sendMovieInfo {
+    func recieveData(info: [[Any]]) {
+        self.movie_info.append(contentsOf: info)
+    }
 }

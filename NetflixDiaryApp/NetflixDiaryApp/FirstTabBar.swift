@@ -20,11 +20,18 @@ struct Poster{
     let review: String
 }
 
+protocol sendMovieInfo: AnyObject {
+    func recieveData(info: [[Any]])
+}
+
 class FirstTabBar: UIViewController{
     
     
     var poster: [Poster] = []
     
+    
+    weak var delegate: sendMovieInfo?
+    var movie_info = [[Any]]()
     
     let table = UITableView()
     
@@ -91,6 +98,14 @@ class FirstTabBar: UIViewController{
         
 //        navigationController?.setNavigationBarHidden(false, animated: false)
         
+        var timer = 0
+        
+        if timer == 0{
+            findPopularFilm()
+            timer += 1
+        }
+        
+        
         let refresh = UIRefreshControl()
 
         refresh.addTarget(self, action: #selector(getData), for: .valueChanged)
@@ -156,8 +171,13 @@ class FirstTabBar: UIViewController{
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-
+    override func viewDidDisappear(_ animated: Bool) {
+        
+        let vc = SecondTabBar()
+        delegate = vc
+        
+        delegate?.recieveData(info: self.movie_info)
+        
     }
     
     @objc func didDismissDetailNotification(_ notification: Notification) {
@@ -184,6 +204,58 @@ class FirstTabBar: UIViewController{
         vc.modalPresentationStyle = .formSheet
         
         self.present(vc, animated: true)
+    }
+    
+    @objc func findPopularFilm() {
+
+        let API_KEY = "e8cb2a054ca6f112d66b1e816e239ee6"
+        var movieSearchURL = URLComponents(string: "https://api.themoviedb.org/3/discover/movie?")
+
+        // 쿼리 아이템 정의
+        let apiQuery = URLQueryItem(name: "api_key", value: API_KEY)
+        let languageQuery = URLQueryItem(name: "language", value: "ko-KR")
+        let watchProvider = URLQueryItem(name: "with_watch_providers", value: "8")
+
+        movieSearchURL?.queryItems?.append(apiQuery)
+        movieSearchURL?.queryItems?.append(languageQuery)
+        movieSearchURL?.queryItems?.append(watchProvider)
+        
+        guard let requestMovieSearchURL = movieSearchURL?.url else { return }
+        
+        let config = URLSessionConfiguration.default
+
+        // session 설정
+        let session = URLSession(configuration: config)
+        
+        let dataTask = session.dataTask(with: requestMovieSearchURL, completionHandler: { (data, response, error) -> Void in
+              if (error != nil) {
+                print(error as Any)
+              } else {
+                  guard let resultData = data else { return }
+                  do{
+                      let decoder = JSONDecoder()
+                      let respons = try decoder.decode(Response.self, from: resultData)
+                      let searchMovie = respons.result
+                      
+                      for i in searchMovie{
+//                          print("영화 제목 : \(i.title ?? "")")
+//                          print("영화 평점 : \(i.rating ?? 0)")
+//                          print("영화 줄거리 : \(i.summary ?? "")")
+//                          print("포스터 경로 : \(i.post ?? "")")
+//
+//                          print("--------------------------")
+                          let a = [i.title!, i.rating!, i.summary!, i.post!]
+                          self.movie_info.append(a)
+                                            
+                      }
+                      
+                  }catch let error{
+                      print(error.localizedDescription)
+                  }
+              }
+            })
+            dataTask.resume()
+        
     }
 }
 
