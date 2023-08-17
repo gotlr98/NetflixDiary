@@ -48,6 +48,8 @@ class popularMovieCell: UICollectionViewCell{
         
         comment.translatesAutoresizingMaskIntoConstraints = false
         comment.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 20).isActive = true
+        comment.widthAnchor.constraint(equalToConstant: 320).isActive = true
+        comment.numberOfLines = 0
             
     }
     
