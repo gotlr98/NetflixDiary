@@ -46,7 +46,7 @@ class SecondTabBar: UIViewController{
         
         
         if self.movie.isEmpty{
-            getData()
+            findPopularFilm()
 
         }
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
@@ -106,8 +106,12 @@ class SecondTabBar: UIViewController{
     @objc func getData(){
         
         var timer: Int = 0
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.findPopularFilm()
+            self.collectionView.refreshControl?.endRefreshing()
+            
+        }
         
-        findPopularFilm()
         
     }
     
@@ -186,7 +190,13 @@ extension SecondTabBar: UICollectionViewDelegate, UICollectionViewDataSource {
         if let cell = cell as? popularMovieCell {
             cell.name.text = movie[indexPath.item][0]
             cell.rating.text = movie[indexPath.item][1]
-            cell.comment.text = movie[indexPath.item][2]
+            if movie[indexPath.item][2].isEmpty{
+                cell.comment.text = "줄거리가 비었습니다"
+            }
+            else{
+                cell.comment.text = movie[indexPath.item][2]
+
+            }
             cell.image.kf.setImage(with: URL(string: "https://image.tmdb.org/t/p/w220_and_h330_face" + movie[indexPath.item][3]))
         }
 
