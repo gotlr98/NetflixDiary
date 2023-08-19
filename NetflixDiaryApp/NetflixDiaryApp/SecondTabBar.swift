@@ -91,7 +91,7 @@ class SecondTabBar: UIViewController{
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        print(self.movie)
+//        print(self.movie)
     }
     
     init(){
