@@ -206,6 +206,6 @@ extension SecondTabBar: UICollectionViewDelegate, UICollectionViewDataSource {
 
 extension SecondTabBar: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 320, height: collectionView.frame.height) // point
+        return CGSize(width: 320, height: collectionView.frame.height + 2) // point
     }
 }
