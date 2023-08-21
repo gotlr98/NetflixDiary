@@ -63,10 +63,11 @@ class SecondTabBar: UIViewController{
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         collectionView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        collectionView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+//        collectionView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        collectionView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
         collectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        collectionView.heightAnchor.constraint(equalToConstant: 320).isActive = true
+        collectionView.heightAnchor.constraint(equalToConstant: 400).isActive = true
         
 
     }
@@ -206,6 +207,6 @@ extension SecondTabBar: UICollectionViewDelegate, UICollectionViewDataSource {
 
 extension SecondTabBar: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 320, height: collectionView.frame.height + 2) // point
+        return CGSize(width: 320, height: collectionView.frame.height) // point
     }
 }
