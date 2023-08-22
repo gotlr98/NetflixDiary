@@ -18,7 +18,24 @@ class SecondTabBar: UIViewController{
     
     var movie = [[String]]()
     
-    lazy var collectionView: UICollectionView = {
+    var tv = [[String]]()
+    
+    
+    lazy var popularMovie: UICollectionView = {
+       
+        
+        let lay = UICollectionViewFlowLayout()
+        lay.scrollDirection = .horizontal
+        
+        lay.minimumLineSpacing = 50
+        
+        let view = UICollectionView(frame: .zero, collectionViewLayout: lay)
+        view.backgroundColor = .white
+        
+        return view
+    }()
+    
+    lazy var popularTV: UICollectionView = {
        
         
         let lay = UICollectionViewFlowLayout()
@@ -39,35 +56,94 @@ class SecondTabBar: UIViewController{
 
         refresh.addTarget(self, action: #selector(getData), for: .valueChanged)
         
-        self.collectionView.refreshControl = refresh
+        self.popularMovie.refreshControl = refresh
         
-        view.addSubview(collectionView)
+        let scrollView = UIScrollView()
+        
+        scrollView.showsVerticalScrollIndicator = true
+        scrollView.isDirectionalLockEnabled = true
+                
+        
+        let contentView = UIView()
+        
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        
+        contentView.backgroundColor = .white
+        
+        NSLayoutConstraint.activate([
+            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            contentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
+            contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor)
+        ])
+        
+        contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+        
+        let contentViewHeight = contentView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor)
+        contentViewHeight.priority = .defaultLow
+        contentViewHeight.isActive = true
+        
+        contentView.addSubview(popularMovie)
+        
+        contentView.addSubview(popularTV)
         
         
         
         if self.movie.isEmpty{
-            findPopularFilm()
+            findPopular(kind: "movie")
+            
+            
 
+        }
+        
+        else if self.tv.isEmpty{
+            
+            findPopular(kind: "TV")
         }
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
             
         }
         
         
-        collectionView.delegate = self
+        popularMovie.delegate = self
         
-        collectionView.dataSource = self
+        popularMovie.dataSource = self
         
-        collectionView.register(popularMovieCell.self, forCellWithReuseIdentifier: popularMovieCell.id)
+        popularMovie.register(popularMovieCell.self, forCellWithReuseIdentifier: popularMovieCell.id)
         
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        popularMovie.translatesAutoresizingMaskIntoConstraints = false
         
-        collectionView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-//        collectionView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
-        collectionView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
-        collectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        collectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        collectionView.heightAnchor.constraint(equalToConstant: 400).isActive = true
+        popularMovie.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        popularMovie.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
+        popularMovie.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        popularMovie.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        popularMovie.heightAnchor.constraint(equalToConstant: 400).isActive = true
+        
+        
+        popularTV.delegate = self
+        
+        popularTV.dataSource = self
+        
+        popularTV.register(popularMovieCell.self, forCellWithReuseIdentifier: popularMovieCell.id)
+        
+        popularTV.translatesAutoresizingMaskIntoConstraints = false
+        
+        popularTV.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        popularTV.topAnchor.constraint(equalTo: self.popularMovie.bottomAnchor, constant: 50).isActive = true
+        popularTV.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        popularTV.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        popularTV.heightAnchor.constraint(equalToConstant: 400).isActive = true
         
 
     }
@@ -83,11 +159,7 @@ class SecondTabBar: UIViewController{
                             self.navigationController?.pushViewController(writeReviewModal(), animated: true)
                         })
                     ])
-        
-//        if self.movie.isEmpty{
-//            print(FirstTabBar().movie_info)
-//            self.movie = FirstTabBar().movie_info
-//        }
+
 
     }
     
@@ -106,20 +178,19 @@ class SecondTabBar: UIViewController{
     
     @objc func getData(){
         
-        var timer: Int = 0
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.findPopularFilm()
-            self.collectionView.refreshControl?.endRefreshing()
+            self.findPopular(kind: "movie")
+            self.popularMovie.refreshControl?.endRefreshing()
             
         }
         
         
     }
     
-    @objc func findPopularFilm() {
+    @objc func findPopular(kind: String) {
 
         let API_KEY = "e8cb2a054ca6f112d66b1e816e239ee6"
-        var movieSearchURL = URLComponents(string: "https://api.themoviedb.org/3/discover/movie?")
+        var movieSearchURL = URLComponents(string: "https://api.themoviedb.org/3/discover/\(kind)?")
 
         // 쿼리 아이템 정의
         let apiQuery = URLQueryItem(name: "api_key", value: API_KEY)
@@ -159,7 +230,15 @@ class SecondTabBar: UIViewController{
                           let c = String(i.summary!)
                           let d = String(i.post!)
                           
-                          self.movie.append([a,b,c,d])
+                          if kind == "movie"{
+                              self.movie.append([a,b,c,d])
+                          }
+                          
+                          else{
+                              self.tv.append([a,b,c,d])
+                          }
+                          
+                          
                                                     
                       }
                       
@@ -183,25 +262,57 @@ extension SecondTabBar: sendMovieInfo {
 extension SecondTabBar: UICollectionViewDelegate, UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return movie.count
+        
+        if collectionView == self.popularMovie{
+            return movie.count
+        }
+        
+        else{
+            return tv.count
+        }
+        
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: popularMovieCell.id, for: indexPath)
-        if let cell = cell as? popularMovieCell {
-            cell.name.text = movie[indexPath.item][0]
-            cell.rating.text = movie[indexPath.item][1]
-            if movie[indexPath.item][2].isEmpty{
-                cell.comment.text = "줄거리가 비었습니다"
-            }
-            else{
-                cell.comment.text = movie[indexPath.item][2]
+        
+        if collectionView == self.popularMovie{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: popularMovieCell.id, for: indexPath)
+            if let cell = cell as? popularMovieCell {
+                cell.name.text = movie[indexPath.item][0]
+                cell.rating.text = movie[indexPath.item][1]
+                if movie[indexPath.item][2].isEmpty{
+                    cell.comment.text = "줄거리가 비었습니다"
+                }
+                else{
+                    cell.comment.text = movie[indexPath.item][2]
 
+                }
+                cell.image.kf.setImage(with: URL(string: "https://image.tmdb.org/t/p/w220_and_h330_face" + movie[indexPath.item][3]))
             }
-            cell.image.kf.setImage(with: URL(string: "https://image.tmdb.org/t/p/w220_and_h330_face" + movie[indexPath.item][3]))
+
+            return cell
         }
+        
+        else{
+            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: popularMovieCell.id2, for: indexPath)
+            if let cell = cell as? popularMovieCell {
+                cell.name.text = tv[indexPath.item][0]
+                cell.rating.text = tv[indexPath.item][1]
+                if tv[indexPath.item][2].isEmpty{
+                    cell.comment.text = "줄거리가 비었습니다"
+                }
+                else{
+                    cell.comment.text = tv[indexPath.item][2]
 
-        return cell
+                }
+                cell.image.kf.setImage(with: URL(string: "https://image.tmdb.org/t/p/w220_and_h330_face" + tv[indexPath.item][3]))
+            }
+
+            return cell
+        }
+        
+        
     }
 }
 

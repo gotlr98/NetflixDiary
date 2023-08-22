@@ -18,6 +18,7 @@ class popularMovieCell: UICollectionViewCell{
 //    static let moviecell = "moviecell"
     
     static var id: String{ NSStringFromClass(Self.self).components(separatedBy: ".").last ?? ""}
+    static var id2: String{ NSStringFromClass(Self.self).components(separatedBy: ".").last ?? ""}
     
     var delegate: sendMovieInfo?
     
