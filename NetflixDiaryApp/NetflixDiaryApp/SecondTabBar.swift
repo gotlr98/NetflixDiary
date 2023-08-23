@@ -107,10 +107,16 @@ class SecondTabBar: UIViewController{
 
         }
         
-        else if self.tv.isEmpty{
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
             
-            findPopular(kind: "TV")
         }
+        
+        if self.tv.isEmpty{
+            
+            findPopular(kind: "tv")
+            print(tv)
+        }
+        
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
             
         }
@@ -225,17 +231,52 @@ class SecondTabBar: UIViewController{
 //                          print("포스터 경로 : \(i.post ?? "")")
 //
 //                          print("--------------------------")
-                          let a = String(i.title!)
-                          let b = String(i.rating!)
-                          let c = String(i.summary!)
-                          let d = String(i.post!)
+                          
                           
                           if kind == "movie"{
+                              
+                              let a = String(i.title!)
+                              let b = String(i.rating!)
+                              let c = String(i.summary!)
+                              let d = String(i.post!)
+                              
                               self.movie.append([a,b,c,d])
                           }
                           
                           else{
-                              self.tv.append([a,b,c,d])
+                              
+                              var empty: [String] = []
+                              
+                              
+                              if let a = i.title{
+                                  empty.append(String(a))
+                              }
+                              else{
+                                  empty.append("empty")
+                              }
+                              
+                              if let b = i.rating{
+                                  empty.append(String(b))
+                              }
+                              else{
+                                  empty.append("empty")
+                              }
+                              
+                              if let c = i.summary{
+                                  empty.append(String(c))
+                              }
+                              else{
+                                  empty.append("empty")
+                              }
+                              
+                              if let d = i.post{
+                                  empty.append(String(d))
+                              }
+                              else{
+                                  empty.append("empty")
+                              }
+                              
+                              self.tv.append(empty)
                           }
                           
                           
