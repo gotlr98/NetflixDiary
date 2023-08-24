@@ -51,6 +51,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate {
         let secondTab = UINavigationController(rootViewController: SecondTabBar())
         let tabtwo = UITabBarItem(title: "search", image: UIImage(systemName: "magnifyingglass"), tag: 2)
         secondTab.tabBarItem = tabtwo
+        
 //        secondTab.tabBarController?.tabBar.isHidden = true
         
         let thirdTab = UINavigationController(rootViewController: ThirdTabBar())
@@ -58,6 +59,9 @@ class ViewController: UITabBarController, UITabBarControllerDelegate {
         thirdTab.tabBarItem = tabthree
         
         self.viewControllers = [firstTab, secondTab, thirdTab]
+        
+        
+        
     }
     
     

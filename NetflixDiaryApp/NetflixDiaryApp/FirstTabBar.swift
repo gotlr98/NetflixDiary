@@ -10,29 +10,32 @@ import Foundation
 import UIKit
 import Kingfisher
 
-//protocol reviewDelegate: AnyObject {
-//    func recieveData(title: String, img_url: String, review: String)
-//}
+protocol reviewDelegate: AnyObject {
+    func recieveData(title: String, img_url: String, review: String)
+}
 
 struct Poster{
     let image_url: String
     let title: String
     let review: String
 }
-
 protocol sendMovieInfo: AnyObject {
     func recieveData(info: [[Any]])
 }
+
 
 class FirstTabBar: UIViewController{
     
     
     var poster: [Poster] = []
     
-    let vc = SecondTabBar()
     
     weak var delegate: sendMovieInfo?
     var movie_info = [[Any]]()
+    
+    
+    var movie = [[String]]()
+    var tv = [[String]]()
     
     let table = UITableView()
     
@@ -48,14 +51,10 @@ class FirstTabBar: UIViewController{
         
         navigationController?.navigationBar.prefersLargeTitles = true
         
-//        let rightbarbutton = UIBarButtonItem(title: "추가하기", image: UIImage(systemName: "plus"), target: nil, action: #selector(rightClick))
-//
-//        
-//        self.navigationController?.navigationItem.setRightBarButton(rightbarbutton, animated: true)
-//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "추가하기", image: UIImage(systemName: "plus"), target: nil, action: nil)
+        findPopular(kind: "movie")
+        findPopular(kind: "tv")
         
-        
-        self.delegate = vc
+
         
         NotificationCenter.default.addObserver(
                   self,
@@ -80,11 +79,7 @@ class FirstTabBar: UIViewController{
         ])
         
         table.rowHeight = 60
-        
-        
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
-            self.delegate?.recieveData(info: self.movie_info)
-        }
+
         
     }
     
@@ -102,14 +97,6 @@ class FirstTabBar: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         
-//        navigationController?.setNavigationBarHidden(false, animated: false)
-        
-        var timer = 0
-        
-        if timer == 0{
-            findPopularFilm()
-            timer += 1
-        }
         
         
         let refresh = UIRefreshControl()
@@ -165,7 +152,14 @@ class FirstTabBar: UIViewController{
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+                
+
+        let bar = self.tabBarController?.viewControllers
         
+        let svc = (bar![1] as! UINavigationController).viewControllers[0] as! SecondTabBar
+        
+        svc.tv = tv
+        svc.movie = movie
         
     }
     
@@ -196,10 +190,10 @@ class FirstTabBar: UIViewController{
         self.present(vc, animated: true)
     }
     
-    @objc func findPopularFilm() {
+    @objc func findPopular(kind: String) {
 
         let API_KEY = "e8cb2a054ca6f112d66b1e816e239ee6"
-        var movieSearchURL = URLComponents(string: "https://api.themoviedb.org/3/discover/movie?")
+        var movieSearchURL = URLComponents(string: "https://api.themoviedb.org/3/discover/\(kind)?")
 
         // 쿼리 아이템 정의
         let apiQuery = URLQueryItem(name: "api_key", value: API_KEY)
@@ -234,9 +228,58 @@ class FirstTabBar: UIViewController{
 //                          print("포스터 경로 : \(i.post ?? "")")
 //
 //                          print("--------------------------")
-                          let a = [i.title!, i.rating!, i.summary!, i.post!]
-                          self.movie_info.append(a)
-                                            
+                          
+                          
+                          if kind == "movie"{
+                              
+                              let a = String(i.title!)
+                              let b = String(i.rating!)
+                              let c = String(i.summary!)
+                              let d = String(i.post!)
+                              
+                              
+                              self.movie.append([a,b,c,d])
+                              
+                              
+                          }
+                          
+                          else{
+                              
+                              var empty: [String] = []
+                              
+                              
+                              if let a = i.title{
+                                  empty.append(String(a))
+                              }
+                              else{
+                                  empty.append("empty")
+                              }
+                              
+                              if let b = i.rating{
+                                  empty.append(String(b))
+                              }
+                              else{
+                                  empty.append("empty")
+                              }
+                              
+                              if let c = i.summary{
+                                  empty.append(String(c))
+                              }
+                              else{
+                                  empty.append("empty")
+                              }
+                              
+                              if let d = i.post{
+                                  empty.append(String(d))
+                              }
+                              else{
+                                  empty.append("empty")
+                              }
+                              
+                              self.tv.append(empty)
+                              
+                          }
+                                                                            
                       }
                       
                   }catch let error{
@@ -247,6 +290,8 @@ class FirstTabBar: UIViewController{
             dataTask.resume()
         
     }
+    
+    
 }
 
 extension FirstTabBar:  UITableViewDataSource, UITableViewDelegate {
@@ -281,13 +326,3 @@ class CustomTapGesture: UITapGestureRecognizer {
     var review: String?
 }
 
-
-//
-//extension FirstTabBar: reviewDelegate {
-//    func recieveData(title: String, img_url: String, review: String) {
-//        self.select_title = title
-//        self.img_url = img_url
-//        self.review = review
-//    }
-//}
-//
