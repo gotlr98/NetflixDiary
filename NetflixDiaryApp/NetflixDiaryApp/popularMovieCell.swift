@@ -48,6 +48,10 @@ class popularMovieCell: UICollectionViewCell{
         name.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 10).isActive = true
         name.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5).isActive = true
         
+        rating.translatesAutoresizingMaskIntoConstraints = false
+        rating.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5).isActive = true
+        rating.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 5).isActive = true
+        
         comment.translatesAutoresizingMaskIntoConstraints = false
         comment.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 20).isActive = true
         comment.widthAnchor.constraint(equalToConstant: 320).isActive = true

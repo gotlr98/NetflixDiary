@@ -165,6 +165,7 @@ class SecondTabBar: UIViewController{
         popularTV.topAnchor.constraint(equalTo: self.popularMovie.bottomAnchor, constant: 50).isActive = true
         popularTV.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         popularTV.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        popularTV.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20).isActive = true
         popularTV.heightAnchor.constraint(equalToConstant: 400).isActive = true
         
         title2.bottomAnchor.constraint(equalTo: popularMovie.topAnchor, constant: -30).isActive = true
@@ -344,13 +345,13 @@ extension SecondTabBar: UICollectionViewDelegate, UICollectionViewDataSource {
         if collectionView == self.popularMovie{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: popularMovieCell.id, for: indexPath)
             if let cell = cell as? popularMovieCell {
-                cell.name.text = movie[indexPath.item][0]
-                cell.rating.text = movie[indexPath.item][1]
+                cell.name.text = "제목: " + movie[indexPath.item][0]
+                cell.rating.text = "평점: " + movie[indexPath.item][1]
                 if movie[indexPath.item][2].isEmpty{
                     cell.comment.text = "줄거리가 비었습니다"
                 }
                 else{
-                    cell.comment.text = movie[indexPath.item][2]
+                    cell.comment.text = "줄거리: " + movie[indexPath.item][2]
 
                 }
                 cell.image.kf.setImage(with: URL(string: "https://image.tmdb.org/t/p/w220_and_h330_face" + movie[indexPath.item][3]))
@@ -363,13 +364,13 @@ extension SecondTabBar: UICollectionViewDelegate, UICollectionViewDataSource {
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: popularMovieCell.id2, for: indexPath)
             if let cell = cell as? popularMovieCell {
-                cell.name.text = tv[indexPath.item][0]
-                cell.rating.text = tv[indexPath.item][1]
+                cell.name.text = "제목: " + tv[indexPath.item][0]
+                cell.rating.text = "평점: " + tv[indexPath.item][1]
                 if tv[indexPath.item][2].isEmpty{
                     cell.comment.text = "줄거리가 비었습니다"
                 }
                 else{
-                    cell.comment.text = tv[indexPath.item][2]
+                    cell.comment.text = "줄거리: " + tv[indexPath.item][2]
 
                 }
                 cell.image.kf.setImage(with: URL(string: "https://image.tmdb.org/t/p/w220_and_h330_face" + tv[indexPath.item][3]))
