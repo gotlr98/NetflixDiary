@@ -45,15 +45,15 @@ class popularMovieCell: UICollectionViewCell{
         
         // 3
         name.translatesAutoresizingMaskIntoConstraints = false
-        name.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 10).isActive = true
+        name.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 15).isActive = true
         name.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5).isActive = true
         
         rating.translatesAutoresizingMaskIntoConstraints = false
-        rating.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5).isActive = true
+        rating.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
         rating.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 5).isActive = true
         
         comment.translatesAutoresizingMaskIntoConstraints = false
-        comment.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 20).isActive = true
+        comment.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 25).isActive = true
         comment.widthAnchor.constraint(equalToConstant: 320).isActive = true
         comment.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5).isActive = true
         comment.numberOfLines = 0
