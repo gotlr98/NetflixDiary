@@ -35,7 +35,7 @@
 /* Begin PBXFileReference section */
 		8A24D0A52A6A70DB00A61006 /* reviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reviewCell.swift; sourceTree = "<group>"; };
 		8A24D0A72A70C6AB00A61006 /* reviewPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reviewPopup.swift; sourceTree = "<group>"; };
-		8A3FD6112A4C1061005D94B9 /* NetflixDiaryApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NetflixDiaryApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A3FD6112A4C1061005D94B9 /* OTTDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OTTDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A3FD6142A4C1061005D94B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A3FD6162A4C1061005D94B9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		8A3FD6182A4C1061005D94B9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -74,7 +74,7 @@
 		8A3FD6082A4C1061005D94B9 = {
 			isa = PBXGroup;
 			children = (
-				8A3FD6132A4C1061005D94B9 /* NetflixDiaryApp */,
+				8A3FD6132A4C1061005D94B9 /* OTTDiary */,
 				8A3FD6122A4C1061005D94B9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -82,12 +82,12 @@
 		8A3FD6122A4C1061005D94B9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8A3FD6112A4C1061005D94B9 /* NetflixDiaryApp.app */,
+				8A3FD6112A4C1061005D94B9 /* OTTDiary.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8A3FD6132A4C1061005D94B9 /* NetflixDiaryApp */ = {
+		8A3FD6132A4C1061005D94B9 /* OTTDiary */ = {
 			isa = PBXGroup;
 			children = (
 				8ACC66472A541C9F00C9B66A /* Database */,
@@ -109,7 +109,7 @@
 				8A7E22C92A835358007902D7 /* popularMovieView.swift */,
 				8A7E22CB2A837586007902D7 /* popularMovieCell.swift */,
 			);
-			path = NetflixDiaryApp;
+			path = OTTDiary;
 			sourceTree = "<group>";
 		};
 		8ACC66472A541C9F00C9B66A /* Database */ = {
@@ -124,9 +124,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8A3FD6102A4C1061005D94B9 /* NetflixDiaryApp */ = {
+		8A3FD6102A4C1061005D94B9 /* OTTDiary */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8A3FD6252A4C1062005D94B9 /* Build configuration list for PBXNativeTarget "NetflixDiaryApp" */;
+			buildConfigurationList = 8A3FD6252A4C1062005D94B9 /* Build configuration list for PBXNativeTarget "OTTDiary" */;
 			buildPhases = (
 				8A3FD60D2A4C1061005D94B9 /* Sources */,
 				8A3FD60E2A4C1061005D94B9 /* Frameworks */,
@@ -136,7 +136,7 @@
 			);
 			dependencies = (
 			);
-			name = NetflixDiaryApp;
+			name = OTTDiary;
 			packageProductDependencies = (
 				8A3FD6352A4D440E005D94B9 /* Lottie */,
 				8ACC66432A541B4600C9B66A /* Realm */,
@@ -145,7 +145,7 @@
 				8A6831CA2A5ADFCD00CC81F4 /* ImageSlideshow/Kingfisher */,
 			);
 			productName = NetflixDiaryApp;
-			productReference = 8A3FD6112A4C1061005D94B9 /* NetflixDiaryApp.app */;
+			productReference = 8A3FD6112A4C1061005D94B9 /* OTTDiary.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -163,7 +163,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8A3FD60C2A4C1061005D94B9 /* Build configuration list for PBXProject "NetflixDiaryApp" */;
+			buildConfigurationList = 8A3FD60C2A4C1061005D94B9 /* Build configuration list for PBXProject "OTTDiary" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -181,7 +181,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8A3FD6102A4C1061005D94B9 /* NetflixDiaryApp */,
+				8A3FD6102A4C1061005D94B9 /* OTTDiary */,
 			);
 		};
 /* End PBXProject section */
@@ -286,6 +286,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = OTTDiary;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -340,6 +341,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = OTTDiary;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -407,7 +409,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8A3FD60C2A4C1061005D94B9 /* Build configuration list for PBXProject "NetflixDiaryApp" */ = {
+		8A3FD60C2A4C1061005D94B9 /* Build configuration list for PBXProject "OTTDiary" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8A3FD6232A4C1062005D94B9 /* Debug */,
@@ -416,7 +418,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8A3FD6252A4C1062005D94B9 /* Build configuration list for PBXNativeTarget "NetflixDiaryApp" */ = {
+		8A3FD6252A4C1062005D94B9 /* Build configuration list for PBXNativeTarget "OTTDiary" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8A3FD6262A4C1062005D94B9 /* Debug */,
