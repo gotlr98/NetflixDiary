@@ -13,10 +13,6 @@ import UIKit
 class SecondTabBar: UIViewController{
 
     
-    
-//    let pop = popularMoviewView()
-    
-    
     var movie = [[String]]()
     
     var tv = [[String]]()
@@ -58,13 +54,11 @@ class SecondTabBar: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
-        let refresh = UIRefreshControl()
-
-        refresh.addTarget(self, action: #selector(getData), for: .valueChanged)
-        
-        self.popularMovie.refreshControl = refresh
+//        let refresh = UIRefreshControl()
+//
+//        refresh.addTarget(self, action: #selector(getData), for: .valueChanged)
+//
+//        self.popularMovie.refreshControl = refresh
         
         
         setScroll()
@@ -85,12 +79,8 @@ class SecondTabBar: UIViewController{
                         })
                     ])
 
+    }
 
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-//        print(self.movie)
-    }
     
     init(){
         super.init(nibName: nil, bundle: nil)
@@ -155,7 +145,6 @@ class SecondTabBar: UIViewController{
         popularMovie.layer.borderWidth = 3
         popularTV.layer.borderWidth = 3
 
-
         
         popularMovie.delegate = self
         
@@ -165,11 +154,13 @@ class SecondTabBar: UIViewController{
         
         popularMovie.translatesAutoresizingMaskIntoConstraints = false
         
-        popularMovie.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        popularMovie.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 90).isActive = true
-        popularMovie.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        popularMovie.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        popularMovie.heightAnchor.constraint(equalToConstant: 400).isActive = true
+        NSLayoutConstraint.activate([
+            popularMovie.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            popularMovie.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 90),
+            popularMovie.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            popularMovie.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            popularMovie.heightAnchor.constraint(equalToConstant: 400)
+        ])
         
         popularTV.delegate = self
         
@@ -179,12 +170,15 @@ class SecondTabBar: UIViewController{
         
         popularTV.translatesAutoresizingMaskIntoConstraints = false
         
-        popularTV.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        popularTV.topAnchor.constraint(equalTo: self.popularMovie.bottomAnchor, constant: 100).isActive = true
-        popularTV.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        popularTV.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        popularTV.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20).isActive = true
-        popularTV.heightAnchor.constraint(equalToConstant: 400).isActive = true
+        NSLayoutConstraint.activate([
+            popularTV.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            popularTV.topAnchor.constraint(equalTo: self.popularMovie.bottomAnchor, constant: 100),
+            popularTV.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            popularTV.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            popularTV.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
+            popularTV.heightAnchor.constraint(equalToConstant: 400)
+        ])
+        
     }
     
     func setTitle(){
@@ -214,125 +208,23 @@ class SecondTabBar: UIViewController{
         title1.layer.cornerRadius = 3
         title2.layer.cornerRadius = 3
         
-        title1.bottomAnchor.constraint(equalTo: popularMovie.topAnchor, constant: -30).isActive = true
-        title1.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
-        title1.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        title1.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        NSLayoutConstraint.activate([
+            title1.bottomAnchor.constraint(equalTo: popularMovie.topAnchor, constant: -30),
+            title1.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            title1.widthAnchor.constraint(equalToConstant: 200),
+            title1.heightAnchor.constraint(equalToConstant: 25),
+            
+            title2.topAnchor.constraint(equalTo: popularMovie.bottomAnchor, constant: 20),
+            title2.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            title2.widthAnchor.constraint(equalToConstant: 200),
+            title2.heightAnchor.constraint(equalToConstant: 25)
+        ])
         
-        title2.topAnchor.constraint(equalTo: popularMovie.bottomAnchor, constant: 20).isActive = true
-        title2.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
-        title2.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        title2.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        
     }
     
-    @objc func findPopular(kind: String) {
-
-        let API_KEY = "e8cb2a054ca6f112d66b1e816e239ee6"
-        var movieSearchURL = URLComponents(string: "https://api.themoviedb.org/3/discover/\(kind)?")
-
-        // 쿼리 아이템 정의
-        let apiQuery = URLQueryItem(name: "api_key", value: API_KEY)
-        let languageQuery = URLQueryItem(name: "language", value: "ko-KR")
-        let watchProvider = URLQueryItem(name: "with_watch_providers", value: "8")
-
-        movieSearchURL?.queryItems?.append(apiQuery)
-        movieSearchURL?.queryItems?.append(languageQuery)
-        movieSearchURL?.queryItems?.append(watchProvider)
-
-        guard let requestMovieSearchURL = movieSearchURL?.url else { return }
-
-        let config = URLSessionConfiguration.default
-
-        // session 설정
-        let session = URLSession(configuration: config)
-
-        let dataTask = session.dataTask(with: requestMovieSearchURL, completionHandler: { (data, response, error) -> Void in
-              if (error != nil) {
-                print(error as Any)
-              } else {
-                  guard let resultData = data else { return }
-                  do{
-                      let decoder = JSONDecoder()
-                      let respons = try decoder.decode(Response.self, from: resultData)
-                      let searchMovie = respons.result
-
-                      for i in searchMovie{
-//                          print("영화 제목 : \(i.title ?? "")")
-//                          print("영화 평점 : \(i.rating ?? 0)")
-//                          print("영화 줄거리 : \(i.summary ?? "")")
-//                          print("포스터 경로 : \(i.post ?? "")")
-//
-//                          print("--------------------------")
-
-
-                          if kind == "movie"{
-
-                              let a = String(i.title!)
-                              let b = String(i.rating!)
-                              let c = String(i.summary!)
-                              let d = String(i.post!)
-
-                              self.movie.append([a,b,c,d])
-
-                          }
-
-                          else{
-
-                              var empty: [String] = []
-
-
-                              if let a = i.title{
-                                  empty.append(String(a))
-                              }
-                              else{
-                                  empty.append("empty")
-                              }
-
-                              if let b = i.rating{
-                                  empty.append(String(b))
-                              }
-                              else{
-                                  empty.append("empty")
-                              }
-
-                              if let c = i.summary{
-                                  empty.append(String(c))
-                              }
-                              else{
-                                  empty.append("empty")
-                              }
-
-                              if let d = i.post{
-                                  empty.append(String(d))
-                              }
-                              else{
-                                  empty.append("empty")
-                              }
-
-                              self.tv.append(empty)
-
-                          }
-
-
-
-                      }
-
-                  }catch let error{
-                      print(error.localizedDescription)
-                  }
-              }
-            })
-            dataTask.resume()
-
-    }
 }
 
-//extension SecondTabBar: sendMovieInfo {
-//    
-//    func recieveData(info: [[Any]]) {
-////        self.movie = info
-//    }
-//}
 
 extension SecondTabBar: UICollectionViewDelegate, UICollectionViewDataSource {
 
@@ -398,23 +290,23 @@ extension SecondTabBar: UICollectionViewDelegateFlowLayout {
 }
 
 
-extension UIScrollView {
-    func updateContentSize() {
-        let unionCalculatedTotalRect = recursiveUnionInDepthFor(view: self)
-        
-        // 계산된 크기로 컨텐츠 사이즈 설정
-        self.contentSize = CGSize(width: self.frame.width, height: unionCalculatedTotalRect.height+50)
-    }
-    
-    private func recursiveUnionInDepthFor(view: UIView) -> CGRect {
-        var totalRect: CGRect = .zero
-        
-        // 모든 자식 View의 컨트롤의 크기를 재귀적으로 호출하며 최종 영역의 크기를 설정
-        for subView in view.subviews {
-            totalRect = totalRect.union(recursiveUnionInDepthFor(view: subView))
-        }
-        
-        // 최종 계산 영역의 크기를 반환
-        return totalRect.union(view.frame)
-    }
-}
+//extension UIScrollView {
+//    func updateContentSize() {
+//        let unionCalculatedTotalRect = recursiveUnionInDepthFor(view: self)
+//        
+//        // 계산된 크기로 컨텐츠 사이즈 설정
+//        self.contentSize = CGSize(width: self.frame.width, height: unionCalculatedTotalRect.height+50)
+//    }
+//    
+//    private func recursiveUnionInDepthFor(view: UIView) -> CGRect {
+//        var totalRect: CGRect = .zero
+//        
+//        // 모든 자식 View의 컨트롤의 크기를 재귀적으로 호출하며 최종 영역의 크기를 설정
+//        for subView in view.subviews {
+//            totalRect = totalRect.union(recursiveUnionInDepthFor(view: subView))
+//        }
+//        
+//        // 최종 계산 영역의 크기를 반환
+//        return totalRect.union(view.frame)
+//    }
+//}

@@ -51,8 +51,8 @@ class FirstTabBar: UIViewController{
         
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        findPopular(kind: "movie")
-        findPopular(kind: "tv")
+        findPopularMovie()
+        findPopularTV()
         
 
         
@@ -96,8 +96,6 @@ class FirstTabBar: UIViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
-        
         
         let refresh = UIRefreshControl()
 
@@ -190,30 +188,21 @@ class FirstTabBar: UIViewController{
         self.present(vc, animated: true)
     }
     
-    @objc func findPopular(kind: String) {
+    @objc func findPopularMovie() {
 
         let API_KEY = "e8cb2a054ca6f112d66b1e816e239ee6"
-        var movieSearchURL = URLComponents(string: "https://api.themoviedb.org/3/discover/\(kind)?")
+        var movieSearchURL = URLComponents(string: "https://api.themoviedb.org/3/discover/movie?")
 
         // 쿼리 아이템 정의
         let apiQuery = URLQueryItem(name: "api_key", value: API_KEY)
         let languageQuery = URLQueryItem(name: "language", value: "ko-KR")
         
-        if kind == "movie"{
-            let watchProvider = URLQueryItem(name: "with_watch_providers", value: "8")
+        let watchProvider = URLQueryItem(name: "with_watch_providers", value: "8")
 
-            movieSearchURL?.queryItems?.append(apiQuery)
-            movieSearchURL?.queryItems?.append(languageQuery)
-            movieSearchURL?.queryItems?.append(watchProvider)
-        }
-        
-        else{
-//            let watchProvider = URLQueryItem(name: "with_watch_providers", value: "8")
+        movieSearchURL?.queryItems?.append(apiQuery)
+        movieSearchURL?.queryItems?.append(languageQuery)
+        movieSearchURL?.queryItems?.append(watchProvider)
 
-            movieSearchURL?.queryItems?.append(apiQuery)
-            movieSearchURL?.queryItems?.append(languageQuery)
-//            movieSearchURL?.queryItems?.append(watchProvider)
-        }
         
         
         guard let requestMovieSearchURL = movieSearchURL?.url else { return }
@@ -230,68 +219,20 @@ class FirstTabBar: UIViewController{
                   guard let resultData = data else { return }
                   do{
                       let decoder = JSONDecoder()
-                      let respons = try decoder.decode(Response.self, from: resultData)
+                      let respons = try decoder.decode(MovieResponse.self, from: resultData)
                       let searchMovie = respons.result
                       
                       for i in searchMovie{
-//                          print("영화 제목 : \(i.title ?? "")")
-//                          print("영화 평점 : \(i.rating ?? 0)")
-//                          print("영화 줄거리 : \(i.summary ?? "")")
-//                          print("포스터 경로 : \(i.post ?? "")")
-//
-//                          print("--------------------------")
+
+                          
+                              
+                          let a = String(i.title!)
+                          let b = String(i.rating!)
+                          let c = String(i.summary!)
+                          let d = String(i.post!)
                           
                           
-                          if kind == "movie"{
-                              
-                              let a = String(i.title!)
-                              let b = String(i.rating!)
-                              let c = String(i.summary!)
-                              let d = String(i.post!)
-                              
-                              
-                              self.movie.append([a,b,c,d])
-                              
-                              
-                          }
-                          
-                          else{
-                              
-                              var empty: [String] = []
-                              
-                              
-                              if let a = i.title{
-                                  empty.append(String(a))
-                              }
-                              else{
-                                  empty.append("empty")
-                              }
-                              
-                              if let b = i.rating{
-                                  empty.append(String(b))
-                              }
-                              else{
-                                  empty.append("empty")
-                              }
-                              
-                              if let c = i.summary{
-                                  empty.append(String(c))
-                              }
-                              else{
-                                  empty.append("empty")
-                              }
-                              
-                              if let d = i.post{
-                                  empty.append(String(d))
-                              }
-                              else{
-                                  empty.append("empty")
-                              }
-                              
-                              self.tv.append(empty)
-                              
-                          }
-                                                                            
+                          self.movie.append([a,b,c,d])                                         
                       }
                       
                   }catch let error{
@@ -300,6 +241,87 @@ class FirstTabBar: UIViewController{
               }
             })
             dataTask.resume()
+        
+    }
+    
+    func findPopularTV(){
+        
+        let API_KEY = "e8cb2a054ca6f112d66b1e816e239ee6"
+        var movieSearchURL = URLComponents(string: "https://api.themoviedb.org/3/discover/tv?")
+
+        // 쿼리 아이템 정의
+        let apiQuery = URLQueryItem(name: "api_key", value: API_KEY)
+        let languageQuery = URLQueryItem(name: "language", value: "ko-KR")
+        let network = URLQueryItem(name: "with_networks", value: "213")
+            
+        movieSearchURL?.queryItems?.append(apiQuery)
+        movieSearchURL?.queryItems?.append(languageQuery)
+        movieSearchURL?.queryItems?.append(network)
+        
+        
+        
+        guard let requestMovieSearchURL = movieSearchURL?.url else { return }
+        
+        let config = URLSessionConfiguration.default
+
+        // session 설정
+        let session = URLSession(configuration: config)
+        
+        let dataTask = session.dataTask(with: requestMovieSearchURL, completionHandler: { (data, response, error) -> Void in
+              if (error != nil) {
+                print(error as Any)
+              } else {
+                  guard let resultData = data else { return }
+                  do{
+                      let decoder = JSONDecoder()
+                      let respons = try decoder.decode(TvResponse.self, from: resultData)
+                      let searchTv = respons.result
+                      
+                      for i in searchTv{
+
+                          var empty: [String] = []
+                          
+                          
+                          if let a = i.name{
+                              empty.append(String(a))
+                          }
+                          else{
+                              empty.append("empty")
+                          }
+                          
+                          
+                          if let b = i.rating{
+                              empty.append(String(b))
+                          }
+                          else{
+                              empty.append("empty")
+                          }
+                          
+                          if let c = i.summary{
+                              empty.append(String(c))
+                          }
+                          else{
+                              empty.append("empty")
+                          }
+                          
+                          if let d = i.post{
+                              empty.append(String(d))
+                          }
+                          else{
+                              empty.append("empty")
+                          }
+                          
+                          self.tv.append(empty)
+                      }
+                      
+                  }catch let error{
+                      print(error.localizedDescription)
+                  }
+              }
+            })
+            dataTask.resume()
+        
+        
         
     }
     

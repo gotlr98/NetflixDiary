@@ -8,19 +8,13 @@
 import Foundation
 import UIKit
 
-//protocol sendMovieInfo: AnyObject {
-//    func recieveData(info: [[Any]])
-//}
-
 
 class popularMovieCell: UICollectionViewCell{
     
-//    static let moviecell = "moviecell"
     
     static var id: String{ NSStringFromClass(Self.self).components(separatedBy: ".").last ?? ""}
     static var id2: String{ NSStringFromClass(Self.self).components(separatedBy: ".").last ?? ""}
     
-    var delegate: sendMovieInfo?
     
     var movie_info = [[Any]]()
     
@@ -62,13 +56,5 @@ class popularMovieCell: UICollectionViewCell{
     
     required init?(coder: NSCoder) {
         fatalError("error")
-    }
-}
-
-extension popularMovieCell: sendMovieInfo {
-    func recieveData(info: [[Any]]){
-        
-        self.movie_info.append(info)
-        
     }
 }

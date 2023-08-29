@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import Lottie
 
-struct Response: Codable {
+struct MovieResponse: Codable {
     let page: Int?
     let result: [MovieInfo]
     
@@ -18,6 +18,17 @@ struct Response: Codable {
         case result = "results"
     }
 }
+
+struct TvResponse: Codable {
+    let page: Int?
+    let result: [TvInfo]
+    
+    enum CodingKeys: String, CodingKey {
+        case page
+        case result = "results"
+    }
+}
+
 
 struct MovieInfo: Codable {
     let title: String?
@@ -33,6 +44,20 @@ struct MovieInfo: Codable {
     }
 }
 
+struct TvInfo: Codable {
+    let name: String?
+    let rating: Double?
+    let summary: String?
+    let post: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case name
+        case rating = "vote_average"
+        case summary = "overview"
+        case post = "poster_path"
+    }
+}
+
 
 
 class StartView: UIViewController{
@@ -41,8 +66,6 @@ class StartView: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         
     }
     
@@ -55,27 +78,16 @@ class StartView: UIViewController{
         if User().get_user_count() == 0{
             User().set_user()
         }
-        
-        
-        
-        
         animationView.frame = self.view.bounds
         animationView.center = self.view.center
         animationView.contentMode = .scaleAspectFit
         animationView.play{ (finish) in
                         
-            
-
             animationView.removeFromSuperview()
             
             self.navigationController?.pushViewController(ViewController(), animated: false)
-
         }
     
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        
     }
     
     

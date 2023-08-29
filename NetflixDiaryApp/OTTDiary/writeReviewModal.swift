@@ -156,7 +156,7 @@ class writeReviewModal: UIViewController{
             
             contentView.addSubview(titleLabel)
             
-            titleLabel.text = self.select_title
+            titleLabel.text = "제목: " + self.select_title
             
             titleLabel.translatesAutoresizingMaskIntoConstraints = false
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 400).isActive = true
@@ -221,7 +221,6 @@ class writeReviewModal: UIViewController{
             
             User().add_user_net(net: Netflix(title: select_title, img_url: title_url[select_title]!, review: reviewField.text))
             
-    //        self.tabBarController?
             self.navigationController?.popViewController(animated: true)
         }
         
@@ -251,7 +250,7 @@ class writeReviewModal: UIViewController{
         }
         else{
             Task{
-                await requestNet(name: self.searchTextField.text!)
+                await searchPopularMovie(name: self.searchTextField.text!)
                 
             }
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
@@ -268,7 +267,7 @@ class writeReviewModal: UIViewController{
         
     }
     
-    func requestNet(name: String) async {
+    func searchPopularMovie(name: String) async {
         
         let API_KEY = "e8cb2a054ca6f112d66b1e816e239ee6"
         var movieSearchURL = URLComponents(string: "https://api.themoviedb.org/3/search/movie?")
@@ -298,7 +297,7 @@ class writeReviewModal: UIViewController{
                   guard let resultData = data else { return }
                   do{
                       let decoder = JSONDecoder()
-                      let respons = try decoder.decode(Response.self, from: resultData)
+                      let respons = try decoder.decode(MovieResponse.self, from: resultData)
                       let searchMovie = respons.result
                       
                       for i in searchMovie{

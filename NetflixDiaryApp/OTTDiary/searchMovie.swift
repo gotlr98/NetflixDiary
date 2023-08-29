@@ -60,7 +60,7 @@ class searchMovie: UIViewController{
             slide.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             slide.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             slide.topAnchor.constraint(equalTo: self.view.topAnchor),
-            slide.heightAnchor.constraint(equalToConstant: 300)
+            slide.heightAnchor.constraint(equalToConstant: 500)
         ])
         
         let gesture = UITapGestureRecognizer(target: self, action: #selector(didTab(sender: )))
