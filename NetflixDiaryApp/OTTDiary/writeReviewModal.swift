@@ -38,7 +38,8 @@ class writeReviewModal: UIViewController{
     let imagePageControl = UIPageControl()
     let imageNumberLabel = UILabel()
     
-    
+    var picker: UIPickerView!
+    var select = ["movie", "tv"]
     
     override func viewDidLoad() {
 //        self.view.backgroundColor = .gray
@@ -96,6 +97,22 @@ class writeReviewModal: UIViewController{
         registerBtn.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20).isActive = true
         registerBtn.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         
+        picker = UIPickerView()
+        
+        
+        contentView.addSubview(picker)
+        
+        picker.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            picker.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
+            picker.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            picker.widthAnchor.constraint(equalToConstant: 200),
+            picker.heightAnchor.constraint(equalToConstant: 80)
+        ])
+        
+        picker.delegate = self
+        picker.dataSource = self
         
         searchTextField = .init(frame: .init())
         
@@ -119,7 +136,7 @@ class writeReviewModal: UIViewController{
         searchTextField.widthAnchor.constraint(equalToConstant: 250).isActive = true
         searchTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
-        searchTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20).isActive = true
+        searchTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 90).isActive = true
         searchTextField.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20).isActive = true
         
         let searchButton: UIButton = .init(frame: .init())
@@ -127,14 +144,11 @@ class writeReviewModal: UIViewController{
         
         searchButton.backgroundColor = .orange
         
-//        searchButton.addTarget(self, action: #selector(cancel), for: .touchUpInside)
-//        searchButton.addTarget(self, action: #selector(self.textFieldDidChanacge(_:)), for: .editingChanged)
-        
         contentView.addSubview(searchButton)
         searchButton.translatesAutoresizingMaskIntoConstraints = false
         searchButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
         searchButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        searchButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20).isActive = true
+        searchButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 90).isActive = true
         searchButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20).isActive = true
         searchButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
         searchButton.addTarget(self, action: #selector(search), for: .touchUpInside)
@@ -144,9 +158,9 @@ class writeReviewModal: UIViewController{
             
             contentView.addSubview(image)
             image.translatesAutoresizingMaskIntoConstraints = false
-            image.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 100).isActive = true
+            image.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 160).isActive = true
             image.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-            image.heightAnchor.constraint(equalToConstant: 200).isActive = true
+            image.heightAnchor.constraint(equalToConstant: 170).isActive = true
             image.widthAnchor.constraint(equalToConstant: 200).isActive = true
 
             image.kf.setImage(
@@ -239,6 +253,8 @@ class writeReviewModal: UIViewController{
         
         self.title_url = [:]
         
+        let selectedValue = select[Int(picker.selectedRow(inComponent: 0))]
+        
         DispatchQueue.main.async {
             self.searchTextField.resignFirstResponder()
         }
@@ -250,7 +266,13 @@ class writeReviewModal: UIViewController{
         }
         else{
             Task{
-                await searchPopularMovie(name: self.searchTextField.text!)
+                if selectedValue == "movie"{
+                    await searchPopularMovie(name: self.searchTextField.text!)
+                }
+                
+                else{
+                    await searchPopularTV(name: self.searchTextField.text!)
+                }
                 
             }
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
@@ -318,6 +340,58 @@ class writeReviewModal: UIViewController{
             dataTask.resume()
         
     }
+    
+    func searchPopularTV(name: String) async {
+        
+        let API_KEY = "e8cb2a054ca6f112d66b1e816e239ee6"
+        var movieSearchURL = URLComponents(string: "https://api.themoviedb.org/3/search/tv?")
+
+        // 쿼리 아이템 정의
+        let apiQuery = URLQueryItem(name: "api_key", value: API_KEY)
+        let languageQuery = URLQueryItem(name: "language", value: "ko-KR")
+        let searchQuery = URLQueryItem(name: "query", value: name)
+        let network = URLQueryItem(name: "with_networks", value: "213")
+        
+        movieSearchURL?.queryItems?.append(apiQuery)
+        movieSearchURL?.queryItems?.append(languageQuery)
+        movieSearchURL?.queryItems?.append(searchQuery)
+        movieSearchURL?.queryItems?.append(network)
+        
+        guard let requestMovieSearchURL = movieSearchURL?.url else { return }
+        
+        let config = URLSessionConfiguration.default
+
+        // session 설정
+        let session = URLSession(configuration: config)
+        
+        let dataTask = session.dataTask(with: requestMovieSearchURL, completionHandler: { (data, response, error) -> Void in
+              if (error != nil) {
+                print(error as Any)
+              } else {
+                  guard let resultData = data else { return }
+                  do{
+                      let decoder = JSONDecoder()
+                      let respons = try decoder.decode(TvResponse.self, from: resultData)
+                      let searchMovie = respons.result
+                      
+                      for i in searchMovie{
+    //                      print("영화 제목 : \(i.title ?? "")")
+    //                      print("영화 평점 : \(i.rating ?? 0)")
+    //                      print("영화 줄거리 : \(i.summary ?? "")")
+    //                      print("포스터 경로 : \(i.post ?? "")")
+    //
+    //                      print("--------------------------")
+                          self.title_url[i.name!] = "https://image.tmdb.org/t/p/w220_and_h330_face" + i.post!
+                      }
+                      
+                  }catch let error{
+                      print(error.localizedDescription)
+                  }
+              }
+            })
+            dataTask.resume()
+        
+    }
 
 }
 
@@ -353,4 +427,19 @@ extension writeReviewModal: SendDataDelegate {
         
         self.viewDidLoad()
     }
+}
+
+extension writeReviewModal: UIPickerViewDelegate, UIPickerViewDataSource{
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return select.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+            return select[row]
+        }
 }
