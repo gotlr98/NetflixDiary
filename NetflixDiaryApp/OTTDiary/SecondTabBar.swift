@@ -20,6 +20,11 @@ class SecondTabBar: UIViewController{
     var movie = [[String]]()
     
     var tv = [[String]]()
+    
+    let title1 = UILabel()
+    let title2 = UILabel()
+    let scrollView = UIScrollView()
+    let contentView = UIView()
 
     
     lazy var popularMovie: UICollectionView = {
@@ -54,11 +59,6 @@ class SecondTabBar: UIViewController{
         super.viewDidLoad()
         
         
-        DispatchQueue.main.async(execute: {
-            self.findPopular(kind: "movie")
-            self.findPopular(kind: "tv")
-        })
-        
         
         let refresh = UIRefreshControl()
 
@@ -66,115 +66,10 @@ class SecondTabBar: UIViewController{
         
         self.popularMovie.refreshControl = refresh
         
-        let scrollView = UIScrollView()
         
-        scrollView.showsVerticalScrollIndicator = true
-        scrollView.isDirectionalLockEnabled = true
-                
+        setScroll()
         
-        let contentView = UIView()
-        
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        
-        self.view.addSubview(scrollView)
-        scrollView.addSubview(contentView)
-        
-        contentView.backgroundColor = .white
-        
-        NSLayoutConstraint.activate([
-            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        ])
-        
-        NSLayoutConstraint.activate([
-            contentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
-            contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor)
-        ])
-        
-        contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-        
-        let contentViewHeight = contentView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor)
-        contentViewHeight.priority = .defaultLow
-        contentViewHeight.isActive = true
-        
-        contentView.addSubview(popularMovie)
-        
-        contentView.addSubview(popularTV)
-        
-        popularMovie.layer.borderColor = UIColor.orange.cgColor
-        popularTV.layer.borderColor = UIColor.orange.cgColor
-        
-        popularMovie.layer.borderWidth = 3
-        popularTV.layer.borderWidth = 3
-
-        
-        
-        let title1 = UILabel()
-        let title2 = UILabel()
-        
-        contentView.addSubview(title1)
-        contentView.addSubview(title2)
-        
-        title1.translatesAutoresizingMaskIntoConstraints = false
-        title2.translatesAutoresizingMaskIntoConstraints = false
-        
-        title1.text = " 인기있는 영화"
-        title2.text = " 인기있는 TV시리즈"
-        
-        
-        title1.layer.borderColor = UIColor.lightGray.cgColor
-        title2.layer.borderColor = UIColor.lightGray.cgColor
-        
-        title1.layer.borderWidth = 3
-        title2.layer.borderWidth = 3
-        
-        popularMovie.delegate = self
-        
-        popularMovie.dataSource = self
-        
-        popularMovie.register(popularMovieCell.self, forCellWithReuseIdentifier: popularMovieCell.id)
-        
-        popularMovie.translatesAutoresizingMaskIntoConstraints = false
-        
-        popularMovie.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        popularMovie.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 90).isActive = true
-        popularMovie.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        popularMovie.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        popularMovie.heightAnchor.constraint(equalToConstant: 400).isActive = true
-        
-        title1.bottomAnchor.constraint(equalTo: popularMovie.topAnchor, constant: -30).isActive = true
-        title1.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
-        title1.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        title1.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
-        
-        popularTV.delegate = self
-        
-        popularTV.dataSource = self
-        
-        popularTV.register(popularMovieCell.self, forCellWithReuseIdentifier: popularMovieCell.id)
-        
-        popularTV.translatesAutoresizingMaskIntoConstraints = false
-        
-        popularTV.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        popularTV.topAnchor.constraint(equalTo: self.popularMovie.bottomAnchor, constant: 50).isActive = true
-        popularTV.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        popularTV.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        popularTV.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20).isActive = true
-        popularTV.heightAnchor.constraint(equalToConstant: 400).isActive = true
-        
-        title2.bottomAnchor.constraint(equalTo: popularMovie.topAnchor, constant: -30).isActive = true
-        title2.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
-        title2.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        title2.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
-        scrollView.updateContentSize()
-        
+        setTitle()
 
     }
     
@@ -215,6 +110,119 @@ class SecondTabBar: UIViewController{
         }
         
         
+    }
+    
+    func setScroll(){
+        scrollView.showsVerticalScrollIndicator = true
+        scrollView.isDirectionalLockEnabled = true
+                
+        
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        
+        contentView.backgroundColor = .white
+        
+        NSLayoutConstraint.activate([
+            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            contentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
+            contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor)
+        ])
+        
+        contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+        
+        let contentViewHeight = contentView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor)
+        contentViewHeight.priority = .defaultLow
+        contentViewHeight.isActive = true
+        
+        contentView.addSubview(popularMovie)
+        
+        contentView.addSubview(popularTV)
+        
+        popularMovie.layer.borderColor = UIColor.orange.cgColor
+        popularTV.layer.borderColor = UIColor.orange.cgColor
+        
+        popularMovie.layer.borderWidth = 3
+        popularTV.layer.borderWidth = 3
+
+
+        
+        popularMovie.delegate = self
+        
+        popularMovie.dataSource = self
+        
+        popularMovie.register(popularMovieCell.self, forCellWithReuseIdentifier: popularMovieCell.id)
+        
+        popularMovie.translatesAutoresizingMaskIntoConstraints = false
+        
+        popularMovie.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        popularMovie.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 90).isActive = true
+        popularMovie.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        popularMovie.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        popularMovie.heightAnchor.constraint(equalToConstant: 400).isActive = true
+        
+        popularTV.delegate = self
+        
+        popularTV.dataSource = self
+        
+        popularTV.register(popularMovieCell.self, forCellWithReuseIdentifier: popularMovieCell.id)
+        
+        popularTV.translatesAutoresizingMaskIntoConstraints = false
+        
+        popularTV.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        popularTV.topAnchor.constraint(equalTo: self.popularMovie.bottomAnchor, constant: 100).isActive = true
+        popularTV.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        popularTV.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        popularTV.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20).isActive = true
+        popularTV.heightAnchor.constraint(equalToConstant: 400).isActive = true
+    }
+    
+    func setTitle(){
+        
+        contentView.addSubview(title1)
+        contentView.addSubview(title2)
+        
+        title1.translatesAutoresizingMaskIntoConstraints = false
+        title2.translatesAutoresizingMaskIntoConstraints = false
+        
+        title1.text = " 인기있는 영화"
+        title2.text = " 인기있는 TV시리즈"
+        
+        title1.backgroundColor = .lightGray
+        title2.backgroundColor = .lightGray
+        
+        title1.textColor = .white
+        title2.textColor = .white
+        
+        
+        title1.layer.borderColor = UIColor.lightGray.cgColor
+        title2.layer.borderColor = UIColor.lightGray.cgColor
+        
+        title1.layer.borderWidth = 3
+        title2.layer.borderWidth = 3
+        
+        title1.layer.cornerRadius = 3
+        title2.layer.cornerRadius = 3
+        
+        title1.bottomAnchor.constraint(equalTo: popularMovie.topAnchor, constant: -30).isActive = true
+        title1.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
+        title1.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        title1.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        
+        title2.topAnchor.constraint(equalTo: popularMovie.bottomAnchor, constant: 20).isActive = true
+        title2.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
+        title2.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        title2.heightAnchor.constraint(equalToConstant: 25).isActive = true
     }
     
     @objc func findPopular(kind: String) {

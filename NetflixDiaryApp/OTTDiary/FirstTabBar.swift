@@ -198,11 +198,23 @@ class FirstTabBar: UIViewController{
         // 쿼리 아이템 정의
         let apiQuery = URLQueryItem(name: "api_key", value: API_KEY)
         let languageQuery = URLQueryItem(name: "language", value: "ko-KR")
-        let watchProvider = URLQueryItem(name: "with_watch_providers", value: "8")
+        
+        if kind == "movie"{
+            let watchProvider = URLQueryItem(name: "with_watch_providers", value: "8")
 
-        movieSearchURL?.queryItems?.append(apiQuery)
-        movieSearchURL?.queryItems?.append(languageQuery)
-        movieSearchURL?.queryItems?.append(watchProvider)
+            movieSearchURL?.queryItems?.append(apiQuery)
+            movieSearchURL?.queryItems?.append(languageQuery)
+            movieSearchURL?.queryItems?.append(watchProvider)
+        }
+        
+        else{
+//            let watchProvider = URLQueryItem(name: "with_watch_providers", value: "8")
+
+            movieSearchURL?.queryItems?.append(apiQuery)
+            movieSearchURL?.queryItems?.append(languageQuery)
+//            movieSearchURL?.queryItems?.append(watchProvider)
+        }
+        
         
         guard let requestMovieSearchURL = movieSearchURL?.url else { return }
         
