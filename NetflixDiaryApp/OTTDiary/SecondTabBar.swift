@@ -29,7 +29,7 @@ class SecondTabBar: UIViewController{
         let lay = UICollectionViewFlowLayout()
         lay.scrollDirection = .horizontal
         
-        lay.minimumLineSpacing = 50
+        lay.minimumLineSpacing = 0
         
         let view = UICollectionView(frame: .zero, collectionViewLayout: lay)
         view.backgroundColor = .white
@@ -43,7 +43,7 @@ class SecondTabBar: UIViewController{
         let lay = UICollectionViewFlowLayout()
         lay.scrollDirection = .horizontal
         
-        lay.minimumLineSpacing = 50
+        lay.minimumLineSpacing = 0
         
         let view = UICollectionView(frame: .zero, collectionViewLayout: lay)
         view.backgroundColor = .white
@@ -152,7 +152,8 @@ class SecondTabBar: UIViewController{
         popularMovie.register(popularMovieCell.self, forCellWithReuseIdentifier: popularMovieCell.id)
         
         popularMovie.translatesAutoresizingMaskIntoConstraints = false
-        
+        popularMovie.isPagingEnabled = true
+
         NSLayoutConstraint.activate([
             popularMovie.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             popularMovie.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 90),
@@ -169,7 +170,7 @@ class SecondTabBar: UIViewController{
         popularTV.register(popularMovieCell.self, forCellWithReuseIdentifier: popularMovieCell.id)
         
         popularTV.translatesAutoresizingMaskIntoConstraints = false
-        popularTV.scrollsToTop = true
+        popularTV.isPagingEnabled = true
         
         NSLayoutConstraint.activate([
             popularTV.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
@@ -247,12 +248,15 @@ extension SecondTabBar: UICollectionViewDelegate, UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: popularMovieCell.id, for: indexPath)
             if let cell = cell as? popularMovieCell {
                 cell.name.text = "제목: " + movie[indexPath.item][0]
+                cell.name.textColor = .black
                 cell.rating.text = "평점: " + movie[indexPath.item][1]
+                cell.rating.textColor = .black
                 if movie[indexPath.item][2].isEmpty{
                     cell.comment.text = "줄거리가 비었습니다"
                 }
                 else{
                     cell.comment.text = "줄거리: " + movie[indexPath.item][2]
+                    cell.comment.textColor = .black
 
                 }
                 cell.image.kf.setImage(with: URL(string: "https://image.tmdb.org/t/p/w220_and_h330_face" + movie[indexPath.item][3]))
@@ -268,11 +272,14 @@ extension SecondTabBar: UICollectionViewDelegate, UICollectionViewDataSource {
             if let cell = cell as? popularMovieCell {
                 cell.name.text = "제목: " + tv[indexPath.item][0]
                 cell.rating.text = "평점: " + tv[indexPath.item][1]
+                cell.name.textColor = .black
+                cell.rating.textColor = .black
                 if tv[indexPath.item][2].isEmpty{
                     cell.comment.text = "줄거리가 비었습니다"
                 }
                 else{
                     cell.comment.text = "줄거리: " + tv[indexPath.item][2]
+                    cell.comment.textColor = .black
 
                 }
                 cell.image.kf.setImage(with: URL(string: "https://image.tmdb.org/t/p/w220_and_h330_face" + tv[indexPath.item][3]))
