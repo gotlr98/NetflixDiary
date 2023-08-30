@@ -106,7 +106,6 @@ class SecondTabBar: UIViewController{
         scrollView.showsVerticalScrollIndicator = true
         scrollView.isDirectionalLockEnabled = true
                 
-        
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -139,11 +138,11 @@ class SecondTabBar: UIViewController{
         
         contentView.addSubview(popularTV)
         
-        popularMovie.layer.borderColor = UIColor.orange.cgColor
-        popularTV.layer.borderColor = UIColor.orange.cgColor
-        
-        popularMovie.layer.borderWidth = 3
-        popularTV.layer.borderWidth = 3
+//        popularMovie.layer.borderColor = UIColor.orange.cgColor
+//        popularTV.layer.borderColor = UIColor.orange.cgColor
+//
+//        popularMovie.layer.borderWidth = 3
+//        popularTV.layer.borderWidth = 3
 
         
         popularMovie.delegate = self
@@ -162,6 +161,7 @@ class SecondTabBar: UIViewController{
             popularMovie.heightAnchor.constraint(equalToConstant: 400)
         ])
         
+        
         popularTV.delegate = self
         
         popularTV.dataSource = self
@@ -169,6 +169,7 @@ class SecondTabBar: UIViewController{
         popularTV.register(popularMovieCell.self, forCellWithReuseIdentifier: popularMovieCell.id)
         
         popularTV.translatesAutoresizingMaskIntoConstraints = false
+        popularTV.scrollsToTop = true
         
         NSLayoutConstraint.activate([
             popularTV.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
@@ -256,7 +257,8 @@ extension SecondTabBar: UICollectionViewDelegate, UICollectionViewDataSource {
                 }
                 cell.image.kf.setImage(with: URL(string: "https://image.tmdb.org/t/p/w220_and_h330_face" + movie[indexPath.item][3]))
             }
-
+            
+            
             return cell
         }
         
@@ -285,7 +287,7 @@ extension SecondTabBar: UICollectionViewDelegate, UICollectionViewDataSource {
 
 extension SecondTabBar: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 320, height: collectionView.frame.height) // point
+        return CGSize(width: view.frame.width, height: collectionView.frame.height) // point
     }
 }
 

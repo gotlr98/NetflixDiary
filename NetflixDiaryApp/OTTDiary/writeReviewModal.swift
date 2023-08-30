@@ -299,11 +299,13 @@ class writeReviewModal: UIViewController{
         let languageQuery = URLQueryItem(name: "language", value: "ko-KR")
         let searchQuery = URLQueryItem(name: "query", value: name)
         let watchProvider = URLQueryItem(name: "with_watch_providers", value: "8")
+        let region = URLQueryItem(name: "region", value: "KR")
         
         movieSearchURL?.queryItems?.append(apiQuery)
         movieSearchURL?.queryItems?.append(languageQuery)
         movieSearchURL?.queryItems?.append(searchQuery)
         movieSearchURL?.queryItems?.append(watchProvider)
+        movieSearchURL?.queryItems?.append(region)
         
         guard let requestMovieSearchURL = movieSearchURL?.url else { return }
         
@@ -351,11 +353,13 @@ class writeReviewModal: UIViewController{
         let languageQuery = URLQueryItem(name: "language", value: "ko-KR")
         let searchQuery = URLQueryItem(name: "query", value: name)
         let network = URLQueryItem(name: "with_networks", value: "213")
+        let region = URLQueryItem(name: "region", value: "KR")
         
         movieSearchURL?.queryItems?.append(apiQuery)
         movieSearchURL?.queryItems?.append(languageQuery)
         movieSearchURL?.queryItems?.append(searchQuery)
         movieSearchURL?.queryItems?.append(network)
+        movieSearchURL?.queryItems?.append(region)
         
         guard let requestMovieSearchURL = movieSearchURL?.url else { return }
         

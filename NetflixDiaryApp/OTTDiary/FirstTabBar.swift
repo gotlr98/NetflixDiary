@@ -198,10 +198,13 @@ class FirstTabBar: UIViewController{
         let languageQuery = URLQueryItem(name: "language", value: "ko-KR")
         
         let watchProvider = URLQueryItem(name: "with_watch_providers", value: "8")
+        let region = URLQueryItem(name: "region", value: "KR")
+        
 
         movieSearchURL?.queryItems?.append(apiQuery)
         movieSearchURL?.queryItems?.append(languageQuery)
         movieSearchURL?.queryItems?.append(watchProvider)
+        movieSearchURL?.queryItems?.append(region)
 
         
         
@@ -253,11 +256,12 @@ class FirstTabBar: UIViewController{
         let apiQuery = URLQueryItem(name: "api_key", value: API_KEY)
         let languageQuery = URLQueryItem(name: "language", value: "ko-KR")
         let network = URLQueryItem(name: "with_networks", value: "213")
+        let region = URLQueryItem(name: "region", value: "KR")
             
         movieSearchURL?.queryItems?.append(apiQuery)
         movieSearchURL?.queryItems?.append(languageQuery)
         movieSearchURL?.queryItems?.append(network)
-        
+        movieSearchURL?.queryItems?.append(region)
         
         
         guard let requestMovieSearchURL = movieSearchURL?.url else { return }
