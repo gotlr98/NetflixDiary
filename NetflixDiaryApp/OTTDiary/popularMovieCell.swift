@@ -80,7 +80,7 @@ class popularMovieCell: UICollectionViewCell, UICollectionViewDelegateFlowLayout
         name.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
         
         rating.translatesAutoresizingMaskIntoConstraints = false
-        rating.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
+        rating.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
         rating.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 5).isActive = true
         
         comment.translatesAutoresizingMaskIntoConstraints = false

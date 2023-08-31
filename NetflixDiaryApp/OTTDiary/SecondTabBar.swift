@@ -213,12 +213,12 @@ class SecondTabBar: UIViewController{
         NSLayoutConstraint.activate([
             title1.bottomAnchor.constraint(equalTo: popularMovie.topAnchor, constant: -30),
             title1.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            title1.widthAnchor.constraint(equalToConstant: 200),
+            title1.widthAnchor.constraint(equalToConstant: 110),
             title1.heightAnchor.constraint(equalToConstant: 25),
             
             title2.topAnchor.constraint(equalTo: popularMovie.bottomAnchor, constant: 20),
             title2.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            title2.widthAnchor.constraint(equalToConstant: 200),
+            title2.widthAnchor.constraint(equalToConstant: 150),
             title2.heightAnchor.constraint(equalToConstant: 25)
         ])
         
