@@ -190,7 +190,7 @@ class FirstTabBar: UIViewController{
     
     @objc func findPopularMovie() {
 
-        let API_KEY = "e8cb2a054ca6f112d66b1e816e239ee6"
+        let API_KEY = Bundle.main.apiKey
         var movieSearchURL = URLComponents(string: "https://api.themoviedb.org/3/discover/movie?")
 
         // 쿼리 아이템 정의
@@ -249,7 +249,7 @@ class FirstTabBar: UIViewController{
     
     func findPopularTV(){
         
-        let API_KEY = "e8cb2a054ca6f112d66b1e816e239ee6"
+        let API_KEY = Bundle.main.apiKey
         var movieSearchURL = URLComponents(string: "https://api.themoviedb.org/3/discover/tv?")
 
         // 쿼리 아이템 정의

@@ -291,7 +291,7 @@ class writeReviewModal: UIViewController{
     
     func searchPopularMovie(name: String) async {
         
-        let API_KEY = "e8cb2a054ca6f112d66b1e816e239ee6"
+        let API_KEY = Bundle.main.apiKey
         var movieSearchURL = URLComponents(string: "https://api.themoviedb.org/3/search/movie?")
 
         // 쿼리 아이템 정의
@@ -345,7 +345,7 @@ class writeReviewModal: UIViewController{
     
     func searchPopularTV(name: String) async {
         
-        let API_KEY = "e8cb2a054ca6f112d66b1e816e239ee6"
+        let API_KEY = Bundle.main.apiKey
         var movieSearchURL = URLComponents(string: "https://api.themoviedb.org/3/search/tv?")
 
         // 쿼리 아이템 정의

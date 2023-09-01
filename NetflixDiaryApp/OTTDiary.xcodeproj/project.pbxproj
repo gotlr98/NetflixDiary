@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A086CEE2AA2226F00C969FD /* Api_Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8A086CED2AA2226F00C969FD /* Api_Key.plist */; };
+		8A086CF02AA222C400C969FD /* extensionBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A086CEF2AA222C400C969FD /* extensionBundle.swift */; };
 		8A24D0A62A6A70DB00A61006 /* reviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A24D0A52A6A70DB00A61006 /* reviewCell.swift */; };
 		8A24D0A82A70C6AB00A61006 /* reviewPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A24D0A72A70C6AB00A61006 /* reviewPopup.swift */; };
 		8A3FD6152A4C1061005D94B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3FD6142A4C1061005D94B9 /* AppDelegate.swift */; };
@@ -33,6 +35,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8A086CED2AA2226F00C969FD /* Api_Key.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Api_Key.plist; sourceTree = "<group>"; };
+		8A086CEF2AA222C400C969FD /* extensionBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensionBundle.swift; sourceTree = "<group>"; };
 		8A24D0A52A6A70DB00A61006 /* reviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reviewCell.swift; sourceTree = "<group>"; };
 		8A24D0A72A70C6AB00A61006 /* reviewPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reviewPopup.swift; sourceTree = "<group>"; };
 		8A3FD6112A4C1061005D94B9 /* OTTDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OTTDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,6 +112,8 @@
 				8A24D0A72A70C6AB00A61006 /* reviewPopup.swift */,
 				8A7E22C92A835358007902D7 /* popularMovieView.swift */,
 				8A7E22CB2A837586007902D7 /* popularMovieCell.swift */,
+				8A086CED2AA2226F00C969FD /* Api_Key.plist */,
+				8A086CEF2AA222C400C969FD /* extensionBundle.swift */,
 			);
 			path = OTTDiary;
 			sourceTree = "<group>";
@@ -192,6 +198,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A3FD6212A4C1062005D94B9 /* LaunchScreen.storyboard in Resources */,
+				8A086CEE2AA2226F00C969FD /* Api_Key.plist in Resources */,
 				8A3FD61E2A4C1062005D94B9 /* Assets.xcassets in Resources */,
 				8A3FD6382A4D5771005D94B9 /* netflix.json in Resources */,
 			);
@@ -211,6 +218,7 @@
 				8A3FD6192A4C1061005D94B9 /* ViewController.swift in Sources */,
 				8A3FD6152A4C1061005D94B9 /* AppDelegate.swift in Sources */,
 				8ACC664B2A542F4D00C9B66A /* Netflix.swift in Sources */,
+				8A086CF02AA222C400C969FD /* extensionBundle.swift in Sources */,
 				8ACC66492A541CB800C9B66A /* User.swift in Sources */,
 				8A7E22CA2A835358007902D7 /* popularMovieView.swift in Sources */,
 				8A24D0A82A70C6AB00A61006 /* reviewPopup.swift in Sources */,
