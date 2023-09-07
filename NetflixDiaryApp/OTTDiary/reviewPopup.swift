@@ -17,6 +17,7 @@ class reviewPopup: UIViewController, UITextViewDelegate{
     
     var is_text_edit: Bool = false
     
+    
     lazy var review_view: UITextView = {
         
         let text = UITextView()
