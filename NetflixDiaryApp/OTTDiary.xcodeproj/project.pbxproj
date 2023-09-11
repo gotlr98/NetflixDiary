@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8A086CF02AA222C400C969FD /* extensionBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A086CEF2AA222C400C969FD /* extensionBundle.swift */; };
+		8A2495622AAEB01400E5A93D /* Api_Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8A87F8902AA9CF7000F9C27C /* Api_Key.plist */; };
 		8A24D0A62A6A70DB00A61006 /* reviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A24D0A52A6A70DB00A61006 /* reviewCell.swift */; };
 		8A24D0A82A70C6AB00A61006 /* reviewPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A24D0A72A70C6AB00A61006 /* reviewPopup.swift */; };
 		8A3FD6152A4C1061005D94B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3FD6142A4C1061005D94B9 /* AppDelegate.swift */; };
@@ -25,7 +26,6 @@
 		8A6831CB2A5ADFCD00CC81F4 /* ImageSlideshow/Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 8A6831CA2A5ADFCD00CC81F4 /* ImageSlideshow/Kingfisher */; };
 		8A7E22CA2A835358007902D7 /* popularMovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7E22C92A835358007902D7 /* popularMovieView.swift */; };
 		8A7E22CC2A837586007902D7 /* popularMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7E22CB2A837586007902D7 /* popularMovieCell.swift */; };
-		8A87F8912AA9CF7000F9C27C /* Api_Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8A87F8902AA9CF7000F9C27C /* Api_Key.plist */; };
 		8ACC66442A541B4600C9B66A /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 8ACC66432A541B4600C9B66A /* Realm */; };
 		8ACC66462A541B4600C9B66A /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8ACC66452A541B4600C9B66A /* RealmSwift */; };
 		8ACC66492A541CB800C9B66A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACC66482A541CB800C9B66A /* User.swift */; };
@@ -50,6 +50,7 @@
 		8A3FD6322A4D42D3005D94B9 /* ThirdTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdTabBar.swift; sourceTree = "<group>"; };
 		8A3FD6372A4D5771005D94B9 /* netflix.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = netflix.json; sourceTree = "<group>"; };
 		8A3FD6392A4D57C0005D94B9 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
+		8A613E142AAAB2E1009BFD1E /* OTTDiary.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OTTDiary.entitlements; sourceTree = "<group>"; };
 		8A7E22C92A835358007902D7 /* popularMovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = popularMovieView.swift; sourceTree = "<group>"; };
 		8A7E22CB2A837586007902D7 /* popularMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = popularMovieCell.swift; sourceTree = "<group>"; };
 		8A87F8902AA9CF7000F9C27C /* Api_Key.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Api_Key.plist; sourceTree = "<group>"; };
@@ -94,6 +95,7 @@
 		8A3FD6132A4C1061005D94B9 /* OTTDiary */ = {
 			isa = PBXGroup;
 			children = (
+				8A613E142AAAB2E1009BFD1E /* OTTDiary.entitlements */,
 				8ACC66472A541C9F00C9B66A /* Database */,
 				8A3FD6142A4C1061005D94B9 /* AppDelegate.swift */,
 				8A3FD6162A4C1061005D94B9 /* SceneDelegate.swift */,
@@ -197,9 +199,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A2495622AAEB01400E5A93D /* Api_Key.plist in Resources */,
 				8A3FD6212A4C1062005D94B9 /* LaunchScreen.storyboard in Resources */,
 				8A3FD61E2A4C1062005D94B9 /* Assets.xcassets in Resources */,
-				8A87F8912AA9CF7000F9C27C /* Api_Key.plist in Resources */,
 				8A3FD6382A4D5771005D94B9 /* netflix.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -365,11 +367,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = OTTDiary/OTTDiary.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JNYZF4BBNC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OTTDiary/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OTTDiary;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -379,11 +383,14 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = sik.NetflixDiaryApp;
+				PRODUCT_BUNDLE_IDENTIFIER = sik.OTTDiaryApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -392,11 +399,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = OTTDiary/OTTDiary.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JNYZF4BBNC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OTTDiary/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OTTDiary;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -406,11 +415,14 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = sik.NetflixDiaryApp;
+				PRODUCT_BUNDLE_IDENTIFIER = sik.OTTDiaryApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
