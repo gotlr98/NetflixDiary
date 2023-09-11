@@ -32,6 +32,7 @@
 		8ACC664B2A542F4D00C9B66A /* Netflix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACC664A2A542F4D00C9B66A /* Netflix.swift */; };
 		8ACC66502A554B9E00C9B66A /* writeReviewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACC664F2A554B9E00C9B66A /* writeReviewModal.swift */; };
 		8ACC66522A56954C00C9B66A /* searchMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACC66512A56954C00C9B66A /* searchMovie.swift */; };
+		8ACD0DA62AAEBAA2008DF086 /* Api_Key.plist in Sources */ = {isa = PBXBuildFile; fileRef = 8A87F8902AA9CF7000F9C27C /* Api_Key.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -213,6 +214,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8ACD0DA62AAEBAA2008DF086 /* Api_Key.plist in Sources */,
 				8A7E22CC2A837586007902D7 /* popularMovieCell.swift in Sources */,
 				8A3FD6312A4D393A005D94B9 /* SecondTabBar.swift in Sources */,
 				8ACC66502A554B9E00C9B66A /* writeReviewModal.swift in Sources */,
