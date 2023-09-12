@@ -1,18 +1,42 @@
-## OTTDiary
+#  🛸OTTDiary App🛸
 
-<h1 align="center">
-  <img width="200" src="https://user-images.githubusercontent.com/71820857/267261559-74bf17ce-0e0b-43b8-8ea8-826003d8d8bf.png"/>
+#### 다양한 OTT플랫폼의 작품들을 검색하고 리뷰를 작성할 수 있습니다.
 
 
-  OTTDiary App<br>
-  <p align="center">
-    
-  </p>
-</h1>
+## 1. 앱 소개
 
-<img width="387" alt="image" src="https://github.com/gotlr98/NetflixDiary/assets/71820857/2f4c5f56-5426-48b7-afc6-3426c0386dd8">
 
-![image](https://github.com/gotlr98/NetflixDiary/assets/71820857/0826959c-bb76-4a37-a426-117df9460f4e)
+### 기술 스택
+------------------------------------
+<div>
+<img src="https://img.shields.io/badge/swift-#F05138?style=for-the-badge&logo=swift&logoColor=white">
+<img src="https://img.shields.io/badge/realm-#39477F?style=for-the-badge&logo=realm&logoColor=white">
+<img src="https://img.shields.io/badge/themoviedatabase-#01B4E4?style=for-the-badge&logo=themoviedatabase&logoColor=white">
+
+</div>
+   
+### 앱 화면 
+------------------------
+* 로딩 화면    
+
+
+
+
+## 4. 깃 커밋 규칙
+> ### 커밋 유형
+> + FEAT : 새로운 기능 추가
+> + FIX : 버그 수정
+> + DOCS : 문서 수정
+> + REFACTOR : 코드 리팩토링
+> + TEST : 테스트 코드 추가
+### 1. 커밋 유형 지정
+### 2. 제목 행을 50자로 제한
+### 3. 제목 행의 첫글자는 대문자로 시작
+### 4. 제목 행에 명령문을 사용한다.   
+   
+
+
+
 
 
 
