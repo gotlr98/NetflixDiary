@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A02AA0C2AB0145000C1FACC /* Api_Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8A02AA0B2AB0145000C1FACC /* Api_Key.plist */; };
 		8A086CF02AA222C400C969FD /* extensionBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A086CEF2AA222C400C969FD /* extensionBundle.swift */; };
 		8A24D0A62A6A70DB00A61006 /* reviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A24D0A52A6A70DB00A61006 /* reviewCell.swift */; };
 		8A24D0A82A70C6AB00A61006 /* reviewPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A24D0A72A70C6AB00A61006 /* reviewPopup.swift */; };
@@ -31,10 +32,10 @@
 		8ACC664B2A542F4D00C9B66A /* Netflix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACC664A2A542F4D00C9B66A /* Netflix.swift */; };
 		8ACC66502A554B9E00C9B66A /* writeReviewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACC664F2A554B9E00C9B66A /* writeReviewModal.swift */; };
 		8ACC66522A56954C00C9B66A /* searchMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACC66512A56954C00C9B66A /* searchMovie.swift */; };
-		8ACD0DA82AAEBC2F008DF086 /* Api_Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8ACD0DA72AAEBC2F008DF086 /* Api_Key.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8A02AA0B2AB0145000C1FACC /* Api_Key.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Api_Key.plist; sourceTree = "<group>"; };
 		8A086CEF2AA222C400C969FD /* extensionBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensionBundle.swift; sourceTree = "<group>"; };
 		8A24D0A52A6A70DB00A61006 /* reviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reviewCell.swift; sourceTree = "<group>"; };
 		8A24D0A72A70C6AB00A61006 /* reviewPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reviewPopup.swift; sourceTree = "<group>"; };
@@ -57,7 +58,6 @@
 		8ACC664A2A542F4D00C9B66A /* Netflix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Netflix.swift; sourceTree = "<group>"; };
 		8ACC664F2A554B9E00C9B66A /* writeReviewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = writeReviewModal.swift; sourceTree = "<group>"; };
 		8ACC66512A56954C00C9B66A /* searchMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = searchMovie.swift; sourceTree = "<group>"; };
-		8ACD0DA72AAEBC2F008DF086 /* Api_Key.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Api_Key.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +79,7 @@
 		8A3FD6082A4C1061005D94B9 = {
 			isa = PBXGroup;
 			children = (
+				8A02AA0B2AB0145000C1FACC /* Api_Key.plist */,
 				8A3FD6132A4C1061005D94B9 /* OTTDiary */,
 				8A3FD6122A4C1061005D94B9 /* Products */,
 			);
@@ -95,7 +96,6 @@
 		8A3FD6132A4C1061005D94B9 /* OTTDiary */ = {
 			isa = PBXGroup;
 			children = (
-				8ACD0DA72AAEBC2F008DF086 /* Api_Key.plist */,
 				8A613E142AAAB2E1009BFD1E /* OTTDiary.entitlements */,
 				8ACC66472A541C9F00C9B66A /* Database */,
 				8A3FD6142A4C1061005D94B9 /* AppDelegate.swift */,
@@ -200,7 +200,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A3FD6212A4C1062005D94B9 /* LaunchScreen.storyboard in Resources */,
-				8ACD0DA82AAEBC2F008DF086 /* Api_Key.plist in Resources */,
+				8A02AA0C2AB0145000C1FACC /* Api_Key.plist in Resources */,
 				8A3FD61E2A4C1062005D94B9 /* Assets.xcassets in Resources */,
 				8A3FD6382A4D5771005D94B9 /* netflix.json in Resources */,
 			);
