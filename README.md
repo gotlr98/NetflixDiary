@@ -1,7 +1,7 @@
 ## OTTDiary
 
 <h1 align="center">
-  ![netflix_logo](https://github.com/gotlr98/OTTDiary/assets/71820857/954da7b8-0e22-437f-9d38-155189d2deef)
+  <img width="200" src="https://user-images.githubusercontent.com/71820857/267261559-74bf17ce-0e0b-43b8-8ea8-826003d8d8bf.png"/>
 
 
   OTTDiary App<br>
