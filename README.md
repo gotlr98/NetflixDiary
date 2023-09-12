@@ -9,7 +9,7 @@
 ### 기술 스택
 ------------------------------------
 <div>
-<img src="https://img.shields.io/badge/swift-#F05138?style=for-the-badge&logo=swift&logoColor=white">
+<img src="https://img.shields.io/badge/Swift-#F05138?style=for-the-badge&logo=Swift&logoColor=white">
 <img src="https://img.shields.io/badge/realm-#39477F?style=for-the-badge&logo=realm&logoColor=white">
 <img src="https://img.shields.io/badge/themoviedatabase-#01B4E4?style=for-the-badge&logo=themoviedatabase&logoColor=white">
 
