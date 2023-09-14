@@ -9,9 +9,9 @@
 ### 기술 스택
 ------------------------------------
 <div>
-<img src="https://img.shields.io/badge/Swift-#F05138?style=flat-square&logo=swift&logoColor=white"/>
-<img src="https://img.shields.io/badge/realm-#39477F?style=flat-square&logo=realm&logoColor=white"/>
-<img src="https://img.shields.io/badge/themoviedatabase-#01B4E4?style=flat-square&logo=themoviedatabase&logoColor=white"/>
+<img src="https://img.shields.io/badge/Swift-F05138?style=flat-square&logo=swift&logoColor=white"/>
+<img src="https://img.shields.io/badge/realm-39477F?style=flat-square&logo=realm&logoColor=white"/>
+<img src="https://img.shields.io/badge/themoviedatabase-01B4E4?style=flat-square&logo=themoviedatabase&logoColor=white"/>
 
 </div>
    
