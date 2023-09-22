@@ -18,6 +18,12 @@ protocol SendDataDelegate: AnyObject {
 
 class writeReviewModal: UIViewController{
     
+    
+    let scrollView = UIScrollView()
+    let contentView = UIView()
+    let registerBtn: UIButton = .init(frame: .init())
+    let searchButton: UIButton = .init(frame: .init())
+    
     var searchTextField: UITextField!
     var reviewField: UITextView!
     var delegate: SendDataDelegate?
@@ -32,7 +38,6 @@ class writeReviewModal: UIViewController{
     
     var titleLabel = UILabel()
     
-    var searchButton: UIButton = .init(frame: .init())
     
     lazy var imageScrollView = UIScrollView()
     let imagePageControl = UIPageControl()
@@ -41,163 +46,19 @@ class writeReviewModal: UIViewController{
     var picker: UIPickerView!
     var select = ["movie", "tv"]
     
+    
+    
     override func viewDidLoad() {
 //        self.view.backgroundColor = .gray
         
-        let scrollView = UIScrollView()
+        setScrollView()
         
-        scrollView.showsVerticalScrollIndicator = true
-        scrollView.isDirectionalLockEnabled = true
-        
-        self.hideKeyboard()
+        setUIBeforeSearch()
         
         
-        let contentView = UIView()
-        
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        
-        self.view.addSubview(scrollView)
-        scrollView.addSubview(contentView)
-        
-        contentView.backgroundColor = .white
-        
-        NSLayoutConstraint.activate([
-            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        ])
-        
-        NSLayoutConstraint.activate([
-            contentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
-            contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor)
-        ])
-        
-        contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-        
-        let contentViewHeight = contentView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor)
-        contentViewHeight.priority = .defaultLow
-        contentViewHeight.isActive = true
-        
-        let registerBtn: UIButton = .init(frame: .init())
-        
-        
-        registerBtn.backgroundColor = .orange
-        
-        registerBtn.setTitle("등록하기", for: .normal)
-        registerBtn.addTarget(self, action: #selector(sendReview), for: .touchUpInside)
-        
-        contentView.addSubview(registerBtn)
-        registerBtn.translatesAutoresizingMaskIntoConstraints = false
-        registerBtn.widthAnchor.constraint(equalToConstant: 120).isActive = true
-        registerBtn.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        registerBtn.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20).isActive = true
-        registerBtn.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        
-        picker = UIPickerView()
-        
-        
-        contentView.addSubview(picker)
-        
-        picker.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            picker.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
-            picker.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            picker.widthAnchor.constraint(equalToConstant: 200),
-            picker.heightAnchor.constraint(equalToConstant: 80)
-        ])
-        
-        picker.delegate = self
-        picker.dataSource = self
-        
-        searchTextField = .init(frame: .init())
-        
-        searchTextField.attributedPlaceholder = NSAttributedString(
-            string: "검색할 작품을 입력해주세요",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.black]
-        )
-        searchTextField.font = UIFont.systemFont(ofSize: 20)
-        searchTextField.borderStyle = .line
-        searchTextField.autocorrectionType = .no
-        searchTextField.keyboardType = .default
-        searchTextField.textColor = .black
-        searchTextField.returnKeyType = .done
-        searchTextField.autocapitalizationType = .none
-        
-        searchTextField.layer.borderWidth = 1.0
-        searchTextField.layer.borderColor = UIColor.black.cgColor
-        
-        contentView.addSubview(searchTextField)
-        searchTextField.translatesAutoresizingMaskIntoConstraints = false
-        searchTextField.widthAnchor.constraint(equalToConstant: 250).isActive = true
-        searchTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
-        searchTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 90).isActive = true
-        searchTextField.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20).isActive = true
-        
-        let searchButton: UIButton = .init(frame: .init())
-        
-        
-        searchButton.backgroundColor = .orange
-        
-        contentView.addSubview(searchButton)
-        searchButton.translatesAutoresizingMaskIntoConstraints = false
-        searchButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        searchButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        searchButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 90).isActive = true
-        searchButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20).isActive = true
-        searchButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
-        searchButton.addTarget(self, action: #selector(search), for: .touchUpInside)
-
-
         if is_search{
             
-            contentView.addSubview(image)
-            image.translatesAutoresizingMaskIntoConstraints = false
-            image.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 160).isActive = true
-            image.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-            image.heightAnchor.constraint(equalToConstant: 170).isActive = true
-            image.widthAnchor.constraint(equalToConstant: 200).isActive = true
-
-            image.kf.setImage(
-                with: URL(string: title_url[select_title]!),
-                placeholder: nil
-            )
-            
-            contentView.addSubview(titleLabel)
-            
-            titleLabel.text = "제목: " + self.select_title
-            
-            titleLabel.translatesAutoresizingMaskIntoConstraints = false
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 400).isActive = true
-//            titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 40).isActive = true
-            titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-            titleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
-            
-            
-            reviewField = .init(frame: .init())
-            
-            reviewField.font = UIFont.systemFont(ofSize: 20)
-            reviewField.autocorrectionType = .no
-            reviewField.backgroundColor = .white
-            reviewField.keyboardType = .default
-            reviewField.returnKeyType = .done
-            reviewField.textColor = .black
-            reviewField.autocapitalizationType = .none
-            reviewField.layer.borderWidth = 1.0
-            reviewField.layer.borderColor = UIColor.red.cgColor
-            
-            contentView.addSubview(reviewField)
-            reviewField.translatesAutoresizingMaskIntoConstraints = false
-            reviewField.widthAnchor.constraint(equalToConstant: 300).isActive = true
-            reviewField.heightAnchor.constraint(equalToConstant: 200).isActive = true
-            
-            reviewField.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-            reviewField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -150).isActive = true
+            setUIAfterSearch()
         }
 
     }
@@ -287,6 +148,42 @@ class writeReviewModal: UIViewController{
         }
         self.isButtonClicked = true
         
+    }
+    
+    func setScrollView(){
+        
+        scrollView.showsVerticalScrollIndicator = true
+        scrollView.isDirectionalLockEnabled = true
+        
+        self.hideKeyboard()
+        
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        
+        contentView.backgroundColor = .white
+        
+        NSLayoutConstraint.activate([
+            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            contentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
+            contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor)
+        ])
+        
+        contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+        
+        let contentViewHeight = contentView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor)
+        contentViewHeight.priority = .defaultLow
+        contentViewHeight.isActive = true
     }
     
     func searchPopularMovie(name: String) async {
@@ -395,6 +292,129 @@ class writeReviewModal: UIViewController{
             })
             dataTask.resume()
         
+    }
+    
+    func setUIBeforeSearch(){
+        registerBtn.backgroundColor = .orange
+        
+        registerBtn.setTitle("등록하기", for: .normal)
+        registerBtn.addTarget(self, action: #selector(sendReview), for: .touchUpInside)
+        
+        contentView.addSubview(registerBtn)
+        registerBtn.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            registerBtn.widthAnchor.constraint(equalToConstant: 120),
+            registerBtn.heightAnchor.constraint(equalToConstant: 40),
+            registerBtn.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
+            registerBtn.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
+        ])
+        
+        
+        picker = UIPickerView()
+        
+        contentView.addSubview(picker)
+        
+        picker.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            picker.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
+            picker.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            picker.widthAnchor.constraint(equalToConstant: 200),
+            picker.heightAnchor.constraint(equalToConstant: 80)
+        ])
+        
+        picker.delegate = self
+        picker.dataSource = self
+        
+        searchTextField = .init(frame: .init())
+        
+        searchTextField.attributedPlaceholder = NSAttributedString(
+            string: "검색할 작품을 입력해주세요",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.black]
+        )
+        searchTextField.font = UIFont.systemFont(ofSize: 20)
+        searchTextField.borderStyle = .line
+        searchTextField.autocorrectionType = .no
+        searchTextField.keyboardType = .default
+        searchTextField.textColor = .black
+        searchTextField.returnKeyType = .done
+        searchTextField.autocapitalizationType = .none
+        
+        searchTextField.layer.borderWidth = 1.0
+        searchTextField.layer.borderColor = UIColor.black.cgColor
+        
+        contentView.addSubview(searchTextField)
+        searchTextField.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            searchTextField.widthAnchor.constraint(equalToConstant: 250),
+            searchTextField.heightAnchor.constraint(equalToConstant: 50),
+            
+            searchTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 90),
+            searchTextField.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20)
+        ])
+        
+        
+        searchButton.backgroundColor = .orange
+        
+        contentView.addSubview(searchButton)
+        searchButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            searchButton.widthAnchor.constraint(equalToConstant: 50),
+            searchButton.heightAnchor.constraint(equalToConstant: 50),
+            searchButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 90),
+            searchButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20)
+        ])
+        
+        searchButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+        searchButton.addTarget(self, action: #selector(search), for: .touchUpInside)
+    }
+    
+    func setUIAfterSearch(){
+        contentView.addSubview(image)
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 160).isActive = true
+        image.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        image.heightAnchor.constraint(equalToConstant: 170).isActive = true
+        image.widthAnchor.constraint(equalToConstant: 200).isActive = true
+
+        image.kf.setImage(
+            with: URL(string: title_url[select_title]!),
+            placeholder: nil
+        )
+        
+        contentView.addSubview(titleLabel)
+        
+        titleLabel.text = "제목: " + self.select_title
+        
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 400).isActive = true
+//            titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 40).isActive = true
+        titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        titleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        
+        reviewField = .init(frame: .init())
+        
+        reviewField.font = UIFont.systemFont(ofSize: 20)
+        reviewField.autocorrectionType = .no
+        reviewField.backgroundColor = .white
+        reviewField.keyboardType = .default
+        reviewField.returnKeyType = .done
+        reviewField.textColor = .black
+        reviewField.autocapitalizationType = .none
+        reviewField.layer.borderWidth = 1.0
+        reviewField.layer.borderColor = UIColor.red.cgColor
+        
+        contentView.addSubview(reviewField)
+        reviewField.translatesAutoresizingMaskIntoConstraints = false
+        reviewField.widthAnchor.constraint(equalToConstant: 300).isActive = true
+        reviewField.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        
+        reviewField.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        reviewField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -150).isActive = true
     }
 
 }

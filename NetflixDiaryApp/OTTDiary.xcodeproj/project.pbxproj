@@ -24,7 +24,6 @@
 		8A3FD63A2A4D57C0005D94B9 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3FD6392A4D57C0005D94B9 /* StartView.swift */; };
 		8A6831C92A5ADFCD00CC81F4 /* ImageSlideshow in Frameworks */ = {isa = PBXBuildFile; productRef = 8A6831C82A5ADFCD00CC81F4 /* ImageSlideshow */; };
 		8A6831CB2A5ADFCD00CC81F4 /* ImageSlideshow/Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 8A6831CA2A5ADFCD00CC81F4 /* ImageSlideshow/Kingfisher */; };
-		8A7E22CA2A835358007902D7 /* popularMovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7E22C92A835358007902D7 /* popularMovieView.swift */; };
 		8A7E22CC2A837586007902D7 /* popularMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7E22CB2A837586007902D7 /* popularMovieCell.swift */; };
 		8ACC66442A541B4600C9B66A /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 8ACC66432A541B4600C9B66A /* Realm */; };
 		8ACC66462A541B4600C9B66A /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8ACC66452A541B4600C9B66A /* RealmSwift */; };
@@ -52,7 +51,6 @@
 		8A3FD6372A4D5771005D94B9 /* netflix.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = netflix.json; sourceTree = "<group>"; };
 		8A3FD6392A4D57C0005D94B9 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		8A613E142AAAB2E1009BFD1E /* OTTDiary.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OTTDiary.entitlements; sourceTree = "<group>"; };
-		8A7E22C92A835358007902D7 /* popularMovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = popularMovieView.swift; sourceTree = "<group>"; };
 		8A7E22CB2A837586007902D7 /* popularMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = popularMovieCell.swift; sourceTree = "<group>"; };
 		8ACC66482A541CB800C9B66A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8ACC664A2A542F4D00C9B66A /* Netflix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Netflix.swift; sourceTree = "<group>"; };
@@ -96,28 +94,51 @@
 		8A3FD6132A4C1061005D94B9 /* OTTDiary */ = {
 			isa = PBXGroup;
 			children = (
+				8A9F9BAD2ABD6BFA00C9EEDF /* Helper */,
+				8A9F9BAC2ABD6BDD00C9EEDF /* Cell */,
+				8A9F9BAB2ABD6BD200C9EEDF /* View */,
 				8A613E142AAAB2E1009BFD1E /* OTTDiary.entitlements */,
 				8ACC66472A541C9F00C9B66A /* Database */,
-				8A3FD6142A4C1061005D94B9 /* AppDelegate.swift */,
-				8A3FD6162A4C1061005D94B9 /* SceneDelegate.swift */,
-				8A3FD6182A4C1061005D94B9 /* ViewController.swift */,
-				8A3FD61D2A4C1062005D94B9 /* Assets.xcassets */,
-				8A3FD61F2A4C1062005D94B9 /* LaunchScreen.storyboard */,
-				8A3FD6222A4C1062005D94B9 /* Info.plist */,
+			);
+			path = OTTDiary;
+			sourceTree = "<group>";
+		};
+		8A9F9BAB2ABD6BD200C9EEDF /* View */ = {
+			isa = PBXGroup;
+			children = (
 				8A3FD62E2A4D3935005D94B9 /* FirstTabBar.swift */,
 				8A3FD6302A4D393A005D94B9 /* SecondTabBar.swift */,
 				8A3FD6322A4D42D3005D94B9 /* ThirdTabBar.swift */,
-				8A3FD6372A4D5771005D94B9 /* netflix.json */,
 				8A3FD6392A4D57C0005D94B9 /* StartView.swift */,
 				8ACC664F2A554B9E00C9B66A /* writeReviewModal.swift */,
 				8ACC66512A56954C00C9B66A /* searchMovie.swift */,
-				8A24D0A52A6A70DB00A61006 /* reviewCell.swift */,
 				8A24D0A72A70C6AB00A61006 /* reviewPopup.swift */,
-				8A7E22C92A835358007902D7 /* popularMovieView.swift */,
-				8A7E22CB2A837586007902D7 /* popularMovieCell.swift */,
-				8A086CEF2AA222C400C969FD /* extensionBundle.swift */,
 			);
-			path = OTTDiary;
+			path = View;
+			sourceTree = "<group>";
+		};
+		8A9F9BAC2ABD6BDD00C9EEDF /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				8A24D0A52A6A70DB00A61006 /* reviewCell.swift */,
+				8A7E22CB2A837586007902D7 /* popularMovieCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		8A9F9BAD2ABD6BFA00C9EEDF /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				8A3FD6142A4C1061005D94B9 /* AppDelegate.swift */,
+				8A3FD6162A4C1061005D94B9 /* SceneDelegate.swift */,
+				8A3FD61D2A4C1062005D94B9 /* Assets.xcassets */,
+				8A3FD61F2A4C1062005D94B9 /* LaunchScreen.storyboard */,
+				8A3FD6222A4C1062005D94B9 /* Info.plist */,
+				8A3FD6372A4D5771005D94B9 /* netflix.json */,
+				8A086CEF2AA222C400C969FD /* extensionBundle.swift */,
+				8A3FD6182A4C1061005D94B9 /* ViewController.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		8ACC66472A541C9F00C9B66A /* Database */ = {
@@ -222,7 +243,6 @@
 				8ACC664B2A542F4D00C9B66A /* Netflix.swift in Sources */,
 				8A086CF02AA222C400C969FD /* extensionBundle.swift in Sources */,
 				8ACC66492A541CB800C9B66A /* User.swift in Sources */,
-				8A7E22CA2A835358007902D7 /* popularMovieView.swift in Sources */,
 				8A24D0A82A70C6AB00A61006 /* reviewPopup.swift in Sources */,
 				8A3FD6172A4C1061005D94B9 /* SceneDelegate.swift in Sources */,
 				8A3FD6332A4D42D3005D94B9 /* ThirdTabBar.swift in Sources */,
@@ -373,7 +393,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JNYZF4BBNC;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = OTTDiary/Info.plist;
+				INFOPLIST_FILE = OTTDiary/Helper/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = OTTDiary;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -405,7 +425,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JNYZF4BBNC;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = OTTDiary/Info.plist;
+				INFOPLIST_FILE = OTTDiary/Helper/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = OTTDiary;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

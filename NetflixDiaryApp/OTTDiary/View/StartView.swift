@@ -71,7 +71,12 @@ class StartView: UIViewController{
     
     override func viewDidAppear(_ animated: Bool) {
         
+        setAnimation()
         
+    
+    }
+    
+    func setAnimation(){
         let animationView: LottieAnimationView = .init(name: "netflix")
         self.view.addSubview(animationView)
         
@@ -87,7 +92,6 @@ class StartView: UIViewController{
             
             self.navigationController?.pushViewController(ViewController(), animated: false)
         }
-    
     }
     
     

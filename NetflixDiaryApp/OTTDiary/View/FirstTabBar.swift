@@ -44,10 +44,12 @@ class FirstTabBar: UIViewController{
     var img_url: String = ""
     var review: String = ""
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.table.backgroundColor = .white
+        
         
         navigationController?.navigationBar.prefersLargeTitles = true
         
@@ -63,22 +65,7 @@ class FirstTabBar: UIViewController{
                   object: nil
               )
         
-        table.delegate = self
-        table.dataSource = self
-        
-        table.register(reviewCell.self, forCellReuseIdentifier: reviewCell.cell)
-        
-        view.addSubview(table)
-        table.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            table.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            table.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            table.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            table.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
-        ])
-        
-        table.rowHeight = 60
+        setTable()
 
         
     }
@@ -97,29 +84,14 @@ class FirstTabBar: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         
-        let refresh = UIRefreshControl()
+//        let refresh = UIRefreshControl()
 
-        refresh.addTarget(self, action: #selector(getData), for: .valueChanged)
+//        refresh.addTarget(self, action: #selector(getData), for: .valueChanged)
         
-        self.table.refreshControl = refresh
+//        self.table.refreshControl = refresh
         
-        let navigationTitle = UILabel()
         
-        navigationTitle.text = "나의 리뷰"
-        navigationTitle.font = UIFont.systemFont(ofSize: 20)
-        navigationTitle.textAlignment = .left
-        
-        self.navigationItem.titleView = navigationTitle
-
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "추가하기", image: UIImage(systemName: "plus"), target: nil, action: nil)
-
-        self.navigationItem.rightBarButtonItem!.menu = UIMenu(children: [
-                        UIAction(title: "리뷰쓰기", attributes: .destructive, handler: { _ in
-
-                            self.navigationController?.pushViewController(writeReviewModal(), animated: true)
-                        })
-                    ])
-
+        setNavigation()
 
 
         let net = User().get_user_net()
@@ -140,14 +112,14 @@ class FirstTabBar: UIViewController{
         self.navigationController?.pushViewController(writeReviewModal(), animated: true)
     }
     
-    @objc func getData(){
-        
-        print("refresh")
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.table.refreshControl?.endRefreshing()
-        }
-    }
+//    @objc func getData(){
+//
+//        print("refresh")
+//
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+//            self.table.refreshControl?.endRefreshing()
+//        }
+//    }
     
     override func viewWillDisappear(_ animated: Bool) {
                 
@@ -327,6 +299,46 @@ class FirstTabBar: UIViewController{
         
         
         
+    }
+    
+    func setNavigation(){
+        let navigationTitle = UILabel()
+        
+        navigationTitle.text = "나의 리뷰"
+        navigationTitle.font = UIFont.systemFont(ofSize: 20)
+        navigationTitle.textAlignment = .left
+        
+        self.navigationItem.titleView = navigationTitle
+
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "추가하기", image: UIImage(systemName: "plus"), target: nil, action: nil)
+
+        self.navigationItem.rightBarButtonItem!.menu = UIMenu(children: [
+                        UIAction(title: "리뷰쓰기", attributes: .destructive, handler: { _ in
+
+                            self.navigationController?.pushViewController(writeReviewModal(), animated: true)
+                        })
+                    ])
+    }
+    
+    func setTable(){
+        self.table.backgroundColor = .white
+        
+        table.delegate = self
+        table.dataSource = self
+        
+        table.register(reviewCell.self, forCellReuseIdentifier: reviewCell.cell)
+        
+        view.addSubview(table)
+        table.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            table.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            table.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            table.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            table.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+        ])
+        
+        table.rowHeight = 60
     }
     
     

@@ -11,6 +11,10 @@ import UIKit
 
 class reviewPopup: UIViewController, UITextViewDelegate{
     
+    let title_label = UILabel()
+    let image = UIImageView()
+    let editBtn: UIButton = .init(frame: .init())
+    
     var movie_title: String
     var img_url: String
     var review: String
@@ -43,6 +47,7 @@ class reviewPopup: UIViewController, UITextViewDelegate{
         super.init(coder: aDecoder)
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,69 +56,9 @@ class reviewPopup: UIViewController, UITextViewDelegate{
         
         self.hideKeyboard()
         
-        let title_label = UILabel()
         
-        self.view.addSubview(title_label)
+        setPopup()
         
-        
-        title_label.text = "' " + movie_title + " ' " + "리뷰: "
-        title_label.translatesAutoresizingMaskIntoConstraints = false
-        title_label.textColor = .black
-        
-        
-        let image = UIImageView()
-        
-        self.view.addSubview(image)
-        
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 100).isActive = true
-        image.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        image.heightAnchor.constraint(equalToConstant: 200).isActive = true
-        image.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        
-        image.kf.setImage(
-            with: URL(string: img_url),
-            placeholder: nil
-        )
-        
-        title_label.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 10).isActive = true
-        title_label.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        title_label.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        title_label.widthAnchor.constraint(equalToConstant: 300).isActive = true
-
-        
-        self.view.addSubview(review_view)
-        
-        review_view.text = self.review
-        review_view.textColor = .black
-        review_view.font = UIFont(name: "Callout", size: 50)
-        review_view.backgroundColor = .white
-        
-        review_view.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 20).isActive = true
-        review_view.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        review_view.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        review_view.heightAnchor.constraint(equalToConstant: 200).isActive = true
-        
-        review_view.delegate = self
-        
-        review_view.textStorage.delegate = self
-        
-        
-        let editBtn: UIButton = .init(frame: .init())
-        
-        
-        editBtn.backgroundColor = .orange
-        
-        self.view.addSubview(editBtn)
-        
-        editBtn.setTitle("수정하기", for: .normal)
-        
-        editBtn.translatesAutoresizingMaskIntoConstraints = false
-        editBtn.widthAnchor.constraint(equalToConstant: 120).isActive = true
-        editBtn.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        editBtn.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20).isActive = true
-        editBtn.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        editBtn.addTarget(self, action: #selector(edit), for: .touchUpInside)
     }
     
     @objc func edit(){
@@ -136,10 +81,80 @@ class reviewPopup: UIViewController, UITextViewDelegate{
         NotificationCenter.default.post(name: NSNotification.Name("DismissModal"), object: nil, userInfo: nil)
     }
     
-//    func textViewDidChange(textView: UITextView) { //Handle the text changes here
-//        print(textView.text)
-//        is_text_edit = true
-//    }
+    func setPopup(){
+        self.view.addSubview(title_label)
+        
+        
+        title_label.text = "' " + movie_title + " ' " + "리뷰: "
+        title_label.translatesAutoresizingMaskIntoConstraints = false
+        title_label.textColor = .black
+        
+        
+        
+        
+        self.view.addSubview(image)
+        
+        image.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            image.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 100),
+            image.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            image.heightAnchor.constraint(equalToConstant: 200),
+            image.widthAnchor.constraint(equalToConstant: 200)
+        ])
+        
+        image.kf.setImage(
+            with: URL(string: img_url),
+            placeholder: nil
+        )
+        
+        NSLayoutConstraint.activate([
+            title_label.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 10),
+            title_label.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            title_label.heightAnchor.constraint(equalToConstant: 100),
+            title_label.widthAnchor.constraint(equalToConstant: 300)
+        ])
+        
+        
+        
+        self.view.addSubview(review_view)
+        
+        review_view.text = self.review
+        review_view.textColor = .black
+        review_view.font = UIFont(name: "Callout", size: 50)
+        review_view.backgroundColor = .white
+        
+        NSLayoutConstraint.activate([
+            review_view.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 20),
+            review_view.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            review_view.widthAnchor.constraint(equalToConstant: 200),
+            review_view.heightAnchor.constraint(equalToConstant: 200)
+        ])
+        
+        
+        
+        review_view.delegate = self
+        
+        review_view.textStorage.delegate = self
+        
+        editBtn.backgroundColor = .orange
+        
+        self.view.addSubview(editBtn)
+        
+        editBtn.setTitle("수정하기", for: .normal)
+        
+        editBtn.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            editBtn.widthAnchor.constraint(equalToConstant: 120),
+            editBtn.heightAnchor.constraint(equalToConstant: 40),
+            editBtn.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20),
+            editBtn.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+        ])
+    
+        editBtn.addTarget(self, action: #selector(edit), for: .touchUpInside)
+    }
+
 }
 
 extension reviewPopup{
