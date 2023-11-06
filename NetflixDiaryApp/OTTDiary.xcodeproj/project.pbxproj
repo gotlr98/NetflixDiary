@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8A02AA0C2AB0145000C1FACC /* Api_Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8A02AA0B2AB0145000C1FACC /* Api_Key.plist */; };
 		8A086CF02AA222C400C969FD /* extensionBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A086CEF2AA222C400C969FD /* extensionBundle.swift */; };
 		8A24D0A62A6A70DB00A61006 /* reviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A24D0A52A6A70DB00A61006 /* reviewCell.swift */; };
 		8A24D0A82A70C6AB00A61006 /* reviewPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A24D0A72A70C6AB00A61006 /* reviewPopup.swift */; };
@@ -22,6 +21,7 @@
 		8A3FD6362A4D440E005D94B9 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 8A3FD6352A4D440E005D94B9 /* Lottie */; };
 		8A3FD6382A4D5771005D94B9 /* netflix.json in Resources */ = {isa = PBXBuildFile; fileRef = 8A3FD6372A4D5771005D94B9 /* netflix.json */; };
 		8A3FD63A2A4D57C0005D94B9 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3FD6392A4D57C0005D94B9 /* StartView.swift */; };
+		8A60F6852AF8975400EF2CCA /* Api_Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8A60F6842AF8975400EF2CCA /* Api_Key.plist */; };
 		8A6831C92A5ADFCD00CC81F4 /* ImageSlideshow in Frameworks */ = {isa = PBXBuildFile; productRef = 8A6831C82A5ADFCD00CC81F4 /* ImageSlideshow */; };
 		8A6831CB2A5ADFCD00CC81F4 /* ImageSlideshow/Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 8A6831CA2A5ADFCD00CC81F4 /* ImageSlideshow/Kingfisher */; };
 		8A7E22CC2A837586007902D7 /* popularMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7E22CB2A837586007902D7 /* popularMovieCell.swift */; };
@@ -34,7 +34,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8A02AA0B2AB0145000C1FACC /* Api_Key.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Api_Key.plist; sourceTree = "<group>"; };
 		8A086CEF2AA222C400C969FD /* extensionBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensionBundle.swift; sourceTree = "<group>"; };
 		8A24D0A52A6A70DB00A61006 /* reviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reviewCell.swift; sourceTree = "<group>"; };
 		8A24D0A72A70C6AB00A61006 /* reviewPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reviewPopup.swift; sourceTree = "<group>"; };
@@ -50,6 +49,7 @@
 		8A3FD6322A4D42D3005D94B9 /* ThirdTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdTabBar.swift; sourceTree = "<group>"; };
 		8A3FD6372A4D5771005D94B9 /* netflix.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = netflix.json; sourceTree = "<group>"; };
 		8A3FD6392A4D57C0005D94B9 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
+		8A60F6842AF8975400EF2CCA /* Api_Key.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Api_Key.plist; sourceTree = "<group>"; };
 		8A613E142AAAB2E1009BFD1E /* OTTDiary.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OTTDiary.entitlements; sourceTree = "<group>"; };
 		8A7E22CB2A837586007902D7 /* popularMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = popularMovieCell.swift; sourceTree = "<group>"; };
 		8ACC66482A541CB800C9B66A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -77,7 +77,7 @@
 		8A3FD6082A4C1061005D94B9 = {
 			isa = PBXGroup;
 			children = (
-				8A02AA0B2AB0145000C1FACC /* Api_Key.plist */,
+				8A60F6842AF8975400EF2CCA /* Api_Key.plist */,
 				8A3FD6132A4C1061005D94B9 /* OTTDiary */,
 				8A3FD6122A4C1061005D94B9 /* Products */,
 			);
@@ -221,7 +221,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A3FD6212A4C1062005D94B9 /* LaunchScreen.storyboard in Resources */,
-				8A02AA0C2AB0145000C1FACC /* Api_Key.plist in Resources */,
+				8A60F6852AF8975400EF2CCA /* Api_Key.plist in Resources */,
 				8A3FD61E2A4C1062005D94B9 /* Assets.xcassets in Resources */,
 				8A3FD6382A4D5771005D94B9 /* netflix.json in Resources */,
 			);
