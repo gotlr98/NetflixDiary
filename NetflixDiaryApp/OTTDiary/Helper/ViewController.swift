@@ -24,6 +24,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate {
         
         self.navigationItem.setHidesBackButton(true, animated: true)
         
+        setTabBarBackgroundColor()
 //        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "추가하기", image: UIImage(systemName: "plus"), target: nil, action: nil)
         
         
@@ -45,7 +46,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate {
         let firstTab = UINavigationController(rootViewController: FirstTabBar())
         let tabone = UITabBarItem(title: "home", image: UIImage(systemName: "house.fill"), tag: 1)
         firstTab.tabBarItem = tabone
-
+//        firstTab.view.backgroundColor = UIColor(named: "Background")
         
         
         let secondTab = UINavigationController(rootViewController: SecondTabBar())
@@ -88,6 +89,11 @@ class ViewController: UITabBarController, UITabBarControllerDelegate {
     @objc func rightClick(){
         self.navigationController?.pushViewController(writeReviewModal(), animated: true)
     }
+    
+    func setTabBarBackgroundColor() {
+            tabBar.barTintColor = .orange
+            tabBar.isTranslucent = false
+        }
 
 }
 

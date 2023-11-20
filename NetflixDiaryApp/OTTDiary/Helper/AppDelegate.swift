@@ -25,6 +25,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UINavigationBar.appearance().compactAppearance = navigationBarAppearance
             UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
             
+            let appearance = UITabBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            
+            //바꾸고 싶은 색으로 backgroundColor를 설정
+            UITabBar.appearance().backgroundColor = UIColor.orange
+                    
+            
         }
         
         

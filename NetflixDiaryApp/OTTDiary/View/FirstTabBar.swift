@@ -55,7 +55,7 @@ class FirstTabBar: UIViewController{
         
         findPopularMovie()
         findPopularTV()
-        
+                
 
         
         NotificationCenter.default.addObserver(
@@ -73,7 +73,7 @@ class FirstTabBar: UIViewController{
     init(){
         super.init(nibName: nil, bundle: nil)
         
-        self.view.backgroundColor = .white
+        
         
 //        self.tabBarItem = UITabBarItem(title: "home", image: UIImage(systemName: "house.fill"), tag: 1)
     }
