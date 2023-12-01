@@ -56,8 +56,6 @@ class FirstTabBar: UIViewController{
         findPopularMovie()
         findPopularTV()
                 
-
-        
         NotificationCenter.default.addObserver(
                   self,
                   selector: #selector(self.didDismissDetailNotification(_:)),
@@ -66,8 +64,6 @@ class FirstTabBar: UIViewController{
               )
         
         setTable()
-
-        
     }
     
     init(){
@@ -334,7 +330,7 @@ class FirstTabBar: UIViewController{
         NSLayoutConstraint.activate([
             table.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             table.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            table.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            table.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: -5),
             table.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
         
@@ -356,7 +352,7 @@ extension FirstTabBar:  UITableViewDataSource, UITableViewDelegate {
         cell.image.kf.setImage(with: URL(string: poster[indexPath.row].image_url))
         cell.name.text = poster[indexPath.row].title
         
-        cell.backgroundColor = .gray
+        cell.backgroundColor = UIColor(hexCode: "ffffe0")
                 
         let gesture = CustomTapGesture(target: self, action: #selector(self.cellTap(gesture:)))
         gesture.title = poster[indexPath.row].title

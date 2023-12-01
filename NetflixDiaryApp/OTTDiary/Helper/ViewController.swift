@@ -24,7 +24,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate {
         
         self.navigationItem.setHidesBackButton(true, animated: true)
         
-        setTabBarBackgroundColor()
 //        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "추가하기", image: UIImage(systemName: "plus"), target: nil, action: nil)
         
         
@@ -56,7 +55,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate {
 //        secondTab.tabBarController?.tabBar.isHidden = true
         
         let thirdTab = UINavigationController(rootViewController: ThirdTabBar())
-        let tabthree = UITabBarItem(title: "profile", image: UIImage(systemName: "person.circle.fill"), tag: 3)
+        let tabthree = UITabBarItem(title: "Empty", image: UIImage(systemName: "questionmark"), tag: 3)
         thirdTab.tabBarItem = tabthree
         
         self.viewControllers = [firstTab, secondTab, thirdTab]
@@ -90,10 +89,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate {
         self.navigationController?.pushViewController(writeReviewModal(), animated: true)
     }
     
-    func setTabBarBackgroundColor() {
-            tabBar.barTintColor = .orange
-            tabBar.isTranslucent = false
-        }
+    
 
 }
 

@@ -191,35 +191,33 @@ class SecondTabBar: UIViewController{
         title1.translatesAutoresizingMaskIntoConstraints = false
         title2.translatesAutoresizingMaskIntoConstraints = false
         
-        title1.text = " 인기있는 영화"
-        title2.text = " 인기있는 TV시리즈"
+        title1.text = " 오늘의 Top 10 영화"
+        title2.text = " 오늘의 Top 10 TV시리즈"
+        title1.font = UIFont.italicSystemFont(ofSize: 20)
+        title2.font = UIFont.italicSystemFont(ofSize: 20)
+        title1.sizeToFit()
+        title2.sizeToFit()
+//        title1.backgroundColor = .lightGray
+//        title2.backgroundColor = .lightGray
         
-        title1.backgroundColor = .lightGray
-        title2.backgroundColor = .lightGray
-        
-        title1.textColor = .white
-        title2.textColor = .white
+        title1.textColor = .black
+        title2.textColor = .black
         
         
-        title1.layer.borderColor = UIColor.lightGray.cgColor
-        title2.layer.borderColor = UIColor.lightGray.cgColor
-        
-        title1.layer.borderWidth = 3
-        title2.layer.borderWidth = 3
-        
-        title1.layer.cornerRadius = 3
-        title2.layer.cornerRadius = 3
+//        title1.layer.borderColor = UIColor.lightGray.cgColor
+//        title2.layer.borderColor = UIColor.lightGray.cgColor
+//        
+//        title1.layer.borderWidth = 3
+//        title2.layer.borderWidth = 3
+//        
+//        title1.layer.cornerRadius = 3
+//        title2.layer.cornerRadius = 3
         
         NSLayoutConstraint.activate([
             title1.bottomAnchor.constraint(equalTo: popularMovie.topAnchor, constant: -30),
             title1.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            title1.widthAnchor.constraint(equalToConstant: 110),
-            title1.heightAnchor.constraint(equalToConstant: 25),
-            
-            title2.topAnchor.constraint(equalTo: popularMovie.bottomAnchor, constant: 20),
-            title2.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            title2.widthAnchor.constraint(equalToConstant: 150),
-            title2.heightAnchor.constraint(equalToConstant: 25)
+            title2.topAnchor.constraint(equalTo: popularMovie.bottomAnchor, constant: 30),
+            title2.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10)
         ])
         
         

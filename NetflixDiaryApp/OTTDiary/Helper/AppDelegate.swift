@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let navigationBarAppearance = UINavigationBarAppearance()
             navigationBarAppearance.configureWithDefaultBackground()
             
-            navigationBarAppearance.backgroundColor = UIColor.lightGray
+            navigationBarAppearance.backgroundColor = .white
 
             UINavigationBar.appearance().standardAppearance = navigationBarAppearance
             UINavigationBar.appearance().compactAppearance = navigationBarAppearance
@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             appearance.configureWithOpaqueBackground()
             
             //바꾸고 싶은 색으로 backgroundColor를 설정
-            UITabBar.appearance().backgroundColor = UIColor.orange
+            UITabBar.appearance().backgroundColor = UIColor(hexCode: "ffb6c1")
                     
             
         }

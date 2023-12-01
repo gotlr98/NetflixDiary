@@ -10,8 +10,21 @@ import UIKit
 
 class ThirdTabBar: UIViewController{
     
+    let label1 = UILabel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.addSubview(label1)
+        label1.translatesAutoresizingMaskIntoConstraints = false
+        
+        label1.text = "Coming Soon...."
+        
+        NSLayoutConstraint.activate([
+            label1.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            label1.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
+        ])
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -41,7 +41,7 @@ class popularMovieCell: UICollectionViewCell, UICollectionViewDelegateFlowLayout
         self.addSubview(scrollView)
         scrollView.addSubview(contentView)
         
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = UIColor(hexCode: "e0ffff")
         
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),

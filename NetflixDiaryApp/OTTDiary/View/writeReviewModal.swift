@@ -221,6 +221,7 @@ class writeReviewModal: UIViewController{
                       let respons = try decoder.decode(MovieResponse.self, from: resultData)
                       let searchMovie = respons.result
                       
+                      
                       for i in searchMovie{
     //                      print("영화 제목 : \(i.title ?? "")")
     //                      print("영화 평점 : \(i.rating ?? 0)")
@@ -412,6 +413,7 @@ class writeReviewModal: UIViewController{
         reviewField.translatesAutoresizingMaskIntoConstraints = false
         reviewField.widthAnchor.constraint(equalToConstant: 300).isActive = true
         reviewField.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        reviewField.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 30).isActive = true
         
         reviewField.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         reviewField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -150).isActive = true
