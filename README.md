@@ -7,16 +7,13 @@
 
 
 <p align="center">  
-   <img src="https://github.com/gotlr98/OTTDiary/assets/71820857/67b62533-f86c-49c4-8aaa-403337828137" align="center" width="25%">
-
-   <img src="https://github.com/gotlr98/OTTDiary/assets/71820857/268415e8-54e9-4b36-8fdc-bfc4fbd054bc" align="center" width="25%">
-
-   <img src="https://github.com/gotlr98/OTTDiary/assets/71820857/2bb81c2a-86f5-4795-a29f-dfb01a38486a" align="center" width="25%">
-
-   <img src="https://github.com/gotlr98/OTTDiary/assets/71820857/4934207b-07a6-40f4-9898-92c429e722f4" align="center" width="25%"> 
+   <img src="https://github.com/gotlr98/OTTDiary/assets/71820857/67b62533-f86c-49c4-8aaa-403337828137" align="center" width="50%">
+   <img src="https://github.com/gotlr98/OTTDiary/assets/71820857/268415e8-54e9-4b36-8fdc-bfc4fbd054bc" align="center" width="50%">
 </p>
-
-출처: https://0soo.tistory.com/227 [Lifealong:티스토리]
+<p align="center">  
+   <img src="https://github.com/gotlr98/OTTDiary/assets/71820857/2bb81c2a-86f5-4795-a29f-dfb01a38486a" align="center" width="50%">
+   <img src="https://github.com/gotlr98/OTTDiary/assets/71820857/4934207b-07a6-40f4-9898-92c429e722f4" align="center" width="50%"> 
+</p>
 
 ### 기술 스택
 ------------------------------------
