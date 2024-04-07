@@ -8,11 +8,7 @@
 import Foundation
 import UIKit
 
-
-
 class SecondTabBar: UIViewController{
-
-    
     var movie = [[String]]()
     
     var tv = [[String]]()
@@ -22,10 +18,7 @@ class SecondTabBar: UIViewController{
     let scrollView = UIScrollView()
     let contentView = UIView()
 
-    
     lazy var popularMovie: UICollectionView = {
-       
-        
         let lay = UICollectionViewFlowLayout()
         lay.scrollDirection = .horizontal
         
@@ -38,8 +31,6 @@ class SecondTabBar: UIViewController{
     }()
     
     lazy var popularTV: UICollectionView = {
-       
-        
         let lay = UICollectionViewFlowLayout()
         lay.scrollDirection = .horizontal
         
@@ -54,17 +45,9 @@ class SecondTabBar: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let refresh = UIRefreshControl()
-//
-//        refresh.addTarget(self, action: #selector(getData), for: .valueChanged)
-//
-//        self.popularMovie.refreshControl = refresh
-        
-        
         setScroll()
         
         setTitle()
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,13 +57,10 @@ class SecondTabBar: UIViewController{
 
         self.navigationItem.rightBarButtonItem!.menu = UIMenu(children: [
                         UIAction(title: "리뷰쓰기", attributes: .destructive, handler: { _ in
-
                             self.navigationController?.pushViewController(writeReviewModal(), animated: true)
                         })
                     ])
-
     }
-
     
     init(){
         super.init(nibName: nil, bundle: nil)
@@ -89,17 +69,6 @@ class SecondTabBar: UIViewController{
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-    }
-    
-    @objc func getData(){
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-//            self.findPopular(kind: "movie")
-//            self.popularMovie.refreshControl?.endRefreshing()
-            
-        }
-        
-        
     }
     
     func setScroll(){
@@ -138,13 +107,6 @@ class SecondTabBar: UIViewController{
         
         contentView.addSubview(popularTV)
         
-//        popularMovie.layer.borderColor = UIColor.orange.cgColor
-//        popularTV.layer.borderColor = UIColor.orange.cgColor
-//
-//        popularMovie.layer.borderWidth = 3
-//        popularTV.layer.borderWidth = 3
-
-        
         popularMovie.delegate = self
         
         popularMovie.dataSource = self
@@ -161,7 +123,6 @@ class SecondTabBar: UIViewController{
             popularMovie.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             popularMovie.heightAnchor.constraint(equalToConstant: 400)
         ])
-        
         
         popularTV.delegate = self
         
@@ -180,7 +141,6 @@ class SecondTabBar: UIViewController{
             popularTV.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
             popularTV.heightAnchor.constraint(equalToConstant: 400)
         ])
-        
     }
     
     func setTitle(){
@@ -197,21 +157,9 @@ class SecondTabBar: UIViewController{
         title2.font = UIFont.italicSystemFont(ofSize: 20)
         title1.sizeToFit()
         title2.sizeToFit()
-//        title1.backgroundColor = .lightGray
-//        title2.backgroundColor = .lightGray
         
         title1.textColor = .black
         title2.textColor = .black
-        
-        
-//        title1.layer.borderColor = UIColor.lightGray.cgColor
-//        title2.layer.borderColor = UIColor.lightGray.cgColor
-//        
-//        title1.layer.borderWidth = 3
-//        title2.layer.borderWidth = 3
-//        
-//        title1.layer.cornerRadius = 3
-//        title2.layer.cornerRadius = 3
         
         NSLayoutConstraint.activate([
             title1.bottomAnchor.constraint(equalTo: popularMovie.topAnchor, constant: -30),
@@ -219,10 +167,7 @@ class SecondTabBar: UIViewController{
             title2.topAnchor.constraint(equalTo: popularMovie.bottomAnchor, constant: 30),
             title2.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10)
         ])
-        
-        
     }
-    
 }
 
 
@@ -230,6 +175,7 @@ extension SecondTabBar: UICollectionViewDelegate, UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
+        // Movie와 TV를 따로 보여주는 collectionview 처리
         if collectionView == self.popularMovie{
             return movie.count
         }
@@ -249,6 +195,8 @@ extension SecondTabBar: UICollectionViewDelegate, UICollectionViewDataSource {
                 cell.name.textColor = .black
                 cell.rating.text = "평점: " + movie[indexPath.item][1]
                 cell.rating.textColor = .black
+                
+                // 줄거리가 비었을때 처리
                 if movie[indexPath.item][2].isEmpty{
                     cell.comment.text = "줄거리가 비었습니다"
                 }
@@ -259,13 +207,10 @@ extension SecondTabBar: UICollectionViewDelegate, UICollectionViewDataSource {
                 }
                 cell.image.kf.setImage(with: URL(string: "https://image.tmdb.org/t/p/w220_and_h330_face" + movie[indexPath.item][3]))
             }
-            
-            
             return cell
         }
         
         else{
-            
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: popularMovieCell.id2, for: indexPath)
             if let cell = cell as? popularMovieCell {
                 cell.name.text = "제목: " + tv[indexPath.item][0]
@@ -282,11 +227,8 @@ extension SecondTabBar: UICollectionViewDelegate, UICollectionViewDataSource {
                 }
                 cell.image.kf.setImage(with: URL(string: "https://image.tmdb.org/t/p/w220_and_h330_face" + tv[indexPath.item][3]))
             }
-
             return cell
         }
-        
-        
     }
 }
 
@@ -296,24 +238,3 @@ extension SecondTabBar: UICollectionViewDelegateFlowLayout {
     }
 }
 
-
-//extension UIScrollView {
-//    func updateContentSize() {
-//        let unionCalculatedTotalRect = recursiveUnionInDepthFor(view: self)
-//        
-//        // 계산된 크기로 컨텐츠 사이즈 설정
-//        self.contentSize = CGSize(width: self.frame.width, height: unionCalculatedTotalRect.height+50)
-//    }
-//    
-//    private func recursiveUnionInDepthFor(view: UIView) -> CGRect {
-//        var totalRect: CGRect = .zero
-//        
-//        // 모든 자식 View의 컨트롤의 크기를 재귀적으로 호출하며 최종 영역의 크기를 설정
-//        for subView in view.subviews {
-//            totalRect = totalRect.union(recursiveUnionInDepthFor(view: subView))
-//        }
-//        
-//        // 최종 계산 영역의 크기를 반환
-//        return totalRect.union(view.frame)
-//    }
-//}

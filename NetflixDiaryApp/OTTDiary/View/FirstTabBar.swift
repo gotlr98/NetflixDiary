@@ -49,8 +49,6 @@ class FirstTabBar: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
         navigationController?.navigationBar.prefersLargeTitles = true
         
         findPopularMovie()
@@ -68,10 +66,6 @@ class FirstTabBar: UIViewController{
     
     init(){
         super.init(nibName: nil, bundle: nil)
-        
-        
-        
-//        self.tabBarItem = UITabBarItem(title: "home", image: UIImage(systemName: "house.fill"), tag: 1)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -80,15 +74,7 @@ class FirstTabBar: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         
-//        let refresh = UIRefreshControl()
-
-//        refresh.addTarget(self, action: #selector(getData), for: .valueChanged)
-        
-//        self.table.refreshControl = refresh
-        
-        
         setNavigation()
-
 
         let net = User().get_user_net()
         
@@ -108,18 +94,7 @@ class FirstTabBar: UIViewController{
         self.navigationController?.pushViewController(writeReviewModal(), animated: true)
     }
     
-//    @objc func getData(){
-//
-//        print("refresh")
-//
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-//            self.table.refreshControl?.endRefreshing()
-//        }
-//    }
-    
     override func viewWillDisappear(_ animated: Bool) {
-                
-
         let bar = self.tabBarController?.viewControllers
         
         let svc = (bar![1] as! UINavigationController).viewControllers[0] as! SecondTabBar
@@ -194,14 +169,10 @@ class FirstTabBar: UIViewController{
                       let searchMovie = respons.result
                       
                       for i in searchMovie{
-
-                          
-                              
                           let a = String(i.title!)
                           let b = String(i.rating!)
                           let c = String(i.summary!)
                           let d = String(i.post!)
-                          
                           
                           self.movie.append([a,b,c,d])                                         
                       }
@@ -293,8 +264,6 @@ class FirstTabBar: UIViewController{
             })
             dataTask.resume()
         
-        
-        
     }
     
     func setNavigation(){
@@ -336,8 +305,6 @@ class FirstTabBar: UIViewController{
         
         table.rowHeight = 60
     }
-    
-    
 }
 
 extension FirstTabBar:  UITableViewDataSource, UITableViewDelegate {
@@ -347,7 +314,6 @@ extension FirstTabBar:  UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reviewCell.cell, for: indexPath) as! reviewCell
-        
         
         cell.image.kf.setImage(with: URL(string: poster[indexPath.row].image_url))
         cell.name.text = poster[indexPath.row].title

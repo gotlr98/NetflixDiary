@@ -31,7 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //바꾸고 싶은 색으로 backgroundColor를 설정
             UITabBar.appearance().backgroundColor = UIColor(hexCode: "ffb6c1")
                     
-            
         }
         
         

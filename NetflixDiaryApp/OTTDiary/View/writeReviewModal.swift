@@ -49,13 +49,12 @@ class writeReviewModal: UIViewController{
     
     
     override func viewDidLoad() {
-//        self.view.backgroundColor = .gray
         
         setScrollView()
         
         setUIBeforeSearch()
         
-        
+        // 검색결과를 받아온 후 보여주는 view처리
         if is_search{
             
             setUIAfterSearch()
@@ -72,9 +71,12 @@ class writeReviewModal: UIViewController{
             
         }
     }
-
+    
+    // 리뷰 작성하는 함수
     @objc func sendReview(){
         
+        
+        // Realm에서 유저의 리뷰 갖고오기
         let review = User().get_user_net()
         
         var titles: [String] = []
@@ -82,6 +84,7 @@ class writeReviewModal: UIViewController{
             titles.append(i.title)
         }
         
+        // 작품 중복작성 막기
         if titles.contains(select_title){
             let error = UIAlertController(title: "Error", message: "이미 작성한 작품입니다.", preferredStyle: UIAlertController.Style.alert)
             let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
@@ -101,10 +104,11 @@ class writeReviewModal: UIViewController{
         
     }
 
-    @objc func textFieldDidChanacge(_ sender: Any?) {
+    @objc func textFieldDidChange(_ sender: Any?) {
         self.img_url = []
     }
     
+    // 작품 검색하는 함수
     @objc func search(){
         
         let alert = UIAlertController(title: "Error", message: "검색어를 입력해 주세요", preferredStyle: UIAlertController.Style.alert)
@@ -142,7 +146,6 @@ class writeReviewModal: UIViewController{
                 vc.delegate = self
                 vc.modalPresentationStyle = .automatic
                 self.present(vc, animated: true)
-    //            self.navigationController?.pushViewController(vc, animated: false)
             }
             
         }
@@ -186,6 +189,7 @@ class writeReviewModal: UIViewController{
         contentViewHeight.isActive = true
     }
     
+    // tmdb api를 사용하여 영화를 검색하는 함수
     func searchPopularMovie(name: String) async {
         
         let API_KEY = Bundle.main.apiKey
@@ -223,12 +227,6 @@ class writeReviewModal: UIViewController{
                       
                       
                       for i in searchMovie{
-    //                      print("영화 제목 : \(i.title ?? "")")
-    //                      print("영화 평점 : \(i.rating ?? 0)")
-    //                      print("영화 줄거리 : \(i.summary ?? "")")
-    //                      print("포스터 경로 : \(i.post ?? "")")
-    //
-    //                      print("--------------------------")
                           self.title_url[i.title!] = "https://image.tmdb.org/t/p/w220_and_h330_face" + i.post!
                       }
                       
@@ -241,6 +239,7 @@ class writeReviewModal: UIViewController{
         
     }
     
+    // tmdb api를 사용하여 영화를 검색하는 함수
     func searchPopularTV(name: String) async {
         
         let API_KEY = Bundle.main.apiKey
@@ -277,12 +276,6 @@ class writeReviewModal: UIViewController{
                       let searchMovie = respons.result
                       
                       for i in searchMovie{
-    //                      print("영화 제목 : \(i.title ?? "")")
-    //                      print("영화 평점 : \(i.rating ?? 0)")
-    //                      print("영화 줄거리 : \(i.summary ?? "")")
-    //                      print("포스터 경로 : \(i.post ?? "")")
-    //
-    //                      print("--------------------------")
                           self.title_url[i.name!] = "https://image.tmdb.org/t/p/w220_and_h330_face" + i.post!
                       }
                       
@@ -295,6 +288,7 @@ class writeReviewModal: UIViewController{
         
     }
     
+    // 검색결과가 나오기 전 View
     func setUIBeforeSearch(){
         registerBtn.backgroundColor = .orange
         
@@ -373,6 +367,7 @@ class writeReviewModal: UIViewController{
         searchButton.addTarget(self, action: #selector(search), for: .touchUpInside)
     }
     
+    // 검색결과가 나온 후 View
     func setUIAfterSearch(){
         contentView.addSubview(image)
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -392,7 +387,6 @@ class writeReviewModal: UIViewController{
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 400).isActive = true
-//            titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 40).isActive = true
         titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         titleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
@@ -435,6 +429,7 @@ extension writeReviewModal{
     }
 }
 
+// 검색한 제목을 받아오는 Delegate
 extension writeReviewModal: SendDataDelegate {
     func recieveData(title: String) {
         

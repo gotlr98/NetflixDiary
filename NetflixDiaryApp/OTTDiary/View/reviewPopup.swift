@@ -89,9 +89,6 @@ class reviewPopup: UIViewController, UITextViewDelegate{
         title_label.translatesAutoresizingMaskIntoConstraints = false
         title_label.textColor = .black
         
-        
-        
-        
         self.view.addSubview(image)
         
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -114,9 +111,6 @@ class reviewPopup: UIViewController, UITextViewDelegate{
             title_label.heightAnchor.constraint(equalToConstant: 100),
             title_label.widthAnchor.constraint(equalToConstant: 300)
         ])
-        
-        
-        
         self.view.addSubview(review_view)
         
         review_view.text = self.review
@@ -130,8 +124,6 @@ class reviewPopup: UIViewController, UITextViewDelegate{
             review_view.widthAnchor.constraint(equalToConstant: 200),
             review_view.heightAnchor.constraint(equalToConstant: 200)
         ])
-        
-        
         
         review_view.delegate = self
         
